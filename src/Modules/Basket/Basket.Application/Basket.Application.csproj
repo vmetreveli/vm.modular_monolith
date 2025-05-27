@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>13</LangVersion>
+        <RootNamespace>Basket.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
+        <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Features\Commands\"/>
+        <Folder Include="Features\Queries\"/>
+    </ItemGroup>
+
+</Project>

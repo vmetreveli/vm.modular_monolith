@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  vm.modular.api:
+    build:
+      context: "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith"
+      dockerfile: "src/Bootstrapper/vm.modular.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/vm.modular.Api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "vm.modular.api:dev"
+    ports: []
+    volumes:
+    - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api:/app:rw"
+    - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith:/src:rw"
+    - "/Users/vakhushtimetreveli/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
