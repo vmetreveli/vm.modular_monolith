@@ -1,0 +1,42 @@
+﻿services:
+  ModularMonolithDb:
+    image: postgres
+    container_name: ModularMonolithDb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=ModularMonolithDb
+    restart: always
+    ports:
+      - "5433:5432"  # ✅ maps host:container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  rabbitmq:
+    image: rabbitmq:4.1-management-alpine
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  
+  vm.modular.api:
+    image: vm.modular.api
+    build:
+      context: .
+      dockerfile: ./src/Bootstrapper/vm.modular.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings__DefaultConnection=Server=ModularMonolithDb;Port=5432;Database=ModularMonolithDb;User Id=admin;Password=admin1234;"
+    depends_on:
+      - ModularMonolithDb
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

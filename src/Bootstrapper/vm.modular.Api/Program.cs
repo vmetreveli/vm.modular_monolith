@@ -1,15 +1,11 @@
-using Asp.Versioning;
 using Carter;
 using Catalog.Module;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Serilog;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using vm.modular.Api;
-using vm.modular.Api.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 

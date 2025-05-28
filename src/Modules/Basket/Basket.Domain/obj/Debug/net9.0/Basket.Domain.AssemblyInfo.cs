@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Basket.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+816ca996d36f82de00f7431d1607dcc34b6dec14")]
 [assembly: System.Reflection.AssemblyProductAttribute("Basket.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Basket.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

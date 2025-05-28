@@ -735,17 +735,6 @@
           }
         }
       },
-      "AsynchronousAdapter/1.0.0": {
-        "dependencies": {
-          "FrameworkVM": "1.0.1"
-        },
-        "runtime": {
-          "AsynchronousAdapter.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "Catalog.Domain/1.0.0": {
         "dependencies": {
           "AsynchronousAdapter": "1.0.0",
@@ -1268,11 +1257,6 @@
       "sha512": "sha512-fz2Y+LXepl0obzvZs5PAs2ZnnOF0fIpaErUQMEynMXIxQwnxaKcRgiBiKhCp4Jp2OrSlcKMwgqzAqceWOyl/hg==",
       "path": "throw/1.4.0",
       "hashPath": "throw.1.4.0.nupkg.sha512"
-    },
-    "AsynchronousAdapter/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "Catalog.Domain/1.0.0": {
       "type": "project",

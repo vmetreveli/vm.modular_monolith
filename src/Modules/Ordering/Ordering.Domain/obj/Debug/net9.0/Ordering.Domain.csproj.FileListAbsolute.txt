@@ -17,3 +17,4 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Ordering/Ordering.Domain/obj/Debug/net9.0/refint/Ordering.Domain.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Ordering/Ordering.Domain/obj/Debug/net9.0/Ordering.Domain.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Ordering/Ordering.Domain/obj/Debug/net9.0/ref/Ordering.Domain.dll
+/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Ordering/Ordering.Domain/obj/Debug/net9.0/Ordering.Domain.sourcelink.json

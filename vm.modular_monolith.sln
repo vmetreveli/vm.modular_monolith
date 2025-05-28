@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{F5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{579C0F23-8371-4A12-8532-11A7BE71B87E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsynchronousAdapter", "Integration\AsynchronousAdapter\AsynchronousAdapter.csproj", "{887EACC9-839F-46C5-B66C-66E3CDD86091}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsynchronousAdapter", "src\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj", "{887EACC9-839F-46C5-B66C-66E3CDD86091}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Application", "src\Modules\Catalog\Catalog.Application\Catalog.Application.csproj", "{631F296F-D15A-43DE-A234-D69CFB28F971}"
 EndProject
@@ -49,7 +49,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Module", "src\Modul
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3407D806-FCD0-4B08-939A-DF6D9ADD8118}"
 	ProjectSection(SolutionItems) = preProject
-		compose.yaml = compose.yaml
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Global

@@ -20,6 +20,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
         <ProjectReference Include="..\..\..\..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj"/>
+        <ProjectReference Include="..\..\..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj" />
     </ItemGroup>
 
 

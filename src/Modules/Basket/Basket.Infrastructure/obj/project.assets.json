@@ -1117,6 +1117,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Framework.Abstractions": "1.0.0",
           "FrameworkVM": "1.0.1"
         },
         "compile": {
@@ -2677,8 +2678,8 @@
     },
     "AsynchronousAdapter/1.0.0": {
       "type": "project",
-      "path": "../../../../Integration/AsynchronousAdapter/AsynchronousAdapter.csproj",
-      "msbuildProject": "../../../../Integration/AsynchronousAdapter/AsynchronousAdapter.csproj"
+      "path": "../../../Integration/AsynchronousAdapter/AsynchronousAdapter.csproj",
+      "msbuildProject": "../../../Integration/AsynchronousAdapter/AsynchronousAdapter.csproj"
     },
     "Basket.Domain/1.0.0": {
       "type": "project",

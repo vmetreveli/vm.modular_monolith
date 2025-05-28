@@ -1,14 +1,12 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Module.deps.json
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Module.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Module.pdb
-/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/AsynchronousAdapter.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Application.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Domain.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Infrastructure.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Framework.Abstractions.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Framework.Infrastructure.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Application.pdb
-/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/AsynchronousAdapter.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Domain.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Catalog.Infrastructure.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/bin/Debug/net9.0/Framework.Abstractions.pdb
@@ -23,3 +21,4 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/obj/Debug/net9.0/refint/Catalog.Module.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/obj/Debug/net9.0/Catalog.Module.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/obj/Debug/net9.0/ref/Catalog.Module.dll
+/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Modules/Catalog/Catalog.Module/obj/Debug/net9.0/Catalog.Module.sourcelink.json

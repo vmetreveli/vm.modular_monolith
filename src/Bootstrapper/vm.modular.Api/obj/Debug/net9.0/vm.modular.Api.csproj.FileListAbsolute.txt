@@ -175,7 +175,6 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.Messages.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.dll
-/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/AsynchronousAdapter.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Application.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Domain.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Infrastructure.dll
@@ -184,7 +183,6 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Framework.Infrastructure.dll
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Framework.Infrastructure.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Module.pdb
-/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/AsynchronousAdapter.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Application.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Domain.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/bin/Debug/net9.0/Catalog.Infrastructure.pdb
@@ -212,3 +210,4 @@
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/obj/Debug/net9.0/vm.modular.Api.pdb
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/obj/Debug/net9.0/vm.modular.Api.genruntimeconfig.cache
 /Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/obj/Debug/net9.0/ref/vm.modular.Api.dll
+/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api/obj/Debug/net9.0/vm.modular.Api.sourcelink.json

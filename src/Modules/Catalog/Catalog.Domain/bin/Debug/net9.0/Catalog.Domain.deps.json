@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v9.0": {
       "Catalog.Domain/1.0.0": {
         "dependencies": {
-          "AsynchronousAdapter": "1.0.0",
           "FrameworkVM": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "Throw": "1.4.0",
@@ -717,17 +716,6 @@
           }
         }
       },
-      "AsynchronousAdapter/1.0.0": {
-        "dependencies": {
-          "FrameworkVM": "1.0.1"
-        },
-        "runtime": {
-          "AsynchronousAdapter.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "Framework.Abstractions/1.0.0": {
         "dependencies": {
           "AutoMapper": "14.0.0",
@@ -1210,11 +1198,6 @@
       "sha512": "sha512-fz2Y+LXepl0obzvZs5PAs2ZnnOF0fIpaErUQMEynMXIxQwnxaKcRgiBiKhCp4Jp2OrSlcKMwgqzAqceWOyl/hg==",
       "path": "throw/1.4.0",
       "hashPath": "throw.1.4.0.nupkg.sha512"
-    },
-    "AsynchronousAdapter/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "Framework.Abstractions/1.0.0": {
       "type": "project",
