@@ -9,25 +9,26 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Catalog.Module.Endpoints;
 
-//public record DeleteProductRequest(Guid Id);
+public record DeleteProductRequest(Guid Id);
 
-public class DeleteProductEndpoint : ICarterModule
-{
-    public void AddRoutes(IEndpointRouteBuilder app)
-    {
-        app.MapDelete("/products/{id}", async (Guid id, IDispatcher dispatcher,CancellationToken cancellationToken) =>
-        {
-            var result = await dispatcher.SendAsync(new DeleteProductCommand(id),cancellationToken);
+ public class DeleteProductEndpoint : ICarterModule
+ {
 
-            var response = result.Adapt<DeleteProductResponse>();
+     public void AddRoutes(IEndpointRouteBuilder app)
+     {
+         app.MapDelete("/products/{id}", async (Guid id, IDispatcher dispatcher,CancellationToken cancellationToken) =>
+         {
+             var result = await dispatcher.SendAsync(new DeleteProductCommand(id),cancellationToken);
 
-            return Results.Ok(response);
-        })
-        .WithName("DeleteProduct")
-        .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .ProducesProblem(StatusCodes.Status404NotFound)
-        .WithSummary("Delete Product")
-        .WithDescription("Delete Product");
-    }
-}
+             var response = result.Adapt<DeleteProductResponse>();
+
+             return Results.Ok(response);
+         })
+         //.WithName("DeleteProduct")
+         .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
+         .ProducesProblem(StatusCodes.Status400BadRequest)
+         .ProducesProblem(StatusCodes.Status404NotFound)
+         .WithSummary("Delete Product")
+         .WithDescription("Delete Product");
+     }
+ }
