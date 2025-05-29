@@ -7,7 +7,7 @@ namespace Basket.Module;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddCatalogModule(this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection AddBasketModule(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddApplication(configuration);
         services.AddInfrastructure(configuration);

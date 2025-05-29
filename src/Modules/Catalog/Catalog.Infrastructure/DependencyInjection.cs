@@ -21,7 +21,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
-            .AddDbContext<DbContext, CatalogDbContext>((sp, options) =>
+            .AddDbContext<CatalogDbContext>((sp, options) =>
             {
                 var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
                 var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
@@ -48,21 +48,21 @@ public static class DependencyInjection
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<DbContext>>();
+        services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
 
         return services;
     }
 
-    public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
-    {
-        // Configure the HTTP request pipeline.
-        // 1. Use Api Endpoint services
-
-        // 2. Use Application Use Case services
-
-        // 3. Use Data - Infrastructure services
-        app.UseMigration<CatalogDbContext>();
-
-        return app;
-    }
+    // public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
+    // {
+    //     // Configure the HTTP request pipeline.
+    //     // 1. Use Api Endpoint services
+    //
+    //     // 2. Use Application Use Case services
+    //
+    //     // 3. Use Data - Infrastructure services
+    //     app.UseMigration<CatalogDbContext>();
+    //
+    //     return app;
+    // }
 }

@@ -11,7 +11,7 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddAutoMapper(typeof(DependencyInjection).Assembly);
-    //    services.AddFramework(configuration, typeof(DependencyInjection).Assembly);
+       // services.AddFramework(configuration, typeof(DependencyInjection).Assembly);
         // services.AddAsynchronousAdapter(configuration);
         // services.AddApplicationServices(configuration);
         // services.AddDomainEventsHandlers(typeof(DependencyInjection).Assembly);

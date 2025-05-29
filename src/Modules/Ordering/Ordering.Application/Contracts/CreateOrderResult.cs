@@ -1,3 +1,3 @@
-namespace Ordering.Application.Features.Commands.CreateOrder;
+namespace Ordering.Application.Contracts;
 
 public record CreateOrderResult(Guid Id);

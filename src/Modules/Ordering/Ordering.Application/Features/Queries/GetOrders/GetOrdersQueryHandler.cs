@@ -6,7 +6,7 @@ using Ordering.Infrastructure.Context;
 
 namespace Ordering.Application.Features.Queries.GetOrders;
 
-internal class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrdersQuery, GetOrdersResult>
+public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrdersQuery, GetOrdersResult>
 {
     public async Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken)
     {

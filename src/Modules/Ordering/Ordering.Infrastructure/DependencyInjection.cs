@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Domain.Repository;
 using Ordering.Infrastructure.Context;
+using Ordering.Infrastructure.Repositories;
 
 namespace Ordering.Infrastructure;
 
@@ -19,7 +21,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
-            .AddDbContext<DbContext, OrderingDbContext>((sp, options) =>
+            .AddDbContext<OrderingDbContext>((sp, options) =>
             {
                 var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
                 var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
@@ -43,24 +45,22 @@ public static class DependencyInjection
                     .EnableDetailedErrors();
             });
 
-        //services.AddScoped<IEventRepository, EventRepository>();
-        //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
-       // services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork<OrderingDbContext>>();
 
         return services;
     }
 
-    public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
-    {
-        // Configure the HTTP request pipeline.
-        // 1. Use Api Endpoint services
-
-        // 2. Use Application Use Case services
-
-        // 3. Use Data - Infrastructure services
-        app.UseMigration<OrderingDbContext>();
-
-        return app;
-    }
+    // public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
+    // {
+    //     // Configure the HTTP request pipeline.
+    //     // 1. Use Api Endpoint services
+    //
+    //     // 2. Use Application Use Case services
+    //
+    //     // 3. Use Data - Infrastructure services
+    //     app.UseMigration<OrderingDbContext>();
+    //
+    //     return app;
+    // }
 }

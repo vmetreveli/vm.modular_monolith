@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\..\Framework\Framework.Abstractions\Framework.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
         <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
     </ItemGroup>
     

@@ -5,7 +5,7 @@ namespace Basket.Domain.Entities;
 
 public class ShoppingCartItem : EntityBase<Guid>
 {
-    internal ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
+    public ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
         string productName) : base(Guid.NewGuid())
     {
         ShoppingCartId = shoppingCartId;

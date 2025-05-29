@@ -1,12 +1,13 @@
 using System;
 using Asp.Versioning;
+using Basket.Module;
 using Carter;
 using Catalog.Module;
-using Framework.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Ordering.Module;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using vm.modular.Api;
@@ -16,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddCatalogModule(builder.Configuration);
+builder.Services.AddOrderingModule(builder.Configuration);
+builder.Services.AddBasketModule(builder.Configuration);
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
@@ -24,13 +27,19 @@ var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
 var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
 var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(catalogAssembly,basketAssembly,orderingAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly,catalogAssembly, basketAssembly);
 
-builder.Services.AddFramework(builder.Configuration, typeof(Program).Assembly);
+
+//builder.Services.AddFramework(builder.Configuration, typeof(Program).Assembly);
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+    options.OperationFilter<SwaggerDefaultValues>();
+});
+
 
 builder.Services.AddApiVersioning(options =>
     {
@@ -88,7 +97,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseErrorHandling();
 app.MapGet("/", async () => DateTime.UtcNow);
 app.MapCarter();
 

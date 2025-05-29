@@ -2,10 +2,8 @@
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Repositories;
 using Framework.Abstractions.Repository;
-using Framework.Infrastructure;
 using Framework.Infrastructure.Interceptors;
 using Framework.Infrastructure.Repository;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +19,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
-            .AddDbContext<DbContext, BasketDbContext>((sp, options) =>
+            .AddDbContext<BasketDbContext>((sp, options) =>
             {
                 var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
                 var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
@@ -53,16 +51,16 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
-    {
-        // Configure the HTTP request pipeline.
-        // 1. Use Api Endpoint services
-
-        // 2. Use Application Use Case services
-
-        // 3. Use Data - Infrastructure services
-        app.UseMigration<BasketDbContext>();
-
-        return app;
-    }
+    // public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
+    // {
+    //     // Configure the HTTP request pipeline.
+    //     // 1. Use Api Endpoint services
+    //
+    //     // 2. Use Application Use Case services
+    //
+    //     // 3. Use Data - Infrastructure services
+    //     app.UseMigration<BasketDbContext>();
+    //
+    //     return app;
+    // }
 }

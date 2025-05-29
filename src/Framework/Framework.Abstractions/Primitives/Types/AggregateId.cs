@@ -10,7 +10,10 @@ public class AggregateId<T> : IEquatable<AggregateId<T>>
     ///     Initializes a new instance of the <see cref="AggregateId{T}" /> class.
     /// </summary>
     /// <param name="value">The unique identifier value.</param>
-    public AggregateId(T value) => Value = value;
+    public AggregateId(T value)
+    {
+        Value = value;
+    }
 
     /// <summary>
     ///     Gets the identifier value.
@@ -34,7 +37,7 @@ public class AggregateId<T> : IEquatable<AggregateId<T>>
     /// </summary>
     /// <param name="obj">The object to compare with the current instance.</param>
     /// <returns>True if the specified object is equal to the current instance; otherwise, false.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
