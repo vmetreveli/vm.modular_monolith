@@ -1,4 +1,4 @@
-﻿using Catalog.Application.Features.Events;
+﻿using Catalog.Domain.Events;
 using Framework.Abstractions.Primitives;
 
 namespace Catalog.Domain.Entities;

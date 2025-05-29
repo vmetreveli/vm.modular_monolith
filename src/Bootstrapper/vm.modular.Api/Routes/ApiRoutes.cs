@@ -1,4 +1,4 @@
-namespace vm.modular_monolith.Api.Routes;
+namespace vm.modular.Api.Routes;
 
 public static class ApiRoutes
 {

@@ -6,11 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj"/>
-        <ProjectReference Include="..\Ordering.Infrastructure\Ordering.Infrastructure.csproj"/>
+        <PackageReference Include="Carter" Version="9.0.0" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
     </ItemGroup>
+
     <ItemGroup>
-      <Folder Include="Features\Commands\" />
-      <Folder Include="Features\Queries\" />
+        <ProjectReference Include="..\Ordering.Application\Ordering.Application.csproj" />
     </ItemGroup>
+
 </Project>

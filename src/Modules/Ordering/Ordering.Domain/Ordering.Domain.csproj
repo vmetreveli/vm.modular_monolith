@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Events\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
         <ProjectReference Include="..\..\..\..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj"/>
     </ItemGroup>

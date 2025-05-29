@@ -21,11 +21,10 @@ builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
 var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-// var basketAssembly = typeof(BasketModule).Assembly;
-// var orderingAssembly = typeof(OrderingModule).Assembly;
+var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
-builder.Services
-    .AddCarterWithAssemblies(catalogAssembly);
+builder.Services.AddCarterWithAssemblies(catalogAssembly,basketAssembly,orderingAssembly);
 
 builder.Services.AddFramework(builder.Configuration, typeof(Program).Assembly);
 
