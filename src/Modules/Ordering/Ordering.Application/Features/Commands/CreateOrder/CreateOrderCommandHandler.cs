@@ -1,29 +1,20 @@
-﻿using FluentValidation;
-using Framework.Abstractions.Commands;
+﻿using Framework.Abstractions.Commands;
+using Framework.Abstractions.Repository;
 using Ordering.Application.Contracts;
 using Ordering.Domain.Entities;
+using Ordering.Domain.Repository;
 using Ordering.Domain.ValueObjects;
-using Ordering.Infrastructure.Context;
 
 namespace Ordering.Application.Features.Commands.CreateOrder;
 
-public record CreateOrderResult(Guid Id);
-public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
-{
-    public CreateOrderCommandValidator()
-    {
-        RuleFor(x => x.Order.OrderName).NotEmpty().WithMessage("OrderName is required");
-    }
-}
-
-internal class CreateOrderCommandHandler(OrderingDbContext dbContext) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+internal class CreateOrderCommandHandler(IOrderRepository orderRepository,IUnitOfWork unitOfWork) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
     public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
     {
         var order = CreateNewOrder(command.Order);
 
-        dbContext.Orders.Add(order);
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await orderRepository.AddAsync(order, cancellationToken);
+        await unitOfWork.CompleteAsync(cancellationToken);
 
         return new CreateOrderResult(order.Id);
     }

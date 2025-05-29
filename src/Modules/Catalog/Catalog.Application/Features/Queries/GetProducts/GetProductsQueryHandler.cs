@@ -13,7 +13,7 @@ public class GetProductsQueryHandler(IProductRepository productRepository, Cance
         var pageIndex = query.PaginationRequest.PageIndex;
         var pageSize = query.PaginationRequest.PageSize;
 
-        var (products, totalCount) = await productRepository.GetPaginatedProductsAsync(
+        var (products, totalCount) = await productRepository.GetPaginatedAsync(
             pageIndex,
             pageSize,
             cancellationToken);

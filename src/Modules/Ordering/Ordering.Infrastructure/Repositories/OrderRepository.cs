@@ -1,13 +1,12 @@
-using Catalog.Domain;
-using Catalog.Domain.Entities;
-using Catalog.Domain.Repository;
-using Catalog.Infrastructure.Context;
 using Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Ordering.Domain.Entities;
+using Ordering.Domain.Repository;
+using Ordering.Infrastructure.Context;
 
-namespace Catalog.Infrastructure.Repositories;
+namespace Ordering.Infrastructure.Repositories;
 
-public class ProductRepository(CatalogDbContext dbContext) : RepositoryBase<CatalogDbContext, Product, Guid>(dbContext), IProductRepository
+public class OrderRepository(OrderingDbContext dbContext) : RepositoryBase<OrderingDbContext, Order, Guid>(dbContext), IOrderRepository
 {
     private readonly DbContext _dbContext = dbContext;
 
@@ -17,4 +16,4 @@ public class ProductRepository(CatalogDbContext dbContext) : RepositoryBase<Cata
         return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-}
+ }

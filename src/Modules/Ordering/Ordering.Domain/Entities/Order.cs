@@ -2,14 +2,33 @@
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Domain.Entities;
-public class Order : Framework.Abstractions.Kernel.Types.AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
+public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
 {
+    public Order(Guid id, DateTime createdOn, DateTime modifiedOn, bool isDeleted, DateTime? deletedOn, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment) : base(id)
+    {
+        CreatedOn = createdOn;
+        ModifiedOn = modifiedOn;
+        IsDeleted = isDeleted;
+        DeletedOn = deletedOn;
+        CustomerId = customerId;
+        OrderName = orderName;
+        ShippingAddress = shippingAddress;
+        BillingAddress = billingAddress;
+        Payment = payment;
+    }
+
     public DateTime CreatedOn { get; }
     public DateTime ModifiedOn { get; }
     public bool IsDeleted { get; }
     public DateTime? DeletedOn { get; }
     
     private readonly List<OrderItem> _items = new();
+
+    private Order() : base(Guid.NewGuid())
+    {
+        throw new NotImplementedException();
+    }
+
     public IReadOnlyList<OrderItem> Items => _items.AsReadOnly();
 
     public Guid CustomerId { get; private set; } = default!;

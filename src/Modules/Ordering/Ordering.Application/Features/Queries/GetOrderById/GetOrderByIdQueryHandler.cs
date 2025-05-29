@@ -1,21 +1,20 @@
 ﻿using Framework.Abstractions.Queries;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Contracts;
+using Ordering.Domain.Entities;
 using Ordering.Domain.Exceptions;
+using Ordering.Domain.Repository;
 using Ordering.Infrastructure.Context;
+using Ordering.Infrastructure.Specifications;
 
 namespace Ordering.Application.Features.Queries.GetOrderById;
 
-internal class GetOrderByIdQueryHandler(OrderingDbContext dbContext)
-    : IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult>
+internal class GetOrderByIdQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult>
 {
     public async Task<GetOrderByIdResult> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken)
     {
-        var order = await dbContext.Orders
-                        .AsNoTracking()
-                        .Include(x => x.Items)
-                        .SingleOrDefaultAsync(p => p.Id == query.Id, cancellationToken);
-
+        Order? order = await orderRepository.FirstOrDefaultAsync(new OrdersWithItemSpecification(query.Id), cancellationToken);
+  
         if (order is null)
         {
             throw new OrderNotFoundException(query.Id);
