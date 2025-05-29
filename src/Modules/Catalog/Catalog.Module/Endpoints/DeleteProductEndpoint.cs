@@ -24,7 +24,7 @@ public record DeleteProductRequest(Guid Id);
 
              return Results.Ok(response);
          })
-         //.WithName("DeleteProduct")
+         .WithName("DeleteProduct")
          .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
          .ProducesProblem(StatusCodes.Status400BadRequest)
          .ProducesProblem(StatusCodes.Status404NotFound)
