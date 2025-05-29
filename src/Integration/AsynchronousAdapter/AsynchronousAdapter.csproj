@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Framework\Framework.Abstractions\Framework.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Framework\Framework.Abstractions\Framework.Abstractions.csproj" />
       <ProjectReference Include="..\..\Modules\Catalog\Catalog.Application\Catalog.Application.csproj" />
       <ProjectReference Include="..\..\Modules\Ordering\Ordering.Application\Ordering.Application.csproj" />

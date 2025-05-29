@@ -14,6 +14,12 @@
         <PackageReference Include="Asp.Versioning.WebApi" Version="7.1.0"/>
         <PackageReference Include="Asp.Versioning.WebApi.ApiExplorer" Version="7.1.0"/>
         <PackageReference Include=" Microsoft.EntityFrameworkCore.Design" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.14.0" />
         <PackageReference Include="Microsoft.NET.Build.Containers" Version="9.0.300"/>
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2"/>
@@ -39,8 +45,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
-        <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
+         <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Basket\Basket.Module\Basket.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj" />
     </ItemGroup>
