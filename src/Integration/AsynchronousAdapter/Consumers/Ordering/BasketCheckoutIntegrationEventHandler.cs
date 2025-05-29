@@ -1,11 +1,11 @@
-﻿using Framework.Abstractions.Dispatchers;
+﻿using AsynchronousAdapter.Events.Basket;
+using Framework.Abstractions.Dispatchers;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts;
 using Ordering.Application.Features.Commands.CreateOrder;
-using Ordering.Domain.Events;
 
-namespace Ordering.Application.Features.Events;
+namespace AsynchronousAdapter.Consumers.Ordering;
 public class BasketCheckoutIntegrationEventHandler(IDispatcher dispatcher, ILogger<BasketCheckoutIntegrationEventHandler> logger)
     : IConsumer<BasketCheckoutIntegrationEvent>
 {

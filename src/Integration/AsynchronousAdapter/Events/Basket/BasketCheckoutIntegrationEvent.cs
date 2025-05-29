@@ -1,8 +1,8 @@
 using Framework.Abstractions.Primitives;
 
-namespace Ordering.Domain.Events;
+namespace AsynchronousAdapter.Events.Basket;
 
-public class BasketCheckoutIntegrationEvent:IntegrationBaseEvent
+public class BasketCheckoutIntegrationEvent: IntegrationBaseEvent
 {
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
