@@ -8,7 +8,7 @@ using Framework.Abstractions.Dispatchers;
 
 namespace Basket.Application.Features.Commands.AddItemIntoBasket;
 
-internal class AddItemIntoBasketHandler(IBasketRepository repository, IDispatcher dispatcher) 
+internal class AddItemIntoBasketCommandHandler(IBasketRepository repository, IDispatcher dispatcher) 
     : ICommandHandler<AddItemIntoBasketCommand, AddItemIntoBasketResult>
 {
     public async Task<AddItemIntoBasketResult> Handle(AddItemIntoBasketCommand command, CancellationToken cancellationToken)

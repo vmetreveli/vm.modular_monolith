@@ -17,7 +17,7 @@ public class GetProductByCategoryEndpoint : ICarterModule
     {
         app.MapGet("/products/category/{category}", async (string category, IDispatcher dispatcher, CancellationToken cancellationToken) =>
         {
-            var result = await dispatcher.QueryAsync(new GetProductByCategoryQuery(category), cancellationToken);
+            var result = await dispatcher.QueryAsync(new GetProductByCategoryQuery{Category = category}, cancellationToken);
 
             var response = result.Adapt<GetProductByCategoryResponse>();
 

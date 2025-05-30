@@ -7,10 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Application.Features.Queries.GetProductByCategory;
 
-public record GetProductByCategoryQuery(string Category)
-    : IQuery<GetProductByCategoryResult>;
-
-internal class GetProductByCategoryHandler(IProductRepository productRepository,CatalogDbContext dbContext)
+internal class GetProductByCategoryQueryHandler(IProductRepository productRepository,CatalogDbContext dbContext)
     : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>
 {
     public async Task<GetProductByCategoryResult> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)

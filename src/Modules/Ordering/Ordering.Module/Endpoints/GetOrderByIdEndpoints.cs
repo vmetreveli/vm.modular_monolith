@@ -18,7 +18,7 @@ public class GetOrderByIdEndpoints : ICarterModule
     {
         app.MapGet("/orders/{id}", async (Guid id, IDispatcher dispatcher, CancellationToken cancellationToken) =>
         {
-            var result = await dispatcher.QueryAsync(new GetOrderByIdQuery(id), cancellationToken);
+            var result = await dispatcher.QueryAsync(new GetOrderByIdQuery{Id = id}, cancellationToken);
 
             var response = result.Adapt<GetOrderByIdResponse>();
 

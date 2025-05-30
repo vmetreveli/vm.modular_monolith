@@ -3,5 +3,7 @@ using Ordering.Application.Contracts;
 
 namespace Ordering.Application.Features.Queries.GetOrderById;
 
-public record GetOrderByIdQuery(Guid Id)
-    : IQuery<GetOrderByIdResult>;
+public class GetOrderByIdQuery : IQuery<GetOrderByIdResult>
+{
+    public Guid Id { get; init; } 
+}

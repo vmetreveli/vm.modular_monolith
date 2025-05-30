@@ -1,3 +1,6 @@
 namespace Ordering.Application.Contracts;
 
-public record GetOrderByIdResult(OrderDto Order);
+public class GetOrderByIdResult
+{
+    public OrderDto Order { get; init; }
+}

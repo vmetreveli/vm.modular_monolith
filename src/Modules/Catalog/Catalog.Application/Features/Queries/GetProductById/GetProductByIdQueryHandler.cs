@@ -6,8 +6,7 @@ using Framework.Abstractions.Queries;
 namespace Catalog.Application.Features.Queries.GetProductById;
 
 
-internal class GetProductByIdQueryHandler(IProductRepository productRepository)
-    : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
+internal class GetProductByIdQueryHandler(IProductRepository productRepository) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
     public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
     {
@@ -32,6 +31,6 @@ internal class GetProductByIdQueryHandler(IProductRepository productRepository)
             Price = product.Price
         };
 
-        return new GetProductByIdResult(productDto);
+        return new GetProductByIdResult {Product = productDto};
     }
 }

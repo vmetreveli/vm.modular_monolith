@@ -1,4 +1,5 @@
 ﻿using Framework.Abstractions.Queries;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Contracts;
 using Ordering.Domain.Entities;
@@ -20,9 +21,9 @@ public class GetOrderByIdQueryHandler(IOrderRepository orderRepository) : IQuery
             throw new OrderNotFoundException(query.Id);
         }
 
-        //var orderDto = order.Adapt<OrderDto>();
+        var orderDto = order.Adapt<OrderDto>();
 
-       // return new GetOrderByIdResult(orderDto);
-       throw new NotImplementedException();
+        return new GetOrderByIdResult { Order = orderDto };
+
     }
 }

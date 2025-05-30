@@ -18,7 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Application.Features.Commands.CheckoutBasket;
 
-internal class CheckoutBasketHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IBasketRepository basketRepository)
+internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IBasketRepository basketRepository)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
