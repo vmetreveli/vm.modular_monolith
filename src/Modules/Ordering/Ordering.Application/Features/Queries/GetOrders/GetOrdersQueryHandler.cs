@@ -14,10 +14,11 @@ public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHan
         var pageIndex = query.PaginationRequest.PageIndex;
         var pageSize = query.PaginationRequest.PageSize;
 
-        var (orders, totalCount) = await orderRepository.GetPaginatedAsync(pageIndex, pageSize, cancellationToken);
+       
+        var (orders, totalCount) = await orderRepository.GetPaginatedAsync(pageIndex, pageSize,null, cancellationToken);
 
 
-        var orderDtos =orders.Select(p=>new OrderDto
+        var orderDtos = orders.Select(p=>new OrderDto
         {
             Id = p.Id,
             CustomerId = p.CustomerId,

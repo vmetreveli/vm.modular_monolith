@@ -16,6 +16,7 @@ public class GetProductsQueryHandler(IProductRepository productRepository, Cance
         var (products, totalCount) = await productRepository.GetPaginatedAsync(
             pageIndex,
             pageSize,
+            null,
             cancellationToken);
 
         var productDtos = products.Select(i => new ProductDto

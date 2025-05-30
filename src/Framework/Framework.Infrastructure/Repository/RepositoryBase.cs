@@ -86,6 +86,43 @@ public abstract class RepositoryBase<TDbContext, TEntity, TId>(TDbContext contex
             .Set<TEntity>()
             .ToListAsync(cancellationToken);
     }
+    
+    /// <summary>
+    ///     Asynchronously retrieves a paginated list of entities.
+    /// </summary>
+    /// <param name="pageIndex">The zero-based page index.</param>
+    /// <param name="pageSize">The size of each page.</param>
+    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+    /// <returns>A tuple containing the list of entities and total count.</returns>
+    public async Task<(List<TEntity> entity, long TotalCount)> GetPaginatedAsync(int pageIndex, int pageSize,Specification<TEntity, TId> specification, CancellationToken cancellationToken)
+    {
+        var totalCount = await  context.Set<TEntity>().LongCountAsync(cancellationToken);
+        
+        List<TEntity>? entities = null;
+        if(specification is null)
+        {
+            entities = await  context
+                .Set<TEntity>()
+                .AsNoTracking()
+                 .OrderBy(p => p.Id)
+                 .Skip(pageSize * pageIndex)
+                 .Take(pageSize)
+                .ToListAsync(cancellationToken);
+        }
+        else
+        {
+            var query = ApplySpecification(specification);
+            entities = await query
+                .AsNoTracking()
+                .OrderBy(p => p.Id)
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
+        }
+           
+        
+        return (entities,   totalCount);
+    }
 
     /// <summary>
     ///     Asynchronously finds entities that match the specified predicate.
@@ -214,28 +251,7 @@ public abstract class RepositoryBase<TDbContext, TEntity, TId>(TDbContext contex
             .RemoveRange(entities);
     }
 
-    /// <summary>
-    ///     Asynchronously retrieves a paginated list of entities.
-    /// </summary>
-    /// <param name="pageIndex">The zero-based page index.</param>
-    /// <param name="pageSize">The size of each page.</param>
-    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
-    /// <returns>A tuple containing the list of entities and total count.</returns>
-    public async Task<(List<TEntity> entity, long TotalCount)> GetPaginatedAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
-    {
-            var totalCount = context.Set<TEntity>().LongCountAsync(cancellationToken);
-        
-            var entities = await context
-                .Set<TEntity>()
-                .Include(p => p)
-                .AsNoTracking()
-                .OrderBy(p => p.Id)
-                .Skip(pageSize * pageIndex)
-                .Take(pageSize)
-                .ToListAsync(cancellationToken);
-        
-            return (entities, await totalCount);
-    }
+
 
 
     /// <summary>

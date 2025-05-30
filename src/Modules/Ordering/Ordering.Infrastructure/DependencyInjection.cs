@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Domain.Entities;
 using Ordering.Domain.Repository;
 using Ordering.Infrastructure.Context;
 using Ordering.Infrastructure.Repositories;
@@ -44,7 +45,6 @@ public static class DependencyInjection
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors();
             });
-
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork<OrderingDbContext>>();
 
