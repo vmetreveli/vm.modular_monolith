@@ -9,11 +9,8 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Catalog.Module.Endpoints;
 
-public record DeleteProductRequest(Guid Id);
-
- public class DeleteProductEndpoint : ICarterModule
+public class DeleteProductEndpoint : ICarterModule
  {
-
      public void AddRoutes(IEndpointRouteBuilder app)
      {
          app.MapDelete("/products/{id}", async (Guid id, IDispatcher dispatcher,CancellationToken cancellationToken) =>

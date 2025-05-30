@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Basket.Application.Contracts;
 using Basket.Infrastructure.Context;
 using Framework.Abstractions.Commands;
 using Microsoft.EntityFrameworkCore;
@@ -22,12 +23,12 @@ internal class UpdateItemPriceInBasketCommandHandler(BasketDbContext dbContext)
             .Where(x => x.ProductId == command.ProductId)
             .ToListAsync(cancellationToken);
 
-        if (!itemsToUpdate.Any()) return new UpdateItemPriceInBasketResult(false);
+        if (!itemsToUpdate.Any()) return new UpdateItemPriceInBasketResult{IsSuccess = false};
 
         foreach (var item in itemsToUpdate) item.UpdatePrice(command.Price);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new UpdateItemPriceInBasketResult(true);
+        return new UpdateItemPriceInBasketResult{IsSuccess = true};
     }
 }

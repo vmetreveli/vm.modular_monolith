@@ -1,0 +1,81 @@
+﻿using System;
+using System.Data;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using AsynchronousAdapter.Events.Basket;
+using Basket.Application.Contracts;
+using Basket.Domain.Entities;
+using Basket.Domain.Exception;
+using Basket.Domain.Repository;
+using Basket.Infrastructure.Context;
+using Basket.Infrastructure.Specifications;
+using Framework.Abstractions.Commands;
+using Framework.Abstractions.Outbox;
+using Framework.Abstractions.Repository;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
+
+namespace Basket.Application.Features.Commands.CheckoutBasket;
+
+internal class CheckoutBasketHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IBasketRepository basketRepository)
+    : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
+{
+    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
+    {
+        // get existing basket with total price
+        // Set totalprice on basketcheckout event message
+        // send basket checkout event to rabbitmq using masstransit
+        // delete the basket
+
+      await unitOfWork.BeginTransactionAsync( IsolationLevel.ReadCommitted,null,cancellationToken: cancellationToken);
+
+        try
+        {
+            // Get existing basket with total price
+            ShoppingCart? basket = await basketRepository.FirstOrDefaultAsync(new ShoppingCartWithItemSpecification(command.BasketCheckout.UserName),cancellationToken);
+
+            if (basket is null)
+            {
+                throw new BasketNotFoundException(command.BasketCheckout.UserName);
+            }
+
+            // Set total price on basket checkout event message
+            var eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
+            eventMessage.TotalPrice = basket.TotalPrice;
+
+            // Write a message to the outbox
+            var outboxMessage = new OutboxMessage(JsonSerializer.Serialize(eventMessage),Guid.NewGuid(), DateTime.UtcNow);
+         
+
+            outboxRepository.CreateOutboxMessage(outboxMessage);
+
+            // Delete the basket
+            basketRepository.Remove(basket);
+
+            await unitOfWork.CompleteAsync(cancellationToken);
+            await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+            return new CheckoutBasketResult(true);
+        }
+        catch
+        {
+            await unitOfWork.RollbackTransactionAsync(cancellationToken);
+            return new CheckoutBasketResult(false);
+        }
+
+        ///////////////////// CHECKOUT BASKET WITHOUT OUTBOX
+        //var basket =
+        //    await repository.GetBasket(command.BasketCheckout.UserName, true, cancellationToken);
+
+        //var eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
+        //eventMessage.TotalPrice = basket.TotalPrice;
+
+        //await bus.Publish(eventMessage, cancellationToken);
+
+        //await repository.DeleteBasket(command.BasketCheckout.UserName, cancellationToken);
+
+        //return new CheckoutBasketResult(true);
+        ///////////////////// CHECKOUT BASKET WITHOUT OUTBOX
+    }
+}

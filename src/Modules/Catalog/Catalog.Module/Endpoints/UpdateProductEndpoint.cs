@@ -1,6 +1,6 @@
 ﻿using Carter;
-using Catalog.Application.Contracts;
 using Catalog.Application.Features.Commands.UpdateProduct;
+using Catalog.Module.Contracts;
 using Framework.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
@@ -30,5 +30,5 @@ public class UpdateProductEndpoint : ICarterModule
         .WithSummary("Update Product")
         .WithDescription("Update Product");
     }
-    public record UpdateProductRequest(ProductDto Product);
+ 
 }

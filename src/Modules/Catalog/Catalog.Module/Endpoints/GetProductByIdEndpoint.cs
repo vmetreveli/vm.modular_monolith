@@ -1,6 +1,6 @@
 ﻿using Carter;
-using Catalog.Application.Contracts;
 using Catalog.Application.Features.Queries.GetProductById;
+using Catalog.Module.Contracts;
 using Framework.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Routing;
 namespace Catalog.Module.Endpoints;
 
 //public record GetProductByIdRequest(Guid Id);
-public record GetProductByIdResponse(ProductDto Product);
 
 public class GetProductByIdEndpoint : ICarterModule
 {

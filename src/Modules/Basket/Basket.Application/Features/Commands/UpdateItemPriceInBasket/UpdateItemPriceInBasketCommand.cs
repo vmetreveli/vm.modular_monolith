@@ -1,4 +1,5 @@
 using System;
+using Basket.Application.Contracts;
 using Framework.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.UpdateItemPriceInBasket;
