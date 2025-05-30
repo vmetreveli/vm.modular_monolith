@@ -1,3 +1,4 @@
+using Framework.Abstractions.Events;
 using Framework.Abstractions.Primitives;
 
 namespace AsynchronousAdapter.Events.Basket;

@@ -1,4 +1,4 @@
-using Framework.Abstractions.Primitives;
+using Framework.Abstractions.Events;
 
 namespace AsynchronousAdapter.Events;
 

@@ -1,6 +1,4 @@
-﻿using Framework.Abstractions.Events;
-
-namespace Framework.Abstractions.Primitives;
+﻿namespace Framework.Abstractions.Events;
 
 /// <summary>
 ///     Represents the base class for integration events.
