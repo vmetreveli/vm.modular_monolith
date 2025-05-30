@@ -50,8 +50,4 @@
         <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="HealthChecks\"/>
-    </ItemGroup>
-
 </Project>

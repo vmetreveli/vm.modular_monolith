@@ -32,7 +32,7 @@ public class Product : AggregateRoot<Guid>
             price
         );
 
-        product.RaiseDomainEvent(new ProductCreatedEvent(product));
+        product.RaiseDomainEvent(new ProductCreatedEvent{Product = product});
 
         return product;
     }
@@ -52,7 +52,7 @@ public class Product : AggregateRoot<Guid>
         if (Price != price)
         {
             Price = price;
-            RaiseDomainEvent(new ProductPriceChangedEvent(this));
+            RaiseDomainEvent(new ProductPriceChangedEvent{Product = this});
         }
     }
 }

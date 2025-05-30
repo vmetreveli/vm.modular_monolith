@@ -2,5 +2,8 @@
 using Framework.Abstractions.Events;
 
 namespace Catalog.Domain.Events;
-public record ProductCreatedEvent(Product Product)
-    : IDomainEvent;
+public class ProductCreatedEvent : IDomainEvent
+{
+    public Product Product { get; init; }
+  
+}
