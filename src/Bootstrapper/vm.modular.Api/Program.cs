@@ -96,7 +96,8 @@ if (app.Environment.IsDevelopment())
 
 }
 
-
+// app.UseAuthentication();
+// app.UseAuthorization();
 app.MapGet("/", async () => DateTime.UtcNow);
 app.MapCarter();
 
