@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using AsynchronousAdapter.Events;
 using Basket.Application.Features.Commands.UpdateItemPriceInBasket;
+using Catalog.Domain.Events;
 using Framework.Abstractions.Dispatchers;
 using Framework.Abstractions.Events;
 using MassTransit;

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Infrastructure.Repositories;
 
-public class BasketRepository(BasketDbContext dbContext) : RepositoryBase<BasketDbContext, ShoppingCart, Guid>(dbContext), IBasketRepository
+public class ShoppingCartRepository(BasketDbContext dbContext) : RepositoryBase<BasketDbContext, ShoppingCart, Guid>(dbContext), IShoppingCartRepository
 
 {
     private readonly DbContext _dbContext = dbContext;

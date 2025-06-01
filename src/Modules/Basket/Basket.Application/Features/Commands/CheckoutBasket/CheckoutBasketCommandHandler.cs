@@ -18,7 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Application.Features.Commands.CheckoutBasket;
 
-internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IBasketRepository basketRepository)
+internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IShoppingCartRepository shoppingCartRepository)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepos
         try
         {
             // Get existing basket with total price
-            ShoppingCart? basket = await basketRepository.FirstOrDefaultAsync(new ShoppingCartWithItemSpecification(command.BasketCheckout.UserName),cancellationToken);
+            ShoppingCart? basket = await shoppingCartRepository.FirstOrDefaultAsync(new ShoppingCartWithItemSpecification(command.BasketCheckout.UserName),cancellationToken);
 
             if (basket is null)
             {
@@ -51,7 +51,7 @@ internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepos
             outboxRepository.CreateOutboxMessage(outboxMessage);
 
             // Delete the basket
-            basketRepository.Remove(basket);
+            shoppingCartRepository.Remove(basket);
 
             await unitOfWork.CompleteAsync(cancellationToken);
             await unitOfWork.CommitTransactionAsync(cancellationToken);

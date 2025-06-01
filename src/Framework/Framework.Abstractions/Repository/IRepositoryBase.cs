@@ -85,8 +85,7 @@ public interface IRepositoryBase<TEntity, TId>
     /// <param name="predicate">An expression that defines the criteria to filter entities.</param>
     /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
     /// <returns>A task representing the asynchronous operation, with a result of a list of entities that match the predicate.</returns>
-    Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
-        CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Asynchronously retrieves entities that match the specified specification.
@@ -97,8 +96,7 @@ public interface IRepositoryBase<TEntity, TId>
     ///     A task representing the asynchronous operation, with a result of a list of entities that match the
     ///     specification.
     /// </returns>
-    Task<IEnumerable<TEntity>> FindAsync(Specification<TEntity, TId> specification,
-        CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> FindAsync(Specification<TEntity, TId> specification, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Asynchronously checks if an entity with the specified identifier exists.
@@ -117,8 +115,7 @@ public interface IRepositoryBase<TEntity, TId>
     ///     A task representing the asynchronous operation, with a result indicating whether an entity that matches the
     ///     predicate exists.
     /// </returns>
-    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate,
-        CancellationToken cancellationToken = default);
+    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Asynchronously adds a new entity to the repository.

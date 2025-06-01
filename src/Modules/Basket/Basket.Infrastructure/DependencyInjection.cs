@@ -45,7 +45,7 @@ public static class DependencyInjection
 
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
-        services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork<BasketDbContext>>();
 
         return services;

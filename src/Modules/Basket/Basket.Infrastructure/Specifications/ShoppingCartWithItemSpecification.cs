@@ -9,7 +9,10 @@ namespace Basket.Infrastructure.Specifications;
 /// </summary>
 public sealed class ShoppingCartWithItemSpecification : Specification<ShoppingCart, Guid>
 {
-    public ShoppingCartWithItemSpecification(string userName) : base(order => order.UserName == userName) =>
+    public ShoppingCartWithItemSpecification(Guid productId) : base(order => order.IsDeleted == false) =>
+        AddInclude(order => order.Items.Where(i=>i.ProductId == productId));
+    
+    public ShoppingCartWithItemSpecification(string userName) : base(order => order.UserName==userName) =>
         AddInclude(order => order.Items);
 
 }

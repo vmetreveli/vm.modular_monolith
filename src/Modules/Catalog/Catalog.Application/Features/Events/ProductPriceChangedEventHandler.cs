@@ -1,5 +1,4 @@
-﻿using AsynchronousAdapter.Events;
-using Catalog.Domain.Events;
+﻿using Catalog.Domain.Events;
 using Framework.Abstractions.Events;
 using Framework.Abstractions.Kernel;
 using Microsoft.Extensions.Logging;

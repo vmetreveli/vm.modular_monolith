@@ -2,13 +2,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Basket.Application.Contracts;
+using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
+using Basket.Infrastructure.Specifications;
 using Framework.Abstractions.Commands;
-using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Application.Features.Commands.UpdateItemPriceInBasket;
 
-internal class UpdateItemPriceInBasketCommandHandler(BasketDbContext dbContext)
+internal class UpdateItemPriceInBasketCommandHandler(IShoppingCartRepository shoppingCartRepository, BasketDbContext dbContext)
     : ICommandHandler<UpdateItemPriceInBasketCommand, UpdateItemPriceInBasketResult>
 {
     public async Task<UpdateItemPriceInBasketResult> Handle(UpdateItemPriceInBasketCommand command,
@@ -19,9 +20,15 @@ internal class UpdateItemPriceInBasketCommandHandler(BasketDbContext dbContext)
         //save to database
         //return result
 
-        var itemsToUpdate = await dbContext.ShoppingCartItems
-            .Where(x => x.ProductId == command.ProductId)
-            .ToListAsync(cancellationToken);
+        // var itemsToUpdate = await dbContext.ShoppingCartItems
+        //     .Where(x => x.ProductId == command.ProductId)
+        //     .ToListAsync(cancellationToken);
+
+        var specification = new ShoppingCartWithItemSpecification(command.ProductId);
+       var shoppingCarts = await shoppingCartRepository.FindAsync(specification, cancellationToken);
+
+       var itemsToUpdate = shoppingCarts.FirstOrDefault()?.Items;
+        
 
         if (!itemsToUpdate.Any()) return new UpdateItemPriceInBasketResult{IsSuccess = false};
 

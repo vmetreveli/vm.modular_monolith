@@ -3,7 +3,7 @@ using Framework.Abstractions.Repository;
 
 namespace Basket.Domain.Repository;
 
-public interface IBasketRepository : IRepositoryBase<ShoppingCart, Guid>
+public interface IShoppingCartRepository : IRepositoryBase<ShoppingCart, Guid>
 {
     Task<ShoppingCart> GetBasket(string userName, bool asNoTracking = true,
         CancellationToken cancellationToken = default);

@@ -6,7 +6,7 @@ using Framework.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.RemoveItemFromBasket;
 
-internal class RemoveItemFromBasketCommandHandler(IBasketRepository repository)
+internal class RemoveItemFromBasketCommandHandler(IShoppingCartRepository repository)
     : ICommandHandler<RemoveItemFromBasketCommand, RemoveItemFromBasketResult>
 {
     public async Task<RemoveItemFromBasketResult> Handle(RemoveItemFromBasketCommand command, CancellationToken cancellationToken)

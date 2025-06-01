@@ -10,7 +10,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
         <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj"/>
-        <ProjectReference Include="..\..\..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -12,7 +12,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
 
     private ShoppingCart() : base(Guid.NewGuid())
     {
-        throw new NotImplementedException();
+       
     }
 
     public string UserName { get; private set; } = default!;

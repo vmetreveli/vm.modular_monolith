@@ -1,6 +1,6 @@
 using Framework.Abstractions.Events;
 
-namespace AsynchronousAdapter.Events;
+namespace Catalog.Domain.Events;
 
 public class ProductPriceChangedIntegrationEvent : IntegrationBaseEvent
 {

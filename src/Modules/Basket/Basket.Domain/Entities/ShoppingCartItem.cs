@@ -3,8 +3,12 @@ using Framework.Abstractions.Primitives;
 
 namespace Basket.Domain.Entities;
 
-public class ShoppingCartItem : EntityBase<Guid>
+public class ShoppingCartItem : EntityBase<Guid>, IAuditableEntity, IDeletableEntity
 {
+    public ShoppingCartItem() : base(Guid.NewGuid())
+    {
+        
+    }
     public ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
         string productName) : base(Guid.NewGuid())
     {
@@ -42,4 +46,9 @@ public class ShoppingCartItem : EntityBase<Guid>
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(newPrice);
         Price = newPrice;
     }
+
+    public DateTime CreatedOn { get; }
+    public DateTime ModifiedOn { get; }
+    public bool IsDeleted { get; }
+    public DateTime? DeletedOn { get; }
 }

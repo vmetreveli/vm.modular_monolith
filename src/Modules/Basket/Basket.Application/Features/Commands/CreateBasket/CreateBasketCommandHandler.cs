@@ -8,7 +8,7 @@ using Framework.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.CreateBasket;
 
-internal class CreateBasketCommandHandler(IBasketRepository repository)
+internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
     : ICommandHandler<CreateBasketCommand, CreateBasketResult>
 {
     public async Task<CreateBasketResult> Handle(CreateBasketCommand command, CancellationToken cancellationToken)
