@@ -6,6 +6,6 @@ public class CreateBasketCommandValidator : AbstractValidator<CreateBasketComman
 {
     public CreateBasketCommandValidator()
     {
-        RuleFor(x => x.ShoppingCart.UserName).NotEmpty().WithMessage("UserName is required");
+     //   RuleFor(x => x.ShoppingCart.UserName).NotEmpty().WithMessage("UserName is required");
     }
 }

@@ -15,7 +15,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
        
     }
 
-    public string UserName { get; private set; } = default!;
+    public string UserName { get; private set; } = string.Empty;
     public IReadOnlyList<ShoppingCartItem> Items => _items.AsReadOnly();
     public decimal TotalPrice => Items.Sum(x => x.Price * x.Quantity);
 
@@ -24,14 +24,14 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
     public bool IsDeleted { get; }
     public DateTime? DeletedOn { get; }
 
-    public static ShoppingCart Create(Guid id, string userName)
+    public static ShoppingCart Create(Guid id)
     {
-        ArgumentException.ThrowIfNullOrEmpty(userName);
+       // ArgumentException.ThrowIfNullOrEmpty(userName);
 
         var shoppingCart = new ShoppingCart
         {
             Id = id,
-            UserName = userName
+           // UserName = userName
         };
 
         return shoppingCart;
@@ -44,7 +44,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
 
         var existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
 
-        if (existingItem != null)
+        if (existingItem is not null)
         {
             existingItem.Quantity += quantity;
         }

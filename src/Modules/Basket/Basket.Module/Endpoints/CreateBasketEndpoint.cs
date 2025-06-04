@@ -21,11 +21,11 @@ public class CreateBasketEndpoint : ICarterModule
                 CancellationToken cancellationToken) =>
             {
                 var userName = string.Empty;
-                var updatedShoppingCart = new ShoppingCartDto { UserName = userName };
+             //   var updatedShoppingCart = new ShoppingCartDto { UserName = userName };
 
                 var command = new CreateBasketCommand
                 {
-                    ShoppingCart = updatedShoppingCart
+                    ShoppingCart = request.ShoppingCart
                 };
 
                 var result =  await dispatcher.SendAsync(command, cancellationToken);

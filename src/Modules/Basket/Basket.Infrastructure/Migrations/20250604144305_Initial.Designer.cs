@@ -7,12 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-#nullable disable
 
 namespace Basket.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketDbContext))]
-    [Migration("20250529180007_Initial")]
+    [Migration("20250604144305_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,18 +32,29 @@ namespace Basket.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_on");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_on");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("modified_on");
+
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
+                        .HasColumnType("text")
                         .HasColumnName("user_name");
 
                     b.HasKey("Id")
                         .HasName("pk_shopping_carts");
-
-                    b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasDatabaseName("ix_shopping_carts_user_name");
 
                     b.ToTable("shopping_carts", "basket");
                 });
@@ -60,6 +70,22 @@ namespace Basket.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("color");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_on");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_on");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("modified_on");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")

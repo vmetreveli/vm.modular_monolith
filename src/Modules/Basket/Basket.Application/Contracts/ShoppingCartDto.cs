@@ -4,8 +4,8 @@ using System.Collections.Generic;
 namespace Basket.Application.Contracts;
 public class ShoppingCartDto
 {
-    public Guid Id { get; init; } 
-    public string UserName { get; init; } 
-    public List<ShoppingCartItemDto> Items { get; init; } 
+    public Guid Id { get; set; } 
+    // public string UserName { get; set; } 
+    public List<ShoppingCartItemDto> Items { get; set; } 
     
 }

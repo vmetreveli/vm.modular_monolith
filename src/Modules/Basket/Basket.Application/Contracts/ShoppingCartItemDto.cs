@@ -3,12 +3,12 @@
 namespace Basket.Application.Contracts;
 public class ShoppingCartItemDto
 {
-    public Guid Id { get; init; }
-    public Guid ShoppingCartId { get; init; } 
-    public Guid ProductId { get; init; } 
-    public int Quantity { get; init; }
-    public string Color { get; init; }
-    public decimal Price { get; init; }
-    public string ProductName { get; init; } 
+    public Guid Id { get; set; }
+    public Guid ShoppingCartId { get; set; } 
+    public Guid ProductId { get; set; } 
+    public int Quantity { get; set; }
+    public string Color { get; set; }
+    public decimal Price { get; set; }
+    public string ProductName { get; set; } 
 
 }

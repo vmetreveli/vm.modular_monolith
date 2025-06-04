@@ -20,7 +20,11 @@ namespace Basket.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    user_name = table.Column<string>(type: "text", nullable: false),
+                    created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    modified_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    deleted_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -38,7 +42,11 @@ namespace Basket.Infrastructure.Migrations
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     color = table.Column<string>(type: "text", nullable: false),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
-                    product_name = table.Column<string>(type: "text", nullable: false)
+                    product_name = table.Column<string>(type: "text", nullable: false),
+                    created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    modified_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    deleted_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,13 +65,6 @@ namespace Basket.Infrastructure.Migrations
                 schema: "basket",
                 table: "shopping_cart_items",
                 column: "shopping_cart_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_shopping_carts_user_name",
-                schema: "basket",
-                table: "shopping_carts",
-                column: "user_name",
-                unique: true);
         }
 
         /// <inheritdoc />

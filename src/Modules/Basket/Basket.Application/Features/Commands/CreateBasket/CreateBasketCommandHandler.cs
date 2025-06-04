@@ -30,9 +30,7 @@ internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
     private ShoppingCart CreateNewBasket(ShoppingCartDto shoppingCartDto)
     {
         // create new basket
-        var newBasket = ShoppingCart.Create(
-            Guid.NewGuid(),
-            shoppingCartDto.UserName);
+        var newBasket = ShoppingCart.Create(Guid.NewGuid());
 
         shoppingCartDto.Items.ForEach(item =>
         {

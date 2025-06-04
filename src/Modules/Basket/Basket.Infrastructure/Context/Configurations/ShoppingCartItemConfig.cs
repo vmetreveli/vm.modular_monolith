@@ -19,6 +19,13 @@ public class ShoppingCartItemConfig : IEntityTypeConfiguration<ShoppingCartItem>
         builder.Property(oi => oi.Price).IsRequired();
 
         builder.Property(oi => oi.ProductName).IsRequired();
+        
+        builder.Property(c => c.CreatedOn).IsRequired();
+        builder.Property(c => c.ModifiedOn);
+        builder.Property(c => c.DeletedOn);
+        builder.Property(c => c.IsDeleted).IsRequired();
+
+        builder.HasQueryFilter(c => !c.IsDeleted);
 
     }
 }
