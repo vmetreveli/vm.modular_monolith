@@ -11,7 +11,11 @@
         <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
         <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
     </ItemGroup>
-    
+    <ItemGroup>
+        <PackageReference Include="Refit" Version="8.0.0" />
+        <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+        <PackageReference Include="Throw" Version="1.4.0"/>
+    </ItemGroup>
     
     <ItemGroup>
         <Folder Include="Context\Configurations\"/>

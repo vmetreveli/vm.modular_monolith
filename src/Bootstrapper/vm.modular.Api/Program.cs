@@ -3,6 +3,7 @@ using Asp.Versioning;
 using Basket.Module;
 using Carter;
 using Catalog.Module;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,21 +17,23 @@ using vm.modular.Api.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddCatalogModule(builder.Configuration);
-builder.Services.AddOrderingModule(builder.Configuration);
+// builder.Services.AddCatalogModule(builder.Configuration);
+// builder.Services.AddOrderingModule(builder.Configuration);
 builder.Services.AddBasketModule(builder.Configuration);
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
-var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+// var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
+//var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
 var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(orderingAssembly,catalogAssembly, basketAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly);
 
 
-//builder.Services.AddFramework(builder.Configuration, typeof(Program).Assembly);
+builder.Services.AddFramework(builder.Configuration,
+    // typeof(Basket.Application.DependencyInjection).Assembly,
+    typeof(Ordering.Application.DependencyInjection).Assembly);
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -93,7 +96,6 @@ if (app.Environment.IsDevelopment())
             options.SwaggerEndpoint(url, name);
         }
     });
-
 }
 
 // app.UseAuthentication();

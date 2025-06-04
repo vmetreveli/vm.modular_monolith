@@ -22,37 +22,44 @@ public static class Extensions
     /// <param name="services">The <see cref="IServiceCollection" /> to which the services will be added.</param>
     /// <param name="configuration">The application configuration used for settings like database connections.</param>
     /// <param name="assembly">The assembly containing handlers for commands, queries, and events.</param>
+    /// <param name="assemblies"></param>
     /// <returns>The modified <see cref="IServiceCollection" />.</returns>
     public static IServiceCollection AddFramework(
         this IServiceCollection services,
         IConfiguration configuration,
-        Assembly assembly)
+        params Assembly[] assemblies)
     {
-        services.AddCommands(assembly);
-        services.AddQueries(assembly);
-        services.AddEvents(assembly);
-        services.AddEventBus(configuration);
-        services.AddScoped<IDispatcher, Dispatcher>();
-        services.AddErrorHandling();
-
-        services.AddScoped<IOutboxRepository, OutboxRepository>();
-
-        // Configure the database context with PostgreSQL settings
-        services
-            .AddDbContext<BaseDbContext>((sp, options) =>
+      
+            foreach (var assembly in assemblies)
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
-                    .UseSnakeCaseNamingConvention()
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors();
-            });
+               
+                services.AddCommands(assembly);
+                services.AddQueries(assembly);
+                services.AddEvents(assembly);
+             
+            }
+            services.AddEventBus(configuration);
+            services.AddScoped<IDispatcher, Dispatcher>();
+            services.AddErrorHandling();
 
-        services
-            .AddAutoMapper(cfg =>
-                    cfg.AddExpressionMapping(),
-                Assembly.GetExecutingAssembly());
+            services.AddScoped<IOutboxRepository, OutboxRepository>();
 
-        return services;
+            // Configure the database context with PostgreSQL settings
+            services
+                .AddDbContext<BaseDbContext>((sp, options) =>
+                {
+                    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                        .UseSnakeCaseNamingConvention()
+                        .EnableSensitiveDataLogging()
+                        .EnableDetailedErrors();
+                });
+
+            services
+                .AddAutoMapper(cfg =>
+                        cfg.AddExpressionMapping(),
+                    Assembly.GetExecutingAssembly());
+
+            return services;
     }
 
     /// <summary>

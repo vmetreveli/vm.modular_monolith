@@ -15,27 +15,29 @@ public class CreateBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/basket", 
-            async (CreateBasketRequest request, IDispatcher dispatcher, ClaimsPrincipal user, CancellationToken cancellationToken) =>
-        {
-            var userName = user.Identity!.Name;
-            var updatedShoppingCart = new ShoppingCartDto {UserName = userName};
-
-            var command = new CreateBasketCommand
+        app.MapPost("/basket", async (
+                CreateBasketRequest request,
+                IDispatcher dispatcher,
+                CancellationToken cancellationToken) =>
             {
-                ShoppingCart = updatedShoppingCart
-            };
+                var userName = string.Empty;
+                var updatedShoppingCart = new ShoppingCartDto { UserName = userName };
 
-            var result = await dispatcher.SendAsync(command, cancellationToken);
+                var command = new CreateBasketCommand
+                {
+                    ShoppingCart = updatedShoppingCart
+                };
 
-            var response = result.Adapt<CreateBasketResponse>();
+                var result =  await dispatcher.SendAsync(command, cancellationToken);
 
-            return Results.Created($"/basket/{response.Id}", response);
-        })
-        .Produces<CreateBasketResponse>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Create Basket")
-        .WithDescription("Create Basket")
-        .RequireAuthorization();
+                var response = result.Adapt<CreateBasketResponse>();
+
+                return Results.Created($"/basket/{response.Id}", response);
+            })
+            .Produces<CreateBasketResponse>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Create Basket")
+            .WithDescription("Create Basket");
+        //.RequireAuthorization();
     }
 }

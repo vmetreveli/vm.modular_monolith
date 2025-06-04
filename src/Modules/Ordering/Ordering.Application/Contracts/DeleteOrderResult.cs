@@ -1,3 +1,6 @@
 namespace Ordering.Application.Contracts;
 
-public record DeleteOrderResult(bool IsSuccess);
+public class DeleteOrderResult
+{
+    public bool IsSuccess { get; init; } 
+}

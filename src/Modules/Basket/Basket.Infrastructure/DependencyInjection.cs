@@ -1,12 +1,14 @@
 ﻿using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Repositories;
+using Basket.Infrastructure.Services.Catalog;
 using Framework.Abstractions.Repository;
 using Framework.Infrastructure.Interceptors;
 using Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
 namespace Basket.Infrastructure;
 
@@ -47,20 +49,21 @@ public static class DependencyInjection
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork<BasketDbContext>>();
-
+       // services.AddScoped<IProductReadService, ProductReadService>();
+       AddCatalogApiClient(services,configuration);
         return services;
     }
+    
+    
+    private static void AddCatalogApiClient(IServiceCollection services, IConfiguration configuration)
+    {
+        var baseAddress = configuration["AppConfiguration:ExternalServices:CatalogApi:BaseAddress"];
+       baseAddress.ThrowIfNullOrEmpty();
 
-    // public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
-    // {
-    //     // Configure the HTTP request pipeline.
-    //     // 1. Use Api Endpoint services
-    //
-    //     // 2. Use Application Use Case services
-    //
-    //     // 3. Use Data - Infrastructure services
-    //     app.UseMigration<BasketDbContext>();
-    //
-    //     return app;
-    // }
+        services.AddRefitClient<IProductReadService>()
+            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+    }
+
+
+  
 }

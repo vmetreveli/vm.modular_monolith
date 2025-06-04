@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts;
 using Ordering.Application.Features.Commands.CreateOrder;
 
-namespace AsynchronousAdapter.Consumers.Ordering;
+namespace Ordering.Application.Features.Events;
 public class BasketCheckoutIntegrationEventHandler(IDispatcher dispatcher, ILogger<BasketCheckoutIntegrationEventHandler> logger)
     : IConsumer<BasketCheckoutIntegrationEvent>
 {

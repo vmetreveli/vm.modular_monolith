@@ -2,4 +2,7 @@ using System;
 
 namespace Basket.Application.Contracts;
 
-public record CreateBasketResult(Guid Id);
+public class CreateBasketResult
+{
+    public Guid Id { get; init; }
+}

@@ -6,7 +6,7 @@ using Ordering.Domain.Repository;
 
 namespace Ordering.Application.Features.Commands.DeleteOrder;
 
-internal class DeleteOrderCommandHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork) : ICommandHandler<DeleteOrderCommand, DeleteOrderResult>
+public class DeleteOrderCommandHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork) : ICommandHandler<DeleteOrderCommand, DeleteOrderResult>
 {
     public async Task<DeleteOrderResult> Handle(DeleteOrderCommand command, CancellationToken cancellationToken)
     {
@@ -19,7 +19,7 @@ internal class DeleteOrderCommandHandler(IOrderRepository orderRepository, IUnit
 
         orderRepository.Remove(order);
         await unitOfWork.CompleteAsync(cancellationToken);
-        
-        return new DeleteOrderResult(true);
+
+        return new DeleteOrderResult { IsSuccess = true };
     }
 }

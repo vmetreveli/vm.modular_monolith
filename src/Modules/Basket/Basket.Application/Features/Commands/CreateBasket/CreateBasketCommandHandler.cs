@@ -9,7 +9,7 @@ using Framework.Abstractions.Commands;
 namespace Basket.Application.Features.Commands.CreateBasket;
 
 internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
-    : ICommandHandler<CreateBasketCommand, CreateBasketResult>
+    : ICommandHandler<CreateBasketCommand,CreateBasketResult>
 {
     public async Task<CreateBasketResult> Handle(CreateBasketCommand command, CancellationToken cancellationToken)
     {
@@ -21,7 +21,10 @@ internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
 
         await repository.CreateBasket(shoppingCart, cancellationToken);
 
-        return new CreateBasketResult(shoppingCart.Id);
+        return new CreateBasketResult
+        {
+            Id = shoppingCart.Id
+        };
     }
 
     private ShoppingCart CreateNewBasket(ShoppingCartDto shoppingCartDto)

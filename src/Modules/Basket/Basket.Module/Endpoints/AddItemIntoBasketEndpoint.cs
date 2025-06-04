@@ -14,24 +14,25 @@ public class AddItemIntoBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/basket/{userName}/items",
-                async ([FromRoute] string userName,
-                    [FromBody] AddItemIntoBasketRequest request,
-                    IDispatcher dispatcher,
-                    CancellationToken cancellationToken) =>
+        app.MapPost("/basket/{userName}/items", async (
+                [FromRoute] string userName,
+                [FromBody] AddItemIntoBasketRequest request,
+                IDispatcher dispatcher,
+                CancellationToken cancellationToken) =>
+            {
+                var command = new AddItemIntoBasketCommand
                 {
-                    var command = new AddItemIntoBasketCommand
-                    {
-                        UserName = userName,
-                        ShoppingCartItem = request.ShoppingCartItem
-                    };
+                    UserName = userName,
+                    ShoppingCartItem = request.ShoppingCartItem
+                };
 
-                    var result = await dispatcher.SendAsync(command, cancellationToken);
+                var result = new AbandonedMutexException();
+                    await dispatcher.SendAsync(command, cancellationToken);
 
-                    var response = result.Adapt<AddItemIntoBasketResponse>();
+                var response = result.Adapt<AddItemIntoBasketResponse>();
 
-                    return Results.Created($"/basket/{response.Id}", response);
-                })
+                return Results.Created($"/basket/{1}", response);
+            })
             .Produces<AddItemIntoBasketResponse>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Add Item Into Basket")
