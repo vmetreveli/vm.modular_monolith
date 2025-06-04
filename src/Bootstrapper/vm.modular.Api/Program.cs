@@ -17,23 +17,26 @@ using vm.modular.Api.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// builder.Services.AddCatalogModule(builder.Configuration);
-// builder.Services.AddOrderingModule(builder.Configuration);
+builder.Services.AddCatalogModule(builder.Configuration);
+builder.Services.AddOrderingModule(builder.Configuration);
 builder.Services.AddBasketModule(builder.Configuration);
+
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
-// var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-//var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
+var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
 var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(orderingAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly);
 
 
-builder.Services.AddFramework(builder.Configuration,
-    // typeof(Basket.Application.DependencyInjection).Assembly,
-    typeof(Ordering.Application.DependencyInjection).Assembly);
+builder.Services.AddFramework(
+    builder.Configuration,
+    typeof(Basket.Application.DependencyInjection).Assembly,
+    typeof(Ordering.Application.DependencyInjection).Assembly,
+    typeof(Catalog.Application.DependencyInjection).Assembly);
 
 
 builder.Services.AddEndpointsApiExplorer();

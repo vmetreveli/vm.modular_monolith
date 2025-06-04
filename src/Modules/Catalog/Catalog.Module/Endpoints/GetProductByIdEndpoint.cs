@@ -17,7 +17,7 @@ public class GetProductByIdEndpoint : ICarterModule
     {
         app.MapGet("/products/{id}", async (Guid id, IDispatcher dispatcher,CancellationToken cancellationToken) =>
         {
-            var result = await dispatcher.QueryAsync(new GetProductByIdQuery(id),cancellationToken);
+            var result = await dispatcher.QueryAsync(new GetProductByIdQuery{Id = id},cancellationToken);
 
             var response = result.Adapt<GetProductByIdResponse>();
 

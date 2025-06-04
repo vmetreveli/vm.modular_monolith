@@ -1,9 +1,9 @@
-﻿using AsynchronousAdapter.Events.Basket;
-using Framework.Abstractions.Dispatchers;
+﻿using Framework.Abstractions.Dispatchers;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts;
 using Ordering.Application.Features.Commands.CreateOrder;
+using Ordering.Domain.Events;
 
 namespace Ordering.Application.Features.Events;
 public class BasketCheckoutIntegrationEventHandler(IDispatcher dispatcher, ILogger<BasketCheckoutIntegrationEventHandler> logger)
@@ -39,7 +39,7 @@ public class BasketCheckoutIntegrationEventHandler(IDispatcher dispatcher, ILogg
                 new OrderItemDto(orderId, new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"), 1, 400)
             ]);
 
-        return new CreateOrderCommand(orderDto);
+        return new CreateOrderCommand{ Order = orderDto};
     }
 
 

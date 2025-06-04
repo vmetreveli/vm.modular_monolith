@@ -3,4 +3,7 @@ using Framework.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProductById;
 
-public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
+public class GetProductByIdQuery: IQuery<GetProductByIdResult>
+{
+    public Guid Id { get; init; }
+}

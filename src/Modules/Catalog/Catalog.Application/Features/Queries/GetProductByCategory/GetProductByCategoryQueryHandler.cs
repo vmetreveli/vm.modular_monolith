@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Application.Features.Queries.GetProductByCategory;
 
-internal class GetProductByCategoryQueryHandler(IProductRepository productRepository,CatalogDbContext dbContext)
+public class GetProductByCategoryQueryHandler(IProductRepository productRepository,CatalogDbContext dbContext)
     : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>
 {
     public async Task<GetProductByCategoryResult> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)
@@ -24,6 +24,6 @@ internal class GetProductByCategoryQueryHandler(IProductRepository productReposi
         //mapping product entity to productdto
         var productDtos = products.Adapt<List<ProductDto>>();
 
-        return new GetProductByCategoryResult(productDtos);
+        return new GetProductByCategoryResult { Products = productDtos };
     }
 }

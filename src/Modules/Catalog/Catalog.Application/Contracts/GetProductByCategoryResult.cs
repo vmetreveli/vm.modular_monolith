@@ -1,3 +1,6 @@
 namespace Catalog.Application.Contracts;
 
-public record GetProductByCategoryResult(IEnumerable<ProductDto> Products);
+public class GetProductByCategoryResult
+{
+    public IEnumerable<ProductDto> Products { get; init; }
+}

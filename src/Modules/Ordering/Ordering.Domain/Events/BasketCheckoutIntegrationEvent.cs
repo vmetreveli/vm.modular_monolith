@@ -1,7 +1,6 @@
 using Framework.Abstractions.Events;
-using Framework.Abstractions.Primitives;
 
-namespace AsynchronousAdapter.Events.Basket;
+namespace Ordering.Domain.Events;
 
 public class BasketCheckoutIntegrationEvent: IntegrationBaseEvent
 {

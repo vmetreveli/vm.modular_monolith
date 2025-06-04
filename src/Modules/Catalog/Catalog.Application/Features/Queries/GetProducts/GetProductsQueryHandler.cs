@@ -5,8 +5,7 @@ using Framework.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProducts;
 
-public class GetProductsQueryHandler(IProductRepository productRepository, CancellationToken cancellationToken)
-    : IQueryHandler<GetProductsQuery, GetProductsResult>
+public class GetProductsQueryHandler(IProductRepository productRepository) : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
     public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
     {

@@ -50,17 +50,4 @@ public static class DependencyInjection
 
         return services;
     }
-
-    // public static IApplicationBuilder UseBasketModule(this IApplicationBuilder app)
-    // {
-    //     // Configure the HTTP request pipeline.
-    //     // 1. Use Api Endpoint services
-    //
-    //     // 2. Use Application Use Case services
-    //
-    //     // 3. Use Data - Infrastructure services
-    //     app.UseMigration<OrderingDbContext>();
-    //
-    //     return app;
-    // }
 }
