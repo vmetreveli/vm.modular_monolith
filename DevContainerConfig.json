@@ -1,0 +1,25 @@
+{
+  "name": "ASP.NET Core Dev Container",
+  "image": "mcr.microsoft.com/dotnet/nightly/aspnet:9.0",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "9.0"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "forwardPorts": [5000, 5001],
+  "postCreateCommand": "dotnet restore",
+  "remoteUser": "vscode"
+}
