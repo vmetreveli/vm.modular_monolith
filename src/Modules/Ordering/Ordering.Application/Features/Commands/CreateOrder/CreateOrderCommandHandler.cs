@@ -9,7 +9,7 @@ namespace Ordering.Application.Features.Commands.CreateOrder;
 
 internal class CreateOrderCommandHandler(IOrderRepository orderRepository,IUnitOfWork unitOfWork) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
-    public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
+    public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken = default)
     {
         var order = CreateNewOrder(command.Order);
 

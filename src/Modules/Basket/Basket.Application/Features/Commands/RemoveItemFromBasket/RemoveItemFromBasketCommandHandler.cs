@@ -9,7 +9,7 @@ namespace Basket.Application.Features.Commands.RemoveItemFromBasket;
 internal class RemoveItemFromBasketCommandHandler(IShoppingCartRepository repository)
     : ICommandHandler<RemoveItemFromBasketCommand, RemoveItemFromBasketResult>
 {
-    public async Task<RemoveItemFromBasketResult> Handle(RemoveItemFromBasketCommand command, CancellationToken cancellationToken)
+    public async Task<RemoveItemFromBasketResult> Handle(RemoveItemFromBasketCommand command, CancellationToken cancellationToken = default)
     {
         var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);
 

@@ -10,7 +10,7 @@ namespace Catalog.Application.Features.Queries.GetProductByCategory;
 public class GetProductByCategoryQueryHandler(IProductRepository productRepository,CatalogDbContext dbContext)
     : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>
 {
-    public async Task<GetProductByCategoryResult> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)
+    public async Task<GetProductByCategoryResult> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken = default)
     {
         // get products by category using dbContext
         // return result

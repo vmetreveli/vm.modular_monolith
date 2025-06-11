@@ -12,7 +12,7 @@ namespace Ordering.Application.Features.Queries.GetOrderById;
 
 public class GetOrderByIdQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult>
 {
-    public async Task<GetOrderByIdResult> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken)
+    public async Task<GetOrderByIdResult> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken = default)
     {
         Order? order = await orderRepository.FirstOrDefaultAsync(new OrdersWithItemSpecification(query.Id), cancellationToken);
   

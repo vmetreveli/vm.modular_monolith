@@ -14,7 +14,7 @@ internal class AddItemIntoBasketCommandHandler(
     IDispatcher dispatcher) 
     : ICommandHandler<AddItemIntoBasketCommand, AddItemIntoBasketResult>
 {
-    public async Task<AddItemIntoBasketResult> Handle(AddItemIntoBasketCommand command, CancellationToken cancellationToken)
+    public async Task<AddItemIntoBasketResult> Handle(AddItemIntoBasketCommand command, CancellationToken cancellationToken = default)
     {
         // Add shopping cart item into shopping cart
         var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);

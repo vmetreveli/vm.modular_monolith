@@ -9,7 +9,7 @@ namespace Catalog.Application.Features.Commands.UpdateProduct;
 internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
+    public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken = default)
     {
         //Update Product entity from command object
         //save to database

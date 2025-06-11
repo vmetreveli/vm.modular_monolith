@@ -8,7 +8,7 @@ namespace Ordering.Application.Features.Commands.DeleteOrder;
 
 public class DeleteOrderCommandHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork) : ICommandHandler<DeleteOrderCommand, DeleteOrderResult>
 {
-    public async Task<DeleteOrderResult> Handle(DeleteOrderCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteOrderResult> Handle(DeleteOrderCommand command, CancellationToken cancellationToken = default)
     {
         var order = await orderRepository.GetByIdAsync(command.OrderId, cancellationToken: cancellationToken);
 

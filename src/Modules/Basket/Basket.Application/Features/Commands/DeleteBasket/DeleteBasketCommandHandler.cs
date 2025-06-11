@@ -8,7 +8,7 @@ namespace Basket.Application.Features.Commands.DeleteBasket;
 
 internal class DeleteBasketCommandHandler(IShoppingCartRepository repository) : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
 {
-    public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken = default)
     {
         //Delete Basket entity from command object
         //save to database

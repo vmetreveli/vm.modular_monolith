@@ -8,7 +8,7 @@ namespace Ordering.Application.Features.Queries.GetOrders;
 
 public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrdersQuery, GetOrdersResult>
 {
-    public async Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken)
+    public async Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken = default)
     {
 
         var pageIndex = query.PaginationRequest.PageIndex;

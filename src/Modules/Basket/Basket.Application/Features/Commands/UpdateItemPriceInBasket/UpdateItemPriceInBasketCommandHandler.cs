@@ -13,7 +13,7 @@ internal class UpdateItemPriceInBasketCommandHandler(IShoppingCartRepository sho
     : ICommandHandler<UpdateItemPriceInBasketCommand, UpdateItemPriceInBasketResult>
 {
     public async Task<UpdateItemPriceInBasketResult> Handle(UpdateItemPriceInBasketCommand command,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         //Find Shopping Cart Items with a give ProductId
         //Iterate items and Update Price of every item with incoming command.Price
@@ -22,8 +22,6 @@ internal class UpdateItemPriceInBasketCommandHandler(IShoppingCartRepository sho
 
         // var itemsToUpdate = await dbContext.ShoppingCartItems
         //     .Where(x => x.ProductId == command.ProductId)
-        //     .ToListAsync(cancellationToken);
-
         var specification = new ShoppingCartWithItemSpecification(command.ProductId);
        var shoppingCarts = await shoppingCartRepository.FindAsync(specification, cancellationToken);
 

@@ -7,7 +7,7 @@ namespace Catalog.Application.Features.Queries.GetProducts;
 
 public class GetProductsQueryHandler(IProductRepository productRepository) : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
-    public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
+    public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken = default)
     {
         var pageIndex = query.PaginationRequest.PageIndex;
         var pageSize = query.PaginationRequest.PageSize;

@@ -21,7 +21,7 @@ namespace Basket.Application.Features.Commands.CheckoutBasket;
 internal class CheckoutBasketCommandHandler(IUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IShoppingCartRepository shoppingCartRepository)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
-    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
+    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken = default)
     {
         // get existing basket with total price
         // Set totalprice on basketcheckout event message

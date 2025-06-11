@@ -7,7 +7,7 @@ namespace Catalog.Application.Features.Commands.DeleteProduct;
 internal class DeleteProductCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<DeleteProductCommand, DeleteProductResult>
 {
-    public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken = default)
     {
         //Delete Product entity from command object
         //save to database

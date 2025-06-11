@@ -11,7 +11,7 @@ namespace Basket.Application.Features.Commands.CreateBasket;
 internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
     : ICommandHandler<CreateBasketCommand,CreateBasketResult>
 {
-    public async Task<CreateBasketResult> Handle(CreateBasketCommand command, CancellationToken cancellationToken)
+    public async Task<CreateBasketResult> Handle(CreateBasketCommand command, CancellationToken cancellationToken = default)
     {
         //create Basket entity from command object
         //save to database

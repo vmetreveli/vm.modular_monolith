@@ -9,7 +9,7 @@ namespace Catalog.Application.Features.Commands.CreateProduct;
 public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, 
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         //create Product entity from command object
         //save to database
