@@ -4,7 +4,7 @@ using Carter;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace vm.modular.Api;
-public static class CarterExtentions
+public static class CarterExtensions
 {
     public static IServiceCollection AddCarterWithAssemblies(this IServiceCollection services, params Assembly[] assemblies)
     {
