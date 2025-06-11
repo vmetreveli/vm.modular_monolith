@@ -49,6 +49,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3407D806-FCD0-4B08-939A-DF6D9ADD8118}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		.env = .env
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Module", "src\Modules\Basket\Basket.Module\Basket.Module.csproj", "{55C341FD-CD68-470E-8230-5E6D571A731C}"
