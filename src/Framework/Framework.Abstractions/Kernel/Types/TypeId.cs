@@ -1,6 +1,6 @@
 ﻿namespace Framework.Abstractions.Kernel.Types;
 
-public abstract class TypeId : IEqualityComparer<TypeId>
+public abstract class TypeId : IEquatable<TypeId>, IEqualityComparer<TypeId>
 {
     protected TypeId(Guid value)
     {
@@ -9,12 +9,10 @@ public abstract class TypeId : IEqualityComparer<TypeId>
 
     public Guid Value { get; }
 
-
     public bool IsEmpty()
     {
         return Value == Guid.Empty;
     }
-
 
     public override int GetHashCode()
     {
@@ -36,11 +34,10 @@ public abstract class TypeId : IEqualityComparer<TypeId>
         if (ReferenceEquals(null, other)) return false;
         return ReferenceEquals(this, other) || Value.Equals(other.Value);
     }
+
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == GetType() && Equals((TypeId)obj);
+        return Equals(obj as TypeId);
     }
 
     public bool Equals(TypeId? x, TypeId? y)
