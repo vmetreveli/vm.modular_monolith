@@ -16,6 +16,7 @@ using vm.modular.Api.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.ConfigureOpenTelemetry();
 
 builder.Services.AddCatalogModule(builder.Configuration);
 builder.Services.AddOrderingModule(builder.Configuration);
@@ -84,6 +85,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.MapPrometheusScrapingEndpoint();
     app.UseDeveloperExceptionPage();
 
     app.UseSwagger();
