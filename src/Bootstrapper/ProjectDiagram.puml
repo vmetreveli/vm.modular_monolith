@@ -1,0 +1,61 @@
+@startuml
+package "src" {
+  package "Modules" {
+    ' Catalog sub-projects and dependencies
+    package "Catalog" {
+      [Catalog.Domain]
+      [Catalog.Infrastructure]
+      [Catalog.Application]
+      [Catalog.Module]
+
+      [Catalog.Infrastructure] --> [Catalog.Domain] : Project Reference
+      [Catalog.Application] --> [Catalog.Domain] : Project Reference
+      [Catalog.Application] --> [Catalog.Infrastructure] : Project Reference
+      [Catalog.Module] --> [Catalog.Application] : Project Reference
+    }
+
+    ' Basket (assumed structure)
+    package "Basket" {
+            [Basket.Module]
+            [Basket.Infrastructure]
+            [Basket.Application]
+            [Basket.Module]
+      
+            [Basket.Infrastructure] --> [Basket.Domain] : Project Reference
+            [Basket.Application] --> [Basket.Domain] : Project Reference
+            [Basket.Application] --> [Basket.Infrastructure] : Project Reference
+            [Basket.Module] --> [Basket.Application] : Project Reference
+    }
+
+    ' Ordering (assumed structure)
+    package "Ordering" {
+      [Ordering.Module]
+      [Ordering.Infrastructure]
+               [Ordering.Application]
+               [Ordering.Module]
+         
+               [Ordering.Infrastructure] --> [Ordering.Domain] : Project Reference
+               [Ordering.Application] --> [Ordering.Domain] : Project Reference
+               [Ordering.Application] --> [Ordering.Infrastructure] : Project Reference
+               [Ordering.Module] --> [Ordering.Application] : Project Reference
+       }
+    }
+  }
+
+  package "Framework"
+  package "Integration"
+  package "Bootstrapper"
+}
+@enduml
+
+@startuml
+' Module integration using component diagram style
+component Bootstrapper
+component "Catalog.Module" as CatalogModule
+component "Basket.Module" as BasketModule
+component "Ordering.Module" as OrderingModule
+
+Bootstrapper --> CatalogModule : AddCatalogModule(...)
+Bootstrapper --> BasketModule : AddBasketModule(...)
+Bootstrapper --> OrderingModule : AddOrderingModule(...)
+@enduml
