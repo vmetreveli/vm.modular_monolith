@@ -1,44 +1,75 @@
 ﻿services:
-  ModularMonolithDb:
-    image: postgres
-    container_name: ModularMonolithDb
+  modularmonolithdb:
+    image: postgres:16
+    container_name: modularmonolithdb
     env_file:
       - .env
     environment:
-      - POSTGRES_DB=ModularMonolithDb
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     restart: always
     ports:
-      - "5433:5432"  # ✅ maps host:container
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "${POSTGRES_USER}" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ModularMonolithDb -h localhost -p 5432"]
       interval: 10s
       timeout: 5s
       retries: 5
-  
+      start_period: 30s
+    networks:
+      - modularmonolith-network
+
   rabbitmq:
-    image: rabbitmq:4.1-management-alpine
+    image: rabbitmq:4.2.2-management-alpine
     container_name: rabbitmq
+    hostname: rabbitmq
     restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+      RABBITMQ_ERLANG_COOKIE: rabbitmq_super_secret_cookie_2025
     ports:
       - "5672:5672"
       - "15672:15672"
-  
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - modularmonolith-network
+
   vm.modular.api:
     image: vm.modular.api
     build:
       context: .
       dockerfile: ./src/Bootstrapper/vm.modular.Api/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings__DefaultConnection=Server=ModularMonolithDb;Port=5432;Database=ModularMonolithDb;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
     env_file:
       - .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
     depends_on:
-      - ModularMonolithDb
+      modularmonolithdb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "8080:8080"
+    networks:
+      - modularmonolith-network
+    restart: unless-stopped
 
 volumes:
   postgres_data:
+  rabbitmq_data:
+
+networks:
+  modularmonolith-network:
+    driver: bridge
