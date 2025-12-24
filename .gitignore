@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Add to .gitignore
+NuGet.config.local
+secrets/
+*.secrets
+.env.local
