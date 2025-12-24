@@ -9,13 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="meadow_framework" Version="1.0.26" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="Throw" Version="1.4.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Framework\Framework.Abstractions\Framework.Abstractions.csproj" />
-        <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
     </ItemGroup>
 
 

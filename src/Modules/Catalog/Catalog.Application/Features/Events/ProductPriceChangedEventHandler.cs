@@ -1,6 +1,6 @@
 ﻿using Catalog.Domain.Events;
-using Framework.Abstractions.Events;
-using Framework.Abstractions.Kernel;
+using Meadow_Framework.Abstractions.Events;
+using Meadow_Framework.Abstractions.Kernel;
 using Microsoft.Extensions.Logging;
 
 namespace Catalog.Application.Features.Events;

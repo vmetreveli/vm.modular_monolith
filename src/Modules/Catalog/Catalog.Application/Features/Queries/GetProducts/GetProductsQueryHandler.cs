@@ -1,7 +1,7 @@
 ﻿using Catalog.Application.Contracts;
 using Catalog.Application.Contracts.Pagination;
 using Catalog.Domain.Repository;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProducts;
 
@@ -15,7 +15,6 @@ public class GetProductsQueryHandler(IProductRepository productRepository) : IQu
         var (products, totalCount) = await productRepository.GetPaginatedAsync(
             pageIndex,
             pageSize,
-            null,
             cancellationToken);
 
         var productDtos = products.Select(i => new ProductDto

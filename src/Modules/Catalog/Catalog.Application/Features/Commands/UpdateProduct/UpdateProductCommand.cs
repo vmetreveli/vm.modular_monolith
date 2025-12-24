@@ -1,5 +1,5 @@
 using Catalog.Application.Contracts;
-using Framework.Abstractions.Commands;
+using Meadow_Framework.Abstractions.Commands;
 
 namespace Catalog.Application.Features.Commands.UpdateProduct;
 

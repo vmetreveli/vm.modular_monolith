@@ -1,7 +1,7 @@
 ﻿using Catalog.Application.Contracts;
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 

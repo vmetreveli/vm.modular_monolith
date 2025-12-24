@@ -1,4 +1,5 @@
-using Framework.Abstractions.Events;
+using Meadow_Framework.Abstractions.Events;
+using Meadow_Framework.Abstractions.Primitives;
 
 namespace Catalog.Domain.Events;
 

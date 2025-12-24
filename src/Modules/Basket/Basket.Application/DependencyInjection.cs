@@ -1,5 +1,4 @@
-﻿using Framework.Infrastructure;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Basket.Application;
@@ -10,7 +9,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+        //services.AddAutoMapper(typeof(DependencyInjection).Assembly);
       //  services.AddFramework(configuration, typeof(DependencyInjection).Assembly); 
      //   services.AddAsynchronousAdapter(configuration);
         // services.AddApplicationServices(configuration);

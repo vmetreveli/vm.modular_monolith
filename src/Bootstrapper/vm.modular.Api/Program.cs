@@ -4,6 +4,7 @@ using Basket.Module;
 using Carter;
 using Catalog.Module;
 using Framework.Infrastructure;
+using Meadow_Framework.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,9 +36,10 @@ builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalog
 
 builder.Services.AddFramework(
     builder.Configuration,
-    typeof(Basket.Application.DependencyInjection).Assembly,
-    typeof(Ordering.Application.DependencyInjection).Assembly,
-    typeof(Catalog.Application.DependencyInjection).Assembly);
+    typeof(Basket.Application.DependencyInjection).Assembly);
+//    typeof(Ordering.Application.DependencyInjection).Assembly,
+// typeof(Catalog.Application.DependencyInjection).Assembly);
+
 
 
 builder.Services.AddEndpointsApiExplorer();

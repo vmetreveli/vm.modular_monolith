@@ -19,7 +19,7 @@ WORKDIR /src
 # Copy project files
 COPY ["src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj", "src/Bootstrapper/vm.modular.Api/"]
 COPY ["src/Framework/Framework.Infrastructure/Framework.Infrastructure.csproj", "src/Framework/Framework.Infrastructure/"]
-COPY ["src/Framework/Framework.Abstractions/Framework.Abstractions.csproj", "src/Framework/Framework.Abstractions/"]
+COPY ["src/Framework/Framework.Abstractions/Meadow_Framework.Abstractions.csproj", "src/Framework/Framework.Abstractions/"]
 COPY ["src/Modules/Catalog/Catalog.Module/Catalog.Module.csproj", "src/Modules/Catalog/Catalog.Module/"]
 COPY ["src/Modules/Catalog/Catalog.Application/Catalog.Application.csproj", "src/Modules/Catalog/Catalog.Application/"]
 COPY ["src/Modules/Catalog/Catalog.Domain/Catalog.Domain.csproj", "src/Modules/Catalog/Catalog.Domain/"]

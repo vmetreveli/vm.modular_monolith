@@ -1,5 +1,5 @@
 using Basket.Application.Contracts;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 
 namespace Basket.Application.Features.Queries.GetBasket;
 

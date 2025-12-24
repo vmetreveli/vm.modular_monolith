@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Basket.Application.Contracts;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Services.Catalog;
-using Framework.Abstractions.Commands;
-using Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Abstractions.Dispatchers;
 
 namespace Basket.Application.Features.Commands.AddItemIntoBasket;
 

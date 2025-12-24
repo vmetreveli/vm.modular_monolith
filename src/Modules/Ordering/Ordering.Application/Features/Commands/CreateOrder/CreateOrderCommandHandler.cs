@@ -1,5 +1,5 @@
-﻿using Framework.Abstractions.Commands;
-using Framework.Abstractions.Repository;
+﻿using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Abstractions.Repository;
 using Ordering.Application.Contracts;
 using Ordering.Domain.Entities;
 using Ordering.Domain.Repository;
