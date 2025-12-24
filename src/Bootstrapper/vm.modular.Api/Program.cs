@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Asp.Versioning;
 using Basket.Module;
 using Carter;
@@ -103,11 +104,12 @@ if (app.Environment.IsDevelopment())
             options.SwaggerEndpoint(url, name);
         }
     });
+    app.ApplyMigration();
 }
 
 // app.UseAuthentication();
 // app.UseAuthorization();
-app.MapGet("/", async () => DateTime.UtcNow);
+app.MapGet("/", () => Task.FromResult(DateTime.UtcNow));
 app.MapCarter();
 
 

@@ -5,32 +5,16 @@ services:
       context: "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith"
       dockerfile: "./src/Bootstrapper/vm.modular.Api/Dockerfile"
       target: "base"
-      args:
-        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "/opt/JetBrains/RiderDebuggerTools/linux-arm64/JetBrains.Debugger.Worker"
-    - "--runtimeconfig"
-    - "/opt/JetBrains/RiderDebuggerTools/JetBrains.Debugger.Worker.runtimeconfig.json"
-    - "--mode=server"
-    - "--frontend-port=57000"
-    - "--backend-port=57200"
-    - "--roslyn-worker-port=57400"
-    - "--timeout=60"
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/vm.modular.Api.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
-      RIDER_DEBUGGER_LOG_DIR: "/var/opt/JetBrains/RiderDebuggerTools"
-      RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
     image: "vm.modular.api:dev"
-    ports:
-    - "127.0.0.1:57000:57000"
-    - "127.0.0.1:57200:57200"
-    - "127.0.0.1:57400:57400"
+    ports: []
     volumes:
     - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api:/app:rw"
     - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith:/src:rw"
     - "/Users/vakhushtimetreveli/.nuget/packages:/root/.nuget/packages"
-    - "/Users/vakhushtimetreveli/.local/share/JetBrains/RiderRemoteDebugger/2025.3.1/LinuxArm64:/opt/JetBrains/RiderDebuggerTools"
-    - "/Users/vakhushtimetreveli/Applications/Rider.app/Contents/bin/backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
-    - "/Users/vakhushtimetreveli/Library/Logs/JetBrains/Rider2025.3/DebuggerWorker/JetBrains.Debugger.Worker.2025_12_24_20_01_24:/var/opt/JetBrains/RiderDebuggerTools:rw"
     working_dir: "/app"
