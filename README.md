@@ -13,6 +13,24 @@ The solution is organized into independent modules, each encapsulating specific 
 - **Ordering**: Manages order processing and fulfillment.
 - **Bootstrapper**: The entry point of the application that composes the modules.
 
+## Module Communication
+
+The modules communicate asynchronously using **Integration Events**. This ensures that modules remain decoupled and can evolve independently.
+
+### Integration Events
+
+1.  **ProductPriceChangedIntegrationEvent**
+    *   **Publisher**: `Catalog` Module
+    *   **Subscriber**: `Basket` Module
+    *   **Trigger**: When a product's price is updated in the Catalog.
+    *   **Action**: The Basket module updates the price of the corresponding item in active baskets.
+
+2.  **BasketCheckoutIntegrationEvent**
+    *   **Publisher**: `Basket` Module
+    *   **Subscriber**: `Ordering` Module
+    *   **Trigger**: When a user checks out their basket.
+    *   **Action**: The Ordering module receives the basket details and creates a new order.
+
 ## System Diagram
 
 The following diagram illustrates the high-level architecture and module interactions:
@@ -57,7 +75,7 @@ graph TD
 
 ## Getting Started
 
-1. Ensure you have Docker and .NET 8 SDK installed.
+1. Ensure you have Docker and .NET 9 SDK installed.
 2. Run `docker-compose up -d` to start the infrastructure (PostgreSQL).
 3. Open the solution `vm.modular_monolith.sln` in your IDE.
 4. Run the `Bootstrapper` project.
