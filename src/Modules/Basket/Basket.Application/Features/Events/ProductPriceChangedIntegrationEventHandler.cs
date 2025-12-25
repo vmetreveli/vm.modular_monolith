@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Basket.Application.Features.Commands.UpdateItemPriceInBasket;
 using Basket.Domain.Events;
-using Framework.Abstractions.Dispatchers;
-using Framework.Abstractions.Events;
+using Meadow_Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Abstractions.Events;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

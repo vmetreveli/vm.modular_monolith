@@ -1,4 +1,4 @@
-﻿using Framework.Abstractions.Primitives;
+﻿using Meadow_Framework.Abstractions.Primitives;
 
 namespace Basket.Domain.Entities;
 

@@ -1,4 +1,4 @@
-﻿using Framework.Abstractions.Dispatchers;
+﻿using Meadow_Framework.Abstractions.Dispatchers;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts;

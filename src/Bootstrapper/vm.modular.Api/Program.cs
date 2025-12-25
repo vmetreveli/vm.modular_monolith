@@ -1,9 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using Asp.Versioning;
 using Basket.Module;
 using Carter;
 using Catalog.Module;
 using Framework.Infrastructure;
+using Meadow_Framework.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -101,11 +103,12 @@ if (app.Environment.IsDevelopment())
             options.SwaggerEndpoint(url, name);
         }
     });
+    app.ApplyMigration();
 }
 
 // app.UseAuthentication();
 // app.UseAuthorization();
-app.MapGet("/", async () => DateTime.UtcNow);
+app.MapGet("/", () => Task.FromResult(DateTime.UtcNow));
 app.MapCarter();
 
 

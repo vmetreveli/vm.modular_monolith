@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
 using Basket.Domain.Entities;
+using Meadow_Framework.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Basket.Infrastructure.Context;
 
 public class BasketDbContext(DbContextOptions<BasketDbContext> options)
-    : DbContext(options)
+    : DbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,5 @@
 using Catalog.Domain.Entities;
-using Framework.Abstractions.Repository;
+using Meadow_Framework.Abstractions.Repository;
 
 namespace Catalog.Domain.Repository;
 

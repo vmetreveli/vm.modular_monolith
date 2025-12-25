@@ -1,7 +1,7 @@
 ﻿using Catalog.Application.Contracts;
 using Catalog.Domain.Exception;
 using Catalog.Domain.Repository;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProductById;
 

@@ -1,4 +1,4 @@
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 using Ordering.Application.Contracts;
 
 namespace Ordering.Application.Features.Queries.GetOrderById;

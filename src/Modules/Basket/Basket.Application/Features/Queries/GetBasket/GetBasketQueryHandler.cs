@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Basket.Application.Contracts;
 using Basket.Domain.Repository;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 using Mapster;
 
 namespace Basket.Application.Features.Queries.GetBasket;

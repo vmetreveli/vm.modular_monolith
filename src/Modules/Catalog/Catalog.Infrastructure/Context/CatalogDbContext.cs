@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
 using Catalog.Domain.Entities;
+using Meadow_Framework.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Catalog.Infrastructure.Context;
 
 public class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
-    : DbContext(options)
+    : DbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

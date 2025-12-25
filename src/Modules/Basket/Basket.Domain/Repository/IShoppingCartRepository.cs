@@ -1,5 +1,5 @@
 using Basket.Domain.Entities;
-using Framework.Abstractions.Repository;
+using Meadow_Framework.Abstractions.Repository;
 
 namespace Basket.Domain.Repository;
 

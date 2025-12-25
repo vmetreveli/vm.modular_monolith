@@ -1,4 +1,4 @@
-﻿using Framework.Abstractions.Queries;
+﻿using Meadow_Framework.Abstractions.Queries;
 using Ordering.Application.Contracts;
 using Ordering.Application.Contracts.Pagination;
 using Ordering.Domain.Repository;
@@ -15,7 +15,7 @@ public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHan
         var pageSize = query.PaginationRequest.PageSize;
 
        
-        var (orders, totalCount) = await orderRepository.GetPaginatedAsync(pageIndex, pageSize,null, cancellationToken);
+        var (orders, totalCount) = await orderRepository.GetPaginatedAsync(pageIndex, pageSize, cancellationToken);
 
 
         var orderDtos = orders.Select(p=>new OrderDto

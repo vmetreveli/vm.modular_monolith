@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Meadow_Framework.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Ordering.Domain.Entities;
@@ -6,7 +7,7 @@ using Ordering.Domain.Entities;
 namespace Ordering.Infrastructure.Context;
 
 public class OrderingDbContext(DbContextOptions<OrderingDbContext> options)
-    : DbContext(options)
+    : DbContext(options) , IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

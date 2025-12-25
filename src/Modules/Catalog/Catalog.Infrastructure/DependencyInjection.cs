@@ -1,10 +1,9 @@
 ﻿using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
-using Framework.Abstractions.Repository;
-using Framework.Infrastructure;
-using Framework.Infrastructure.Interceptors;
-using Framework.Infrastructure.Repository;
+using Meadow_Framework.Abstractions.Repository;
+using Meadow_Framework.Infrastructure.Interceptors;
+using Meadow_Framework.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

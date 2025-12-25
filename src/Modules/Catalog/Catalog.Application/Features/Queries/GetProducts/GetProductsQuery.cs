@@ -1,5 +1,5 @@
 using Catalog.Application.Contracts.Pagination;
-using Framework.Abstractions.Queries;
+using Meadow_Framework.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProducts;
 

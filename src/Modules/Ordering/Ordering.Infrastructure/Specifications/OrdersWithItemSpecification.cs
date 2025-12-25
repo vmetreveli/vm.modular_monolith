@@ -1,4 +1,4 @@
-﻿using Framework.Abstractions.Specifications;
+﻿using Meadow_Framework.Abstractions.Specifications;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Specifications;

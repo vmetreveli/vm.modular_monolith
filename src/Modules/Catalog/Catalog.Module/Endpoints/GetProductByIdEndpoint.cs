@@ -1,7 +1,7 @@
 ﻿using Carter;
 using Catalog.Application.Features.Queries.GetProductById;
 using Catalog.Module.Contracts;
-using Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

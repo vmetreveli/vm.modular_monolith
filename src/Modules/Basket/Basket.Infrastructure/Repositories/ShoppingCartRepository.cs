@@ -6,7 +6,7 @@ using Basket.Domain.Entities;
 using Basket.Domain.Exception;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
-using Framework.Infrastructure.Repository;
+using Meadow_Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Infrastructure.Repositories;

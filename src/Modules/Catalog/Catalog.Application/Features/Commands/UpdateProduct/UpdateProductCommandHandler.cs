@@ -2,7 +2,7 @@
 using Catalog.Domain.Entities;
 using Catalog.Domain.Exception;
 using Catalog.Infrastructure.Context;
-using Framework.Abstractions.Commands;
+using Meadow_Framework.Abstractions.Commands;
 
 namespace Catalog.Application.Features.Commands.UpdateProduct;
 

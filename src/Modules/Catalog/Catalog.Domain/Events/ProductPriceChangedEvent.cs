@@ -1,5 +1,5 @@
 ﻿using Catalog.Domain.Entities;
-using Framework.Abstractions.Events;
+using Meadow_Framework.Abstractions.Events;
 
 namespace Catalog.Domain.Events;
 public class ProductPriceChangedEvent : IDomainEvent
