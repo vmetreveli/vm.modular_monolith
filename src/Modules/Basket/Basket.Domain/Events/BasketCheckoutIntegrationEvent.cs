@@ -1,10 +1,12 @@
-using Meadow_Framework.Abstractions.Events;
-using Meadow_Framework.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Events;
+using Meadow_Framework.Core.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Basket.Domain.Events;
 
 public class BasketCheckoutIntegrationEvent: IntegrationBaseEvent
 {
+    public string Name { get; set; } = default!;
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
     public decimal TotalPrice { get; set; } = default!;

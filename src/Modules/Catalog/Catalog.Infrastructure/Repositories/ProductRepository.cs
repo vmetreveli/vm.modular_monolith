@@ -2,7 +2,7 @@ using Catalog.Domain;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
-using Meadow_Framework.Infrastructure.Repository;
+using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories;

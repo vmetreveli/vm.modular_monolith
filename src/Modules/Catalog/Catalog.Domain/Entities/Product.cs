@@ -1,5 +1,5 @@
 ﻿using Catalog.Domain.Events;
-using Meadow_Framework.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Catalog.Domain.Entities;
 public class Product : AggregateRoot<Guid>

@@ -1,5 +1,5 @@
 ﻿using Basket.Domain.Entities;
-using Meadow_Framework.Abstractions.Specifications;
+using Meadow_Framework.Core.Abstractions.Specifications;
 
 
 namespace Basket.Infrastructure.Specifications;

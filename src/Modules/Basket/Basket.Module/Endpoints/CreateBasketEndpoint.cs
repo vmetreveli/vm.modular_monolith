@@ -3,7 +3,7 @@ using Basket.Application.Contracts;
 using Basket.Application.Features.Commands.CreateBasket;
 using Basket.Module.Contracts;
 using Carter;
-using Meadow_Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

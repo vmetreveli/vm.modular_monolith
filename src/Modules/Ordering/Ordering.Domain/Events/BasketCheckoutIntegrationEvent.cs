@@ -1,10 +1,13 @@
-using Meadow_Framework.Abstractions.Events;
-using Meadow_Framework.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Events;
+using Meadow_Framework.Core.Abstractions.Primitives;
+using Meadow_Framework.Core.Infrastructure.Security;
 
 namespace Ordering.Domain.Events;
 
 public class BasketCheckoutIntegrationEvent: IntegrationBaseEvent
 {
+    [SensitiveData]
+    public required string Name { get; set; }
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
     public decimal TotalPrice { get; set; } = default!;

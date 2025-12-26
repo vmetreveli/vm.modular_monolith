@@ -1,4 +1,4 @@
-﻿using Meadow_Framework.Abstractions.Primitives;
+﻿using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Ordering.Domain.Entities;
 public class OrderItem : EntityBase<Guid>

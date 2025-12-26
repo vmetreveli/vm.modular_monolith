@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using Meadow_Framework.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Basket.Domain.Entities;
 

@@ -5,7 +5,7 @@ using Basket.Application.Contracts;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Specifications;
-using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.UpdateItemPriceInBasket;
 

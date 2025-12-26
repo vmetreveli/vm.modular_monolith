@@ -1,7 +1,7 @@
 ﻿using Carter;
 using Catalog.Application.Features.Commands.DeleteProduct;
 using Catalog.Module.Contracts;
-using Meadow_Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

@@ -1,6 +1,6 @@
 ﻿using Carter;
 using Catalog.Application.Features.Commands.CreateProduct;
-using Meadow_Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

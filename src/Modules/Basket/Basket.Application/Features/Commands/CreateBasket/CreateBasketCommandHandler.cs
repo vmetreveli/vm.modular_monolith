@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Basket.Application.Contracts;
 using Basket.Domain.Entities;
 using Basket.Domain.Repository;
-using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.CreateBasket;
 

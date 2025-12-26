@@ -1,4 +1,4 @@
-using Meadow_Framework.Abstractions.Repository;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Domain.Repository;

@@ -1,9 +1,20 @@
-using Meadow_Framework.Abstractions.Events;
-using Meadow_Framework.Abstractions.Primitives;
+using Meadow_Framework.Core.Abstractions.Events;
+using Meadow_Framework.Core.Abstractions.Primitives;
+using Meadow_Framework.Core.Infrastructure.Security;
 
 namespace Basket.Domain.Events;
 
 public class ProductPriceChangedIntegrationEvent : IntegrationBaseEvent
+{
+    public Guid ProductId { get; set; } = default!;
+    public string Name { get; set; } = default!;
+    public List<string> Category { get; set; } = default!;
+    public string Description { get; set; } = default!;
+    public string ImageFile { get; set; } = default!;
+    public decimal Price { get; set; } = default!;
+}
+
+public class ProductPriceChangedIntegrationBaseEvent : IntegrationBaseEvent
 {
     public Guid ProductId { get; set; } = default!;
     public string Name { get; set; } = default!;

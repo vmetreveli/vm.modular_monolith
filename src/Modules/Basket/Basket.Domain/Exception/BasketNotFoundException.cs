@@ -1,4 +1,4 @@
-﻿using Meadow_Framework.Abstractions.Exceptions;
+﻿using Meadow_Framework.Core.Abstractions.Exceptions;
 
 namespace Basket.Domain.Exception;
 

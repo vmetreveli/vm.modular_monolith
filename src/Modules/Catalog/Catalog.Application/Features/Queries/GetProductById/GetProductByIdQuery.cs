@@ -1,5 +1,5 @@
 ﻿using Catalog.Application.Contracts;
-using Meadow_Framework.Abstractions.Queries;
+using Meadow_Framework.Core.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProductById;
 

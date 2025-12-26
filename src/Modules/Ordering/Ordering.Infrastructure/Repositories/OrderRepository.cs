@@ -1,4 +1,4 @@
-using Meadow_Framework.Infrastructure.Repository;
+using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Domain.Entities;
 using Ordering.Domain.Repository;

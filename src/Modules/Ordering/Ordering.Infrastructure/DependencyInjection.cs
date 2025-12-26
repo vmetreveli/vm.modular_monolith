@@ -1,6 +1,6 @@
-﻿using Meadow_Framework.Abstractions.Repository;
-using Meadow_Framework.Infrastructure.Interceptors;
-using Meadow_Framework.Infrastructure.Repository;
+﻿using Meadow_Framework.Core.Abstractions.Repository;
+using Meadow_Framework.Core.Infrastructure.Interceptors;
+using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

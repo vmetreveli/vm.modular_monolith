@@ -1,5 +1,5 @@
-﻿using Meadow_Framework.Abstractions.Commands;
-using Meadow_Framework.Abstractions.Repository;
+﻿using Meadow_Framework.Core.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Ordering.Application.Contracts;
 using Ordering.Domain.Exceptions;
 using Ordering.Domain.Repository;

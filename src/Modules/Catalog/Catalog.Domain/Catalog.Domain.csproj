@@ -4,10 +4,11 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>14</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="meadow_framework" Version="1.0.27" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="Throw" Version="1.4.0"/>
+        <PackageReference Include="Meadow_Framework.Core" Version="1.0.54" />
+        <PackageReference Include="Meadow_Framework.Analyzer" Version="1.0.54"/>
+              <PackageReference Include="Throw" Version="1.4.0"/>
     </ItemGroup>
 </Project>

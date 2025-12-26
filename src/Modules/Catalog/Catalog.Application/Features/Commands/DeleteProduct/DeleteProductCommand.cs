@@ -1,4 +1,4 @@
-using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Commands;
 
 namespace Catalog.Application.Features.Commands.DeleteProduct;
 

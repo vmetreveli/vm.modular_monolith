@@ -1,4 +1,4 @@
-﻿using Meadow_Framework.Abstractions.Queries;
+﻿using Meadow_Framework.Core.Abstractions.Queries;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Contracts;

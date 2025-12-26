@@ -1,4 +1,4 @@
-﻿using Meadow_Framework.Abstractions.Primitives;
+﻿using Meadow_Framework.Core.Abstractions.Primitives;
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Domain.Entities;

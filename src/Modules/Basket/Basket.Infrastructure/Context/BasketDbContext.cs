@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Basket.Domain.Entities;
-using Meadow_Framework.Abstractions;
+using Meadow_Framework.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 

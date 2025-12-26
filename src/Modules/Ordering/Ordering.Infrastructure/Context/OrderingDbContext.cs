@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Meadow_Framework.Abstractions;
+using Meadow_Framework.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Ordering.Domain.Entities;

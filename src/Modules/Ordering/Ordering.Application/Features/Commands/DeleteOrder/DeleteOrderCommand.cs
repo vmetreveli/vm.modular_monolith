@@ -1,4 +1,4 @@
-using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Commands;
 using Ordering.Application.Contracts;
 
 namespace Ordering.Application.Features.Commands.DeleteOrder;

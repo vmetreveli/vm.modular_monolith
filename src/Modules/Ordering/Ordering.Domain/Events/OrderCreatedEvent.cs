@@ -1,4 +1,4 @@
-﻿using Meadow_Framework.Abstractions.Events;
+﻿using Meadow_Framework.Core.Abstractions.Events;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Domain.Events;

@@ -10,8 +10,8 @@
         <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Refit" Version="8.0.0" />
-        <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+        <PackageReference Include="Refit" Version="9.0.2" />
+        <PackageReference Include="Refit.HttpClientFactory" Version="9.0.2" />
         <PackageReference Include="Throw" Version="1.4.0"/>
     </ItemGroup>
     

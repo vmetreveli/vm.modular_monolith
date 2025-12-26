@@ -10,9 +10,9 @@ using Basket.Domain.Exception;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Specifications;
-using Meadow_Framework.Abstractions.Commands;
-using Meadow_Framework.Abstractions.Outbox;
-using Meadow_Framework.Abstractions.Repository;
+using Meadow_Framework.Core.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Outbox;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 

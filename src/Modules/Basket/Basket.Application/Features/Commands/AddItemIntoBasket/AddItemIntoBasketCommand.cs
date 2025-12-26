@@ -1,5 +1,5 @@
 using Basket.Application.Contracts;
-using Meadow_Framework.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.AddItemIntoBasket;
 

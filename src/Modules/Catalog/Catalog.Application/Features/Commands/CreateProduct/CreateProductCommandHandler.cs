@@ -1,8 +1,8 @@
 ﻿using Catalog.Application.Contracts;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Repository;
-using Meadow_Framework.Abstractions.Commands;
-using Meadow_Framework.Abstractions.Repository;
+using Meadow_Framework.Core.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Repository;
 
 namespace Catalog.Application.Features.Commands.CreateProduct;
 
