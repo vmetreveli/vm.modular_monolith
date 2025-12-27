@@ -46,7 +46,6 @@ public static class DependencyInjection
             });
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<OrderingDbContext>>();
 
         return services;
     }
