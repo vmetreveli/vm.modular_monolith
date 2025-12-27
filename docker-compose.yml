@@ -24,13 +24,14 @@
 
   rabbitmq:
     image: rabbitmq:4.2.2-management-alpine
-    container_name: rabbitmq
-    hostname: rabbitmq
+    container_name: ${AppConfiguration__RabbitMQ__ExchangeName}
+    hostname: ${AppConfiguration__RabbitMQ__Host}
     restart: always
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin123
+      RABBITMQ_DEFAULT_USER: ${AppConfiguration__RabbitMQ__Username}
+      RABBITMQ_DEFAULT_PASS: ${AppConfiguration__RabbitMQ__Password}
       RABBITMQ_ERLANG_COOKIE: rabbitmq_super_secret_cookie_2025
+
     ports:
       - "5672:5672"
       - "15672:15672"

@@ -7,7 +7,7 @@ using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Application.Features.Commands.CreateOrder;
 
-internal class CreateOrderCommandHandler(IOrderRepository orderRepository,IUnitOfWork unitOfWork) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+internal class CreateOrderCommandHandler(IOrderRepository orderRepository,IOrderUnitOfWork unitOfWork) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
     public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken = default)
     {

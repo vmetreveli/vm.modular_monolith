@@ -45,6 +45,7 @@ public static class DependencyInjection
                     .EnableDetailedErrors();
             });
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
         services.AddScoped<IUnitOfWork, UnitOfWork<OrderingDbContext>>();
 
         return services;
