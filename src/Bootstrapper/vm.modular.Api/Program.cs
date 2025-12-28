@@ -4,6 +4,7 @@ using Asp.Versioning;
 using Basket.Module;
 using Carter;
 using Catalog.Module;
+using Discount.Module;
 using Framework.Infrastructure;
 using Meadow_Framework.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,7 @@ builder.ConfigureOpenTelemetry();
 builder.Services.AddCatalogModule(builder.Configuration);
 builder.Services.AddOrderingModule(builder.Configuration);
 builder.Services.AddBasketModule(builder.Configuration);
+builder.Services.AddDiscountModule(builder.Configuration);
 
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
@@ -31,14 +33,16 @@ builder.Services.AddHttpContextAccessor();
 var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
 var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
 var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
+var discountAssembly = typeof(Discount.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly,discountAssembly);
 
 
 builder.Services.AddFramework(
     builder.Configuration,
     typeof(Basket.Application.DependencyInjection).Assembly,
     typeof(Ordering.Application.DependencyInjection).Assembly,
+    typeof(Discount.Application.DependencyInjection).Assembly,
     typeof(Catalog.Application.DependencyInjection).Assembly);
 
 

@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Module", "src\Modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Domain", "src\Modules\Discount\Discount.Domain\Discount.Domain.csproj", "{250203AA-7CAB-49DB-BDF8-FF9149280663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Application", "src\Modules\Discount\Discount.Application\Discount.Application\Discount.Application.csproj", "{545DDC42-D697-45D3-A248-194BAAFC3FF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Application", "src\Modules\Discount\Discount.Application\Discount.Application.csproj", "{545DDC42-D697-45D3-A248-194BAAFC3FF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Infrastructure", "src\Modules\Discount\Discount.Infrastructure\Discount.Infrastructure.csproj", "{353E3E49-274D-4D43-9ED7-C3628E3AADF6}"
 EndProject

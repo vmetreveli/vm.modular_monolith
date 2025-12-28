@@ -47,9 +47,10 @@
     </ItemGroup>
 
     <ItemGroup>
-         <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
+        <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Basket\Basket.Module\Basket.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj" />
+        <ProjectReference Include="..\..\Modules\Discount\Discount.Module\Discount.Module.csproj" />
     </ItemGroup>
 
 </Project>

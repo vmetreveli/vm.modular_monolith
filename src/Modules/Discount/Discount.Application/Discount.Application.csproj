@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\Discount.Domain\Discount.Domain.csproj"/>
         <ProjectReference Include="..\Discount.Infrastructure\Discount.Infrastructure.csproj"/>

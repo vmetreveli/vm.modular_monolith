@@ -1,3 +1,5 @@
+using Discount.Application;
+using Discount.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
