@@ -41,7 +41,7 @@ internal class CheckoutBasketCommandHandler(IBasketUnitOfWork unitOfWork, IOutbo
             }
 
             // Set total price on basket checkout event message
-            var eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
+            BasketCheckoutIntegrationEvent eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
             eventMessage.TotalPrice = basket.TotalPrice;
 
             // Write a message to the outbox

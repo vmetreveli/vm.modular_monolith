@@ -30,7 +30,7 @@ public class CheckoutBasketEndpoint : ICarterModule
         .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Checkout Basket")
-        .WithDescription("Checkout Basket")
-        .RequireAuthorization();
+        .WithDescription("Checkout Basket");
+        //.RequireAuthorization();
     }
 }
