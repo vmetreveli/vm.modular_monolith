@@ -52,7 +52,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
-    options.OperationFilter<SwaggerDefaultValues>();
+   // options.OperationFilter<SwaggerDefaultValues>();
     options.CustomSchemaIds(type => type.FullName);
 });
 
@@ -75,7 +75,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
     // Add a custom operation filter which sets default values
-    options.OperationFilter<SwaggerDefaultValues>();
+
 });
 
 
