@@ -69,8 +69,8 @@ graph TD
 - **ASP.NET Core**
 - **Entity Framework Core**
 - **MediatR** (for CQRS and in-process messaging)
-- **MassTransit** (likely used for integration events, inferred from architecture)
-- **PostgreSQL** (inferred from `postgres_data` folder)
+- **MassTransit** (for integration events)
+- **PostgreSQL**
 - **Docker**
 
 ## Getting Started
