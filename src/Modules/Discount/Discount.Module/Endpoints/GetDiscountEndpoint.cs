@@ -1,14 +1,14 @@
 ﻿using Carter;
 using Discount.Application.Features.Discount.Queries.GetDiscount;
+using Discount.Module.Contracts;
 using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Ordering.Module.Contracts;
 
 namespace Discount.Module.Endpoints;
 
-public class GetDiscountEndpoint : ICarterModule
+public sealed class GetDiscountEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

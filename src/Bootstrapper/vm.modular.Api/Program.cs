@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using Asp.Versioning;
 using Basket.Module;
@@ -30,16 +31,17 @@ builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
-var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
-var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
-var discountAssembly = typeof(Discount.Module.DependencyInjection).Assembly;
+Assembly catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
+Assembly basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+Assembly orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
+Assembly discountAssembly = typeof(Discount.Module.DependencyInjection).Assembly;
 
 builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly,discountAssembly);
 
 
 builder.Services.AddFramework(
     builder.Configuration,
+    true,
     typeof(Basket.Application.DependencyInjection).Assembly,
     typeof(Ordering.Application.DependencyInjection).Assembly,
     typeof(Discount.Application.DependencyInjection).Assembly,
@@ -51,6 +53,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
     options.OperationFilter<SwaggerDefaultValues>();
+    options.CustomSchemaIds(type => type.FullName);
 });
 
 

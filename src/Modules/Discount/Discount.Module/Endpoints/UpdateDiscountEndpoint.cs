@@ -22,7 +22,8 @@ public sealed class UpdateDiscountEndpoint : ICarterModule
                 return Results.Ok(result);
             })
             .WithName("UpdateDiscount")
-            .Produces<Coupon>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status200OK)
+          //  .Produces<Coupon>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Update Discount")
             .WithDescription("Updates an existing discount");

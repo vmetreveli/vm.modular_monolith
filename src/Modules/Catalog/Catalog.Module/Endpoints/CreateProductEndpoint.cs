@@ -1,5 +1,6 @@
 ﻿using Carter;
 using Catalog.Application.Features.Commands.CreateProduct;
+using Catalog.Module.Contracts;
 using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Mapster;
 using Microsoft.AspNetCore.Builder;

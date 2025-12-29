@@ -1,4 +1,4 @@
-namespace Catalog.Module.Endpoints;
+namespace Catalog.Module.Contracts;
 
 public class CreateProductResponse
 {

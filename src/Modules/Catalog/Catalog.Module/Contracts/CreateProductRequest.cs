@@ -1,6 +1,6 @@
 using Catalog.Application.Contracts;
 
-namespace Catalog.Module.Endpoints;
+namespace Catalog.Module.Contracts;
 
 public class CreateProductRequest
 {

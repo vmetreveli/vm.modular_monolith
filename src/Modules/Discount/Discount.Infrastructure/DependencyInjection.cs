@@ -41,21 +41,13 @@ public static class DependencyInjection
                     .EnableDetailedErrors();
             });
 
+        //services.AddScoped<IEventRepository, EventRepository>();
+        //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IDiscountRepository, DiscountRepository>();
-        //services.AddScoped<IBasketUnitOfWork, BasketUnitOfWork>();
+     //   services.AddScoped<ICatalogUnitOfWork, CatalogUnitOfWork>();
 
-        AddCatalogApiClient(services,configuration);
         return services;
     }
 
-
-    private static void AddCatalogApiClient(IServiceCollection services, IConfiguration configuration)
-    {
-       //  var baseAddress = configuration["AppConfiguration:ExternalServices:CatalogApi:BaseAddress"];
-       // baseAddress.ThrowIfNullOrEmpty();
-       //
-       //  services.AddRefitClient<IProductReadService>()
-       //      .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
-    }
 
 }
