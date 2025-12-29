@@ -9,19 +9,17 @@ namespace Catalog.Application.Features.Commands.UpdateProduct;
 internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken = default)
+    public async Task<UpdateProductResult> Handle(UpdateProductCommand command,
+        CancellationToken cancellationToken = default)
     {
         //Update Product entity from command object
         //save to database
         //return result
 
         var product = await dbContext.Products
-          .FindAsync([command.Product.Id], cancellationToken: cancellationToken);
+            .FindAsync([command.Product.Id], cancellationToken);
 
-        if (product is null)
-        {
-            throw new ProductNotFoundException(command.Product.Id);
-        }
+        if (product is null) throw new ProductNotFoundException(command.Product.Id);
 
         UpdateProductWithNewValues(product, command.Product);
 

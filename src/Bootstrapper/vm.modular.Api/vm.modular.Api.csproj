@@ -10,28 +10,28 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1"/>
         <PackageReference Include="Asp.Versioning.WebApi" Version="7.1.0"/>
         <PackageReference Include="Asp.Versioning.WebApi.ApiExplorer" Version="7.1.0"/>
-         <PackageReference Include="Microsoft.NET.Build.Containers" Version="10.0.101" />
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
-        <PackageReference Include="Polly" Version="8.6.5" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.1.0" />
-        <PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0" />
-        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
-        <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+        <PackageReference Include="Microsoft.NET.Build.Containers" Version="10.0.101"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1"/>
+        <PackageReference Include="Polly" Version="8.6.5"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.1.0"/>
+        <PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0"/>
+        <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1"/>
 
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0" />
-        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="10.1.0" />
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0" />
-        <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.7.0-rc.1" />
-        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.7.0-beta.1" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0" />
-        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0"/>
+        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="10.1.0"/>
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0"/>
+        <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.7.0-rc.1"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.7.0-beta.1"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0"/>
+        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -42,15 +42,15 @@
             <DependentUpon>appsettings.json</DependentUpon>
         </Content>
         <Content Include="..\..\..\.dockerignore">
-          <Link>.dockerignore</Link>
+            <Link>.dockerignore</Link>
         </Content>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
-        <ProjectReference Include="..\..\Modules\Basket\Basket.Module\Basket.Module.csproj" />
-        <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj" />
-        <ProjectReference Include="..\..\Modules\Discount\Discount.Module\Discount.Module.csproj" />
+        <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj"/>
+        <ProjectReference Include="..\..\Modules\Basket\Basket.Module\Basket.Module.csproj"/>
+        <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj"/>
+        <ProjectReference Include="..\..\Modules\Discount\Discount.Module\Discount.Module.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -6,15 +6,16 @@ using Meadow_Framework.Core.Abstractions.Repository;
 
 namespace Catalog.Application.Features.Commands.CreateProduct;
 
-public class CreateProductCommandHandler(IProductRepository productRepository, ICatalogUnitOfWork unitOfWork) : ICommandHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductCommandHandler(IProductRepository productRepository, ICatalogUnitOfWork unitOfWork)
+    : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
-    public async Task<CreateProductResult> Handle(CreateProductCommand command, 
+    public async Task<CreateProductResult> Handle(CreateProductCommand command,
         CancellationToken cancellationToken = default)
     {
         //create Product entity from command object
         //save to database
         //return result
-        
+
         var product = CreateNewProduct(command.Product);
 
         await productRepository.AddAsync(product, cancellationToken);

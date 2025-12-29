@@ -8,7 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Basket.Application.Features.Events;
 
-public class ProductPriceChangedIntegrationEventHandler(IDispatcher dispatcher, ILogger<ProductPriceChangedIntegrationEventHandler> logger)
+public class ProductPriceChangedIntegrationEventHandler(
+    IDispatcher dispatcher,
+    ILogger<ProductPriceChangedIntegrationEventHandler> logger)
     : IEventConsumer<ProductPriceChangedIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<ProductPriceChangedIntegrationEvent> context)

@@ -8,7 +8,8 @@ namespace Ordering.Infrastructure.Specifications;
 /// </summary>
 public sealed class OrdersWithItemSpecification : Specification<Order, Guid>
 {
-    public OrdersWithItemSpecification(Guid orderId) : base(order => order.Id == orderId) =>
+    public OrdersWithItemSpecification(Guid orderId) : base(order => order.Id == orderId)
+    {
         AddInclude(order => order.Items);
-
+    }
 }

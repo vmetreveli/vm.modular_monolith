@@ -12,7 +12,6 @@ public class OrderItemDto
 
     public OrderItemDto()
     {
-        
     }
 
     public Guid OrderId { get; init; }

@@ -7,7 +7,6 @@ namespace Discount.Application.Features.Discount.Commands.CreateDiscount;
 public class CreateDiscountCommandHandler(IDiscountRepository discountRepository)
     : ICommandHandler<CreateDiscountCommand>
 {
-
     public async Task Handle(CreateDiscountCommand request, CancellationToken cancellationToken = default)
     {
         Coupon coupon = new()

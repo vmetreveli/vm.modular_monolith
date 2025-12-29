@@ -10,8 +10,8 @@ public class Coupon : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
 
     public Coupon() : base(Guid.NewGuid())
     {
-
     }
+
     public string ProductName { get; set; }
     public string Description { get; set; }
     public int Amount { get; set; }

@@ -4,5 +4,4 @@ namespace Catalog.Domain.Repository;
 
 public interface ICatalogUnitOfWork : IUnitOfWork
 {
-
 }

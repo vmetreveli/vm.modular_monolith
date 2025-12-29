@@ -7,8 +7,8 @@ public class ShoppingCartItem : EntityBase<Guid>, IAuditableEntity, IDeletableEn
 {
     public ShoppingCartItem() : base(Guid.NewGuid())
     {
-        
     }
+
     public ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
         string productName) : base(Guid.NewGuid())
     {

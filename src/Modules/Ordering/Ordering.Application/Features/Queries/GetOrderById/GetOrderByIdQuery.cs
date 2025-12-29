@@ -5,5 +5,5 @@ namespace Ordering.Application.Features.Queries.GetOrderById;
 
 public class GetOrderByIdQuery : IQuery<GetOrderByIdResult>
 {
-    public Guid Id { get; init; } 
+    public Guid Id { get; init; }
 }

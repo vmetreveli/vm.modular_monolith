@@ -2,9 +2,11 @@
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Domain.Entities;
+
 public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
 {
-    public Order(Guid id, DateTime createdOn, DateTime modifiedOn, bool isDeleted, DateTime? deletedOn, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment) : base(id)
+    public Order(Guid id, DateTime createdOn, DateTime modifiedOn, bool isDeleted, DateTime? deletedOn, Guid customerId,
+        string orderName, Address shippingAddress, Address billingAddress, Payment payment) : base(id)
     {
         CreatedOn = createdOn;
         ModifiedOn = modifiedOn;
@@ -21,7 +23,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
     public DateTime ModifiedOn { get; }
     public bool IsDeleted { get; }
     public DateTime? DeletedOn { get; }
-    
+
     private readonly List<OrderItem> _items = new();
 
     private Order() : base(Guid.NewGuid())
@@ -38,7 +40,8 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
     public Payment Payment { get; private set; } = default!;
     public decimal TotalPrice => Items.Sum(x => x.Price * x.Quantity);
 
-    public static Order Create(Guid id, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment)
+    public static Order Create(Guid id, Guid customerId, string orderName, Address shippingAddress,
+        Address billingAddress, Payment payment)
     {
         var order = new Order
         {
@@ -50,7 +53,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
             Payment = payment
         };
 
-      //  order.AddDomainEvent(new OrderCreatedEvent(order));
+        //  order.AddDomainEvent(new OrderCreatedEvent(order));
 
         return order;
     }
@@ -76,11 +79,6 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
     public void Remove(Guid productId)
     {
         var orderItem = _items.FirstOrDefault(x => x.ProductId == productId);
-        if (orderItem is not null)
-        {
-            _items.Remove(orderItem);
-        }
+        if (orderItem is not null) _items.Remove(orderItem);
     }
-
-
 }

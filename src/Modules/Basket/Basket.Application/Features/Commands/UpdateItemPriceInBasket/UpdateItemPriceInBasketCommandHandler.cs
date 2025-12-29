@@ -9,7 +9,9 @@ using Meadow_Framework.Core.Abstractions.Commands;
 
 namespace Basket.Application.Features.Commands.UpdateItemPriceInBasket;
 
-internal class UpdateItemPriceInBasketCommandHandler(IShoppingCartRepository shoppingCartRepository, BasketDbContext dbContext)
+internal class UpdateItemPriceInBasketCommandHandler(
+    IShoppingCartRepository shoppingCartRepository,
+    BasketDbContext dbContext)
     : ICommandHandler<UpdateItemPriceInBasketCommand, UpdateItemPriceInBasketResult>
 {
     public async Task<UpdateItemPriceInBasketResult> Handle(UpdateItemPriceInBasketCommand command,
@@ -23,17 +25,17 @@ internal class UpdateItemPriceInBasketCommandHandler(IShoppingCartRepository sho
         // var itemsToUpdate = await dbContext.ShoppingCartItems
         //     .Where(x => x.ProductId == command.ProductId)
         var specification = new ShoppingCartWithItemSpecification(command.ProductId);
-       var shoppingCarts = await shoppingCartRepository.FindAsync(specification, cancellationToken);
+        var shoppingCarts = await shoppingCartRepository.FindAsync(specification, cancellationToken);
 
-       var itemsToUpdate = shoppingCarts.FirstOrDefault()?.Items;
-        
+        var itemsToUpdate = shoppingCarts.FirstOrDefault()?.Items;
 
-        if (!itemsToUpdate.Any()) return new UpdateItemPriceInBasketResult{IsSuccess = false};
+
+        if (!itemsToUpdate.Any()) return new UpdateItemPriceInBasketResult { IsSuccess = false };
 
         foreach (var item in itemsToUpdate) item.UpdatePrice(command.Price);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new UpdateItemPriceInBasketResult{IsSuccess = true};
+        return new UpdateItemPriceInBasketResult { IsSuccess = true };
     }
 }

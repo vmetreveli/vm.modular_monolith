@@ -5,7 +5,8 @@ using Meadow_Framework.Core.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProducts;
 
-public class GetProductsQueryHandler(IProductRepository productRepository) : IQueryHandler<GetProductsQuery, GetProductsResult>
+public class GetProductsQueryHandler(IProductRepository productRepository)
+    : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
     public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken = default)
     {
@@ -24,8 +25,7 @@ public class GetProductsQueryHandler(IProductRepository productRepository) : IQu
             Category = i.Category,
             Description = i.Description,
             ImageFile = i.ImageFile,
-            Price = i.Price,
-
+            Price = i.Price
         }).ToList();
 
 
@@ -37,5 +37,4 @@ public class GetProductsQueryHandler(IProductRepository productRepository) : IQu
                 productDtos)
         );
     }
-
 }

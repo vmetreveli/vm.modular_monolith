@@ -4,6 +4,5 @@ namespace Basket.Module.Contracts;
 
 public class CreateBasketRequest()
 {
-    public ShoppingCartDto ShoppingCart { get; init; } 
-
+    public ShoppingCartDto ShoppingCart { get; init; }
 }

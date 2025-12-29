@@ -4,13 +4,15 @@ using Meadow_Framework.Core.Abstractions.Kernel;
 using Microsoft.Extensions.Logging;
 
 namespace Catalog.Application.Features.Events;
-public class ProductPriceChangedEventHandler(IEventDispatcher eventDispatcher, ILogger<ProductPriceChangedEventHandler> logger) : IDomainEventHandler<ProductPriceChangedEvent>
-{
 
+public class ProductPriceChangedEventHandler(
+    IEventDispatcher eventDispatcher,
+    ILogger<ProductPriceChangedEventHandler> logger) : IDomainEventHandler<ProductPriceChangedEvent>
+{
     public async Task HandleAsync(ProductPriceChangedEvent @event, CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("Domain Event handled: {DomainEvent}", @event.GetType().Name);        
-        
+        logger.LogInformation("Domain Event handled: {DomainEvent}", @event.GetType().Name);
+
         // Publish product price changed integration event for update basket prices
         var integrationEvent = new ProductPriceChangedIntegrationEvent
         {
@@ -21,7 +23,7 @@ public class ProductPriceChangedEventHandler(IEventDispatcher eventDispatcher, I
             ImageFile = @event.Product.ImageFile,
             Price = @event.Product.Price //set updated product price
         };
-        
+
         await eventDispatcher.PublishIntegrationEventAsync(integrationEvent, cancellationToken);
     }
 }

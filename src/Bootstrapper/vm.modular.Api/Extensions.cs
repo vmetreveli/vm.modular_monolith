@@ -30,25 +30,22 @@ public static class Extensions
             })
             .WithTracing(x =>
             {
-                if (builder.Environment.IsDevelopment())
-                {
-                    x.SetSampler<AlwaysOnSampler>();
-                }
-                
+                if (builder.Environment.IsDevelopment()) x.SetSampler<AlwaysOnSampler>();
+
                 x.AddAspNetCoreInstrumentation()
                     .AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();
-        
+
         return builder;
     }
-    
+
     private static IHostApplicationBuilder AddOpenTelemetryExporters(this IHostApplicationBuilder builder)
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
-        
+
         if (useOtlpExporter)
         {
             builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter());
@@ -57,7 +54,7 @@ public static class Extensions
         }
 
         builder.Services.AddOpenTelemetry().WithMetrics(x => x.AddPrometheusExporter());
-        
+
         return builder;
     }
 }

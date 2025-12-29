@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Domain.Entities;
 using Ordering.Domain.Repository;
+using Ordering.Domain.Services;
 using Ordering.Infrastructure.Context;
 using Ordering.Infrastructure.Repositories;
+using Ordering.Infrastructure.Services;
 
 namespace Ordering.Infrastructure;
 
@@ -46,7 +48,7 @@ public static class DependencyInjection
             });
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
-
+        services.AddTransient<IEmailService, EmailService>();
         return services;
     }
 }

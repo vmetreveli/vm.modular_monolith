@@ -49,21 +49,18 @@ public static class DependencyInjection
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
         services.AddScoped<IBasketUnitOfWork, BasketUnitOfWork>();
-       // services.AddScoped<IProductReadService, ProductReadService>();
-       AddCatalogApiClient(services,configuration);
+        // services.AddScoped<IProductReadService, ProductReadService>();
+        AddCatalogApiClient(services, configuration);
         return services;
     }
-    
-    
+
+
     private static void AddCatalogApiClient(IServiceCollection services, IConfiguration configuration)
     {
         var baseAddress = configuration["AppConfiguration:ExternalServices:CatalogApi:BaseAddress"];
-       baseAddress.ThrowIfNullOrEmpty();
+        baseAddress.ThrowIfNullOrEmpty();
 
         services.AddRefitClient<IProductReadService>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
     }
-
-
-  
 }

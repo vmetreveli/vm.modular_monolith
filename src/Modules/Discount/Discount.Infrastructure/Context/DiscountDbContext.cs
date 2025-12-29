@@ -17,7 +17,9 @@ public class DiscountDbContext(DbContextOptions<DiscountDbContext> options)
     }
 
     #region Entities
+
     public DbSet<Coupon> Coupons { get; set; }
+
     #endregion
 }
 

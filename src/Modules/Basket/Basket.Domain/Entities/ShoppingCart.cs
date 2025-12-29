@@ -12,7 +12,6 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
 
     private ShoppingCart() : base(Guid.NewGuid())
     {
-       
     }
 
     public string UserName { get; private set; } = string.Empty;
@@ -26,12 +25,12 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
 
     public static ShoppingCart Create(Guid id)
     {
-       // ArgumentException.ThrowIfNullOrEmpty(userName);
+        // ArgumentException.ThrowIfNullOrEmpty(userName);
 
         var shoppingCart = new ShoppingCart
         {
-            Id = id,
-           // UserName = userName
+            Id = id
+            // UserName = userName
         };
 
         return shoppingCart;

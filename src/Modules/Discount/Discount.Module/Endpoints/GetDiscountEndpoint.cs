@@ -12,21 +12,22 @@ public sealed class GetDiscountEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/getDiscount", async (string productName, IDispatcher dispatcher, CancellationToken cancellationToken) =>
-        {
-            GetDiscountQuery query = new()
-            {
-                ProductName = productName
-            };
+        app.MapGet("/getDiscount",
+                async (string productName, IDispatcher dispatcher, CancellationToken cancellationToken) =>
+                {
+                    GetDiscountQuery query = new()
+                    {
+                        ProductName = productName
+                    };
 
-            CouponVm result = await dispatcher.QueryAsync(query, cancellationToken);
+                    var result = await dispatcher.QueryAsync(query, cancellationToken);
 
-            return Results.Ok(result);
-        })
-        .WithName("GetDiscount")
-        .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Get Discount")
-        .WithDescription("Get Discount");
+                    return Results.Ok(result);
+                })
+            .WithName("GetDiscount")
+            .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Get Discount")
+            .WithDescription("Get Discount");
     }
 }

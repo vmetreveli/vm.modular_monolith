@@ -6,16 +6,15 @@ using Ordering.Domain.Repository;
 
 namespace Ordering.Application.Features.Commands.DeleteOrder;
 
-public class DeleteOrderCommandHandler(IOrderRepository orderRepository, IOrderUnitOfWork unitOfWork) : ICommandHandler<DeleteOrderCommand, DeleteOrderResult>
+public class DeleteOrderCommandHandler(IOrderRepository orderRepository, IOrderUnitOfWork unitOfWork)
+    : ICommandHandler<DeleteOrderCommand, DeleteOrderResult>
 {
-    public async Task<DeleteOrderResult> Handle(DeleteOrderCommand command, CancellationToken cancellationToken = default)
+    public async Task<DeleteOrderResult> Handle(DeleteOrderCommand command,
+        CancellationToken cancellationToken = default)
     {
-        var order = await orderRepository.GetByIdAsync(command.OrderId, cancellationToken: cancellationToken);
+        var order = await orderRepository.GetByIdAsync(command.OrderId, cancellationToken);
 
-        if (order is null)
-        {
-            throw new OrderNotFoundException(command.OrderId);
-        }
+        if (order is null) throw new OrderNotFoundException(command.OrderId);
 
         orderRepository.Remove(order);
         await unitOfWork.CompleteAsync(cancellationToken);

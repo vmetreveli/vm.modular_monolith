@@ -4,7 +4,5 @@ namespace Basket.Application.Contracts;
 
 public class AddItemIntoBasketResult
 {
-    public Guid Id { get; init; } 
-
-
+    public Guid Id { get; init; }
 }

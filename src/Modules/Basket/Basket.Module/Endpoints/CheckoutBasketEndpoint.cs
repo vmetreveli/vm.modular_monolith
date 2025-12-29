@@ -20,17 +20,17 @@ public class CheckoutBasketEndpoint : ICarterModule
             {
                 var command = request.Adapt<CheckoutBasketCommand>();
 
-                var result = await dispatcher.SendAsync(command,cancellationToken);
+                var result = await dispatcher.SendAsync(command, cancellationToken);
 
                 var response = result.Adapt<CheckoutBasketResponse>();
 
                 return Results.Ok(response);
             })
-        .WithName("CheckoutBasket")
-        .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Checkout Basket")
-        .WithDescription("Checkout Basket");
+            .WithName("CheckoutBasket")
+            .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Checkout Basket")
+            .WithDescription("Checkout Basket");
         //.RequireAuthorization();
     }
 }

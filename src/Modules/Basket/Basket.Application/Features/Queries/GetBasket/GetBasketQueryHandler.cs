@@ -7,7 +7,8 @@ using Mapster;
 
 namespace Basket.Application.Features.Queries.GetBasket;
 
-internal class GetBasketQueryHandler(IShoppingCartRepository repository) : IQueryHandler<GetBasketQuery, GetBasketResult>
+internal class GetBasketQueryHandler(IShoppingCartRepository repository)
+    : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken = default)
     {
@@ -17,6 +18,6 @@ internal class GetBasketQueryHandler(IShoppingCartRepository repository) : IQuer
         //mapping basket entity to shoppingcartdto
         var basketDto = basket.Adapt<ShoppingCartDto>();
 
-        return new GetBasketResult{ShoppingCart=basketDto};
+        return new GetBasketResult { ShoppingCart = basketDto };
     }
 }

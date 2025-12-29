@@ -20,7 +20,7 @@ public class ShoppingCartConfig : IEntityTypeConfiguration<ShoppingCart>
         builder.HasMany(s => s.Items)
             .WithOne()
             .HasForeignKey(si => si.ShoppingCartId);
-        
+
         builder.Property(c => c.CreatedOn).IsRequired();
         builder.Property(c => c.ModifiedOn);
         builder.Property(c => c.DeletedOn);

@@ -10,20 +10,18 @@ using Ordering.Infrastructure.Specifications;
 
 namespace Ordering.Application.Features.Queries.GetOrderById;
 
-public class GetOrderByIdQueryHandler(IOrderRepository orderRepository) : IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult>
+public class GetOrderByIdQueryHandler(IOrderRepository orderRepository)
+    : IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult>
 {
     public async Task<GetOrderByIdResult> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken = default)
     {
-        Order? order = await orderRepository.FirstOrDefaultAsync(new OrdersWithItemSpecification(query.Id), cancellationToken);
-  
-        if (order is null)
-        {
-            throw new OrderNotFoundException(query.Id);
-        }
+        var order = await orderRepository.FirstOrDefaultAsync(new OrdersWithItemSpecification(query.Id),
+            cancellationToken);
+
+        if (order is null) throw new OrderNotFoundException(query.Id);
 
         var orderDto = order.Adapt<OrderDto>();
 
         return new GetOrderByIdResult { Order = orderDto };
-
     }
 }

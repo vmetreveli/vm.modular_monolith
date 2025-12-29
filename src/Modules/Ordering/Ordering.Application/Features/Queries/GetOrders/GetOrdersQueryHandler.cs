@@ -10,15 +10,14 @@ public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHan
 {
     public async Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken = default)
     {
-
         var pageIndex = query.PaginationRequest.PageIndex;
         var pageSize = query.PaginationRequest.PageSize;
 
-       
+
         var (orders, totalCount) = await orderRepository.GetPaginatedAsync(pageIndex, pageSize, cancellationToken);
 
 
-        var orderDtos = orders.Select(p=>new OrderDto
+        var orderDtos = orders.Select(p => new OrderDto
         {
             Id = p.Id,
             CustomerId = p.CustomerId,
@@ -58,7 +57,7 @@ public class GetOrdersQueryHandler(IOrderRepository orderRepository) : IQueryHan
                 Price = i.Price
             }).ToList()
         }).ToList();
-        
+
         return new GetOrdersResult(
             new PaginatedResult<OrderDto>(
                 pageIndex,

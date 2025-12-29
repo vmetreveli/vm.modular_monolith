@@ -9,15 +9,16 @@ using Meadow_Framework.Core.Abstractions.Commands;
 namespace Basket.Application.Features.Commands.CreateBasket;
 
 internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
-    : ICommandHandler<CreateBasketCommand,CreateBasketResult>
+    : ICommandHandler<CreateBasketCommand, CreateBasketResult>
 {
-    public async Task<CreateBasketResult> Handle(CreateBasketCommand command, CancellationToken cancellationToken = default)
+    public async Task<CreateBasketResult> Handle(CreateBasketCommand command,
+        CancellationToken cancellationToken = default)
     {
         //create Basket entity from command object
         //save to database
         //return result
 
-        var shoppingCart = CreateNewBasket(command.ShoppingCart);        
+        var shoppingCart = CreateNewBasket(command.ShoppingCart);
 
         await repository.CreateBasket(shoppingCart, cancellationToken);
 

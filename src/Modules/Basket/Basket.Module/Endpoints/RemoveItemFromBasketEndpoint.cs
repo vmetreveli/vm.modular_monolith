@@ -17,23 +17,23 @@ public class RemoveItemFromBasketEndpoint : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapDelete("/basket/{userName}/items/{productId}",
-            async ([FromRoute] string userName, 
-                   [FromRoute] Guid productId, 
-                   IDispatcher dispatcher,
-                   CancellationToken cancellationToken) =>
-            {
-                var command = new RemoveItemFromBasketCommand{UserName = userName,ProductId = productId};
+                async ([FromRoute] string userName,
+                    [FromRoute] Guid productId,
+                    IDispatcher dispatcher,
+                    CancellationToken cancellationToken) =>
+                {
+                    var command = new RemoveItemFromBasketCommand { UserName = userName, ProductId = productId };
 
-                var result = await dispatcher.SendAsync(command, cancellationToken);
+                    var result = await dispatcher.SendAsync(command, cancellationToken);
 
-                var response = result.Adapt<RemoveItemFromBasketResponse>();
+                    var response = result.Adapt<RemoveItemFromBasketResponse>();
 
-                return Results.Ok(response);
-            })
-        .Produces<RemoveItemFromBasketResponse>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Remove Item From Basket")
-        .WithDescription("Remove Item From Basket")
-        .RequireAuthorization();
+                    return Results.Ok(response);
+                })
+            .Produces<RemoveItemFromBasketResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Remove Item From Basket")
+            .WithDescription("Remove Item From Basket")
+            .RequireAuthorization();
     }
 }

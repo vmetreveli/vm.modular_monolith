@@ -31,12 +31,12 @@ builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
-Assembly catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-Assembly basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
-Assembly orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
-Assembly discountAssembly = typeof(Discount.Module.DependencyInjection).Assembly;
+var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
+var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
+var discountAssembly = typeof(Discount.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly,discountAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly, basketAssembly, catalogAssembly, discountAssembly);
 
 
 builder.Services.AddFramework(
@@ -52,7 +52,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
-   // options.OperationFilter<SwaggerDefaultValues>();
+    // options.OperationFilter<SwaggerDefaultValues>();
     options.CustomSchemaIds(type => type.FullName);
 });
 
@@ -75,7 +75,6 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
     // Add a custom operation filter which sets default values
-
 });
 
 

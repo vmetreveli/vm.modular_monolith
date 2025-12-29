@@ -1,9 +1,10 @@
 ﻿namespace Ordering.Application.Contracts;
+
 public class AddressDto
 {
     public string FirstName { get; init; }
     public string LastName { get; init; }
-    public string EmailAddress { get; init; } 
+    public string EmailAddress { get; init; }
     public string AddressLine { get; init; }
     public string Country { get; init; }
     public string State { get; init; }
@@ -13,7 +14,8 @@ public class AddressDto
     {
     }
 
-    public AddressDto(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
+    public AddressDto(string firstName, string lastName, string emailAddress, string addressLine, string country,
+        string state, string zipCode)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -24,7 +26,8 @@ public class AddressDto
         ZipCode = zipCode;
     }
 
-    public void Deconstruct(out string FirstName, out string LastName, out string EmailAddress, out string AddressLine, out string Country, out string State, out string ZipCode)
+    public void Deconstruct(out string FirstName, out string LastName, out string EmailAddress, out string AddressLine,
+        out string Country, out string State, out string ZipCode)
     {
         FirstName = this.FirstName;
         LastName = this.LastName;

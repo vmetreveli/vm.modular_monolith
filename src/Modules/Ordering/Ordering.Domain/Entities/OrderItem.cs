@@ -1,12 +1,13 @@
 ﻿using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Ordering.Domain.Entities;
+
 public class OrderItem : EntityBase<Guid>
 {
-    public OrderItem():base(Guid.NewGuid())
+    public OrderItem() : base(Guid.NewGuid())
     {
-        
     }
+
     public OrderItem(Guid orderId, Guid productId, int quantity, decimal price) : base(Guid.NewGuid())
     {
         OrderId = orderId;

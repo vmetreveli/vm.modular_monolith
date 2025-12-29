@@ -18,35 +18,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Application.Features.Commands.CheckoutBasket;
 
-internal class CheckoutBasketCommandHandler(IBasketUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IShoppingCartRepository shoppingCartRepository)
+internal class CheckoutBasketCommandHandler(
+    IBasketUnitOfWork unitOfWork,
+    IOutboxRepository outboxRepository,
+    IShoppingCartRepository shoppingCartRepository)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
-    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken = default)
+    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command,
+        CancellationToken cancellationToken = default)
     {
         // get existing basket with total price
         // Set totalprice on basketcheckout event message
         // send basket checkout event to rabbitmq using masstransit
         // delete the basket
 
-      await unitOfWork.BeginTransactionAsync( IsolationLevel.ReadCommitted,null,cancellationToken: cancellationToken);
+        await unitOfWork.BeginTransactionAsync(IsolationLevel.ReadCommitted, null, cancellationToken);
 
         try
         {
             // Get existing basket with total price
-            ShoppingCart? basket = await shoppingCartRepository.FirstOrDefaultAsync(new ShoppingCartWithItemSpecification(command.BasketCheckout.UserName),cancellationToken);
+            var basket = await shoppingCartRepository.FirstOrDefaultAsync(
+                new ShoppingCartWithItemSpecification(command.BasketCheckout.UserName), cancellationToken);
 
-            if (basket is null)
-            {
-                throw new BasketNotFoundException(command.BasketCheckout.UserName);
-            }
+            if (basket is null) throw new BasketNotFoundException(command.BasketCheckout.UserName);
 
             // Set total price on basket checkout event message
-            BasketCheckoutIntegrationEvent eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
+            var eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
             eventMessage.TotalPrice = basket.TotalPrice;
 
             // Write a message to the outbox
-            var outboxMessage = new OutboxMessage(JsonSerializer.Serialize(eventMessage),Guid.NewGuid(), DateTime.UtcNow);
-         
+            var outboxMessage =
+                new OutboxMessage(JsonSerializer.Serialize(eventMessage), Guid.NewGuid(), DateTime.UtcNow);
+
 
             outboxRepository.CreateOutboxMessage(outboxMessage);
 

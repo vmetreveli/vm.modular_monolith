@@ -4,10 +4,9 @@ using Meadow_Framework.Core.Infrastructure.Security;
 
 namespace Ordering.Domain.Events;
 
-public class BasketCheckoutIntegrationEvent: IntegrationBaseEvent
+public class BasketCheckoutIntegrationEvent : IntegrationBaseEvent
 {
-    [SensitiveData]
-    public required string Name { get; set; }
+    [SensitiveData] public required string Name { get; set; }
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
     public decimal TotalPrice { get; set; } = default!;

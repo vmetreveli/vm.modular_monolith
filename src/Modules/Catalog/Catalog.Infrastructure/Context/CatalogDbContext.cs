@@ -19,6 +19,7 @@ public class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
     #region Entities
 
     public DbSet<Product> Products => Set<Product>();
+
     #endregion
 }
 

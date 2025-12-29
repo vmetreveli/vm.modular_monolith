@@ -16,20 +16,21 @@ public class DeleteBasketEndpoint : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapDelete("/basket/{userName}", async (
-                string userName, 
+                string userName,
                 IDispatcher dispatcher,
                 CancellationToken cancellationToken) =>
-        {
-            var result = await dispatcher.SendAsync(new DeleteBasketCommand{UserName = userName},cancellationToken);
+            {
+                var result =
+                    await dispatcher.SendAsync(new DeleteBasketCommand { UserName = userName }, cancellationToken);
 
-            var response = result.Adapt<DeleteBasketResponse>();
+                var response = result.Adapt<DeleteBasketResponse>();
 
-            return Results.Ok(response);
-        })
-        .Produces<DeleteBasketResponse>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Delete Basket")
-        .WithDescription("Delete Basket")
-        .RequireAuthorization();
+                return Results.Ok(response);
+            })
+            .Produces<DeleteBasketResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Delete Basket")
+            .WithDescription("Delete Basket")
+            .RequireAuthorization();
     }
 }

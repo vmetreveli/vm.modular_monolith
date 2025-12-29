@@ -7,7 +7,7 @@ using Ordering.Domain.Entities;
 namespace Ordering.Infrastructure.Context;
 
 public class OrderingDbContext(DbContextOptions<OrderingDbContext> options)
-    : DbContext(options) , IDbContext
+    : DbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -7,11 +7,10 @@ namespace Catalog.Module;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddCatalogModule(this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection AddCatalogModule(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplication(configuration);
         services.AddInfrastructure(configuration);
         return services;
     }
-    
 }

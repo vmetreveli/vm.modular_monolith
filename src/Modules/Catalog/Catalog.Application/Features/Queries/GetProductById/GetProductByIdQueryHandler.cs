@@ -5,20 +5,18 @@ using Meadow_Framework.Core.Abstractions.Queries;
 
 namespace Catalog.Application.Features.Queries.GetProductById;
 
-
-public class GetProductByIdQueryHandler(IProductRepository productRepository) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
+public class GetProductByIdQueryHandler(IProductRepository productRepository)
+    : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
-    public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken = default)
+    public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query,
+        CancellationToken cancellationToken = default)
     {
         // get products by id using dbContext
         // return result
 
         var product = await productRepository.GetByIdAsync(query.Id, cancellationToken);
 
-        if (product is null)
-        {
-            throw new ProductNotFoundException(query.Id);
-        }
+        if (product is null) throw new ProductNotFoundException(query.Id);
 
         //mapping product entity to productdto
         var productDto = new ProductDto
@@ -31,6 +29,6 @@ public class GetProductByIdQueryHandler(IProductRepository productRepository) : 
             Price = product.Price
         };
 
-        return new GetProductByIdResult {Product = productDto};
+        return new GetProductByIdResult { Product = productDto };
     }
 }

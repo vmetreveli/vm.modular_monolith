@@ -10,22 +10,22 @@ using Microsoft.AspNetCore.Routing;
 namespace Catalog.Module.Endpoints;
 
 public class DeleteProductEndpoint : ICarterModule
- {
-     public void AddRoutes(IEndpointRouteBuilder app)
-     {
-         app.MapDelete("/products/{id}", async (Guid id, IDispatcher dispatcher,CancellationToken cancellationToken) =>
-         {
-             var result = await dispatcher.SendAsync(new DeleteProductCommand(id),cancellationToken);
+{
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapDelete("/products/{id}", async (Guid id, IDispatcher dispatcher, CancellationToken cancellationToken) =>
+            {
+                var result = await dispatcher.SendAsync(new DeleteProductCommand(id), cancellationToken);
 
-             var response = result.Adapt<DeleteProductResponse>();
+                var response = result.Adapt<DeleteProductResponse>();
 
-             return Results.Ok(response);
-         })
-         .WithName("DeleteProduct")
-         .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
-         .ProducesProblem(StatusCodes.Status400BadRequest)
-         .ProducesProblem(StatusCodes.Status404NotFound)
-         .WithSummary("Delete Product")
-         .WithDescription("Delete Product");
-     }
- }
+                return Results.Ok(response);
+            })
+            .WithName("DeleteProduct")
+            .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .WithSummary("Delete Product")
+            .WithDescription("Delete Product");
+    }
+}

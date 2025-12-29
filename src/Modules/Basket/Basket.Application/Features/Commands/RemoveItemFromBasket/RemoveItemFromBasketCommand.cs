@@ -6,7 +6,6 @@ namespace Basket.Application.Features.Commands.RemoveItemFromBasket;
 
 public class RemoveItemFromBasketCommand : ICommand<RemoveItemFromBasketResult>
 {
-    public string UserName { get; init; } 
-    public Guid ProductId { get; init; } 
-
+    public string UserName { get; init; }
+    public Guid ProductId { get; init; }
 }

@@ -27,7 +27,7 @@ public class AddItemIntoBasketEndpoint : ICarterModule
                 };
 
                 var result = new AbandonedMutexException();
-                    await dispatcher.SendAsync(command, cancellationToken);
+                await dispatcher.SendAsync(command, cancellationToken);
 
                 var response = result.Adapt<AddItemIntoBasketResponse>();
 

@@ -6,4 +6,5 @@ using Ordering.Infrastructure.Context;
 
 namespace Ordering.Infrastructure.Repositories;
 
-public class OrderRepository(OrderingDbContext dbContext) : RepositoryBase<OrderingDbContext, Order, Guid>(dbContext), IOrderRepository;
+public class OrderRepository(OrderingDbContext dbContext)
+    : RepositoryBase<OrderingDbContext, Order, Guid>(dbContext), IOrderRepository;

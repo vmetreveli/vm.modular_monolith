@@ -13,20 +13,21 @@ public class CreateOrderEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/orders", async (CreateOrderRequest request, IDispatcher dispatcher, CancellationToken cancellationToken) =>
-        {
-            var command = request.Adapt<CreateOrderCommand>();
+        app.MapPost("/orders",
+                async (CreateOrderRequest request, IDispatcher dispatcher, CancellationToken cancellationToken) =>
+                {
+                    var command = request.Adapt<CreateOrderCommand>();
 
-            var result = await dispatcher.SendAsync(command, cancellationToken);
+                    var result = await dispatcher.SendAsync(command, cancellationToken);
 
-            var response = result.Adapt<CreateOrderResponse>();
+                    var response = result.Adapt<CreateOrderResponse>();
 
-            return Results.Created($"/Orders/{response.Id}", response);
-        })
-        .WithName("CreateOrder")
-        .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
-        .ProducesProblem(StatusCodes.Status400BadRequest)
-        .WithSummary("Create Order")
-        .WithDescription("Create Order");
+                    return Results.Created($"/Orders/{response.Id}", response);
+                })
+            .WithName("CreateOrder")
+            .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Create Order")
+            .WithDescription("Create Order");
     }
 }

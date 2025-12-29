@@ -10,7 +10,7 @@ namespace Discount.Infrastructure;
 
 public static class DependencyInjection
 {
-       public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<InsertOutboxMessagesInterceptor>();
         services.AddScoped<UpdateAuditableEntitiesInterceptor>();
@@ -44,10 +44,8 @@ public static class DependencyInjection
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IDiscountRepository, DiscountRepository>();
-     //   services.AddScoped<ICatalogUnitOfWork, CatalogUnitOfWork>();
+        //   services.AddScoped<ICatalogUnitOfWork, CatalogUnitOfWork>();
 
         return services;
     }
-
-
 }

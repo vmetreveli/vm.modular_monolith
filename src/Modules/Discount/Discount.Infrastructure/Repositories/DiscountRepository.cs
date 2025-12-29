@@ -7,7 +7,8 @@ using Npgsql;
 
 namespace Discount.Infrastructure.Repositories;
 
-public class DiscountRepository(DiscountDbContext dbContext) :  RepositoryBase<DiscountDbContext, Coupon , Guid>(dbContext), IDiscountRepository
+public class DiscountRepository(DiscountDbContext dbContext)
+    : RepositoryBase<DiscountDbContext, Coupon, Guid>(dbContext), IDiscountRepository
 {
     public Task<Coupon> GetDiscount(string productName, CancellationToken cancellationToken)
     {
