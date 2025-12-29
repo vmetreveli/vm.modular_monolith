@@ -6,26 +6,31 @@ using Ordering.Domain.Repository;
 
 namespace Ordering.Application.Features.Commands.CheckoutOrder;
 
-public class CheckoutOrderCommandHandler : ICommandHandler<CheckoutOrderCommand, string>
+public class CheckoutOrderCommandHandler(
+    IOrderRepository orderRepository,
+    ILogger<CheckoutOrderCommandHandler> logger)
+    : ICommandHandler<CheckoutOrderCommand, string>
 {
-    private readonly ILogger<CheckoutOrderCommandHandler> _logger;
-    private readonly IMapper _mapper;
-    private readonly IOrderRepository _orderRepository;
-
-    public CheckoutOrderCommandHandler(IMapper mapper,
-        IOrderRepository orderRepository,
-        ILogger<CheckoutOrderCommandHandler> logger)
-    {
-        _mapper = mapper;
-        _orderRepository = orderRepository;
-        _logger = logger;
-    }
-
     public async Task<string> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken = default)
     {
-        var orderEntity = _mapper.Map<Order>(request);
-        await _orderRepository.AddAsync(orderEntity, cancellationToken);
-        _logger.LogInformation("Order {Id} is successfully created.", orderEntity.Id);
-        return orderEntity.Id.ToString();
+        throw new NotImplementedException();
+        // Order? orderEntity = Order.Create(
+        //     Guid.NewGuid(),
+        //     request.UserId,
+        //     request.OrderItems,
+        //     request.TotalAmount,
+        //     request.ShippingAddress,
+        //     request.EmailAddress);
+        // // orderEntity = new()
+        // // {
+        // //     UserId = request.UserId,
+        // //     OrderItems = request.OrderItems,
+        // //     TotalAmount = request.TotalAmount,
+        // //     ShippingAddress = request.ShippingAddress,
+        // //     EmailAddress = request.EmailAddress
+        // // };
+        // await orderRepository.AddAsync(orderEntity, cancellationToken);
+        // logger.LogInformation("Order {Id} is successfully created.", orderEntity.Id);
+        // return orderEntity.Id.ToString();
     }
 }

@@ -111,7 +111,7 @@ if (app.Environment.IsDevelopment())
     });
     app.ApplyMigration();
 }
-
+app.UseErrorHandling();
 // app.UseAuthentication();
 // app.UseAuthorization();
 app.MapGet("/", () => Task.FromResult(DateTime.UtcNow));
