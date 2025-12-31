@@ -1,0 +1,164 @@
+### Get Basket
+GET {{HostAddress}}/basket/testuser
+Accept: application/json
+
+### Create Basket
+POST {{HostAddress}}/basket
+Content-Type: application/json
+
+{
+  "shoppingCart": {
+    "userName": "testuser",
+    "items": []
+  }
+}
+
+### Add Item Into Basket
+POST {{HostAddress}}/basket/testuser/items
+Content-Type: application/json
+
+{
+  "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "productName": "Test Product",
+  "quantity": 1,
+  "color": "Red",
+  "price": 10.0,
+  "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "productName": "Test Product"
+}
+
+### Remove Item From Basket
+DELETE {{HostAddress}}/basket/testuser/items/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+### Checkout Basket
+POST {{HostAddress}}/basket/checkout
+Content-Type: application/json
+
+{
+  "userName": "testuser",
+  "totalPrice": 10.0,
+  "firstName": "John",
+  "lastName": "Doe",
+  "emailAddress": "john.doe@example.com",
+  "addressLine": "123 Main St",
+  "country": "USA",
+  "state": "NY",
+  "zipCode": "10001",
+  "cardName": "John Doe",
+  "cardNumber": "1234567890123456",
+  "expiration": "12/25",
+  "cvv": "123",
+  "paymentMethod": 1
+}
+
+### Delete Basket
+DELETE {{HostAddress}}/basket/testuser
+Accept: application/json
+
+### Get Products
+GET {{HostAddress}}/products?pageNumber=1&pageSize=10
+Accept: application/json
+
+### Get Product By Id
+GET {{HostAddress}}/products/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+### Get Product By Category
+GET {{HostAddress}}/products/category/Electronics
+Accept: application/json
+
+### Create Product
+POST {{HostAddress}}/products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "category": ["Electronics"],
+  "description": "A new product description",
+  "imageFile": "image.png",
+  "price": 99.99
+}
+
+### Update Product
+PUT {{HostAddress}}/products
+Content-Type: application/json
+
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "name": "Updated Product",
+  "category": ["Electronics"],
+  "description": "Updated description",
+  "imageFile": "updated_image.png",
+  "price": 109.99
+}
+
+### Delete Product
+DELETE {{HostAddress}}/products/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+### Get Discount
+GET {{HostAddress}}/getDiscount?productName=TestProduct
+Accept: application/json
+
+### Create Discount
+POST {{HostAddress}}/discount
+Content-Type: application/json
+
+{
+  "productName": "TestProduct",
+  "description": "Discount description",
+  "amount": 10
+}
+
+### Update Discount
+PUT {{HostAddress}}/discount
+Content-Type: application/json
+
+{
+  "productName": "TestProduct",
+  "description": "Updated discount description",
+  "amount": 15,
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+### Delete Discount
+DELETE {{HostAddress}}/discount/TestProduct
+Accept: application/json
+
+### Get Orders
+GET {{HostAddress}}/orders?pageIndex=1&pageSize=10
+Accept: application/json
+
+### Get Order By Id
+GET {{HostAddress}}/orders/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+### Create Order
+POST {{HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "userName": "testuser",
+  "totalPrice": 100.0,
+  "firstName": "John",
+  "lastName": "Doe",
+  "emailAddress": "john.doe@example.com",
+  "addressLine": "123 Main St",
+  "country": "USA",
+  "state": "NY",
+  "zipCode": "10001",
+  "cardName": "John Doe",
+  "cardNumber": "1234567890123456",
+  "expiration": "12/25",
+  "cvv": "123",
+  "paymentMethod": 1
+}
+
+### Delete Order
+DELETE {{HostAddress}}/orders/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+### Checkout Order
+GET {{HostAddress}}/orders/checkoutOrder?pageIndex=1&pageSize=10
+Accept: application/json

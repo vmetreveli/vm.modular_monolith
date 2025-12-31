@@ -41,7 +41,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
 
-        var existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
+        ShoppingCartItem? existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
 
         if (existingItem is not null)
         {
@@ -56,7 +56,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
 
     public void RemoveItem(Guid productId)
     {
-        var existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
+        ShoppingCartItem? existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
 
         if (existingItem != null) _items.Remove(existingItem);
     }

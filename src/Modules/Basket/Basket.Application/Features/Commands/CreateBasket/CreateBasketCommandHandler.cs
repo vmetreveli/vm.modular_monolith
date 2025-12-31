@@ -18,7 +18,7 @@ internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
         //save to database
         //return result
 
-        var shoppingCart = CreateNewBasket(command.ShoppingCart);
+        ShoppingCart shoppingCart = CreateNewBasket(command.ShoppingCart);
 
         await repository.CreateBasket(shoppingCart, cancellationToken);
 
@@ -31,7 +31,7 @@ internal class CreateBasketCommandHandler(IShoppingCartRepository repository)
     private ShoppingCart CreateNewBasket(ShoppingCartDto shoppingCartDto)
     {
         // create new basket
-        var newBasket = ShoppingCart.Create(Guid.NewGuid());
+        ShoppingCart newBasket = ShoppingCart.Create(Guid.NewGuid());
 
         shoppingCartDto.Items.ForEach(item =>
         {

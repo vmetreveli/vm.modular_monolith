@@ -26,12 +26,11 @@ public class AddItemIntoBasketEndpoint : ICarterModule
                     ShoppingCartItem = request.ShoppingCartItem
                 };
 
-                var result = new AbandonedMutexException();
-                await dispatcher.SendAsync(command, cancellationToken);
+                var result = await dispatcher.SendAsync(command, cancellationToken);
 
                 var response = result.Adapt<AddItemIntoBasketResponse>();
 
-                return Results.Created($"/basket/{1}", response);
+                return Results.Created($"/basket/{response.Id}", response);
             })
             .Produces<AddItemIntoBasketResponse>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest)
