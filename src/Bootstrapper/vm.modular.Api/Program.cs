@@ -9,6 +9,7 @@ using Discount.Module;
 using Framework.Infrastructure;
 using Meadow_Framework.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -26,6 +27,27 @@ builder.Services.AddCatalogModule(builder.Configuration);
 builder.Services.AddOrderingModule(builder.Configuration);
 builder.Services.AddBasketModule(builder.Configuration);
 builder.Services.AddDiscountModule(builder.Configuration);
+
+// Configure Serilog early
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console();
+
+    if (context.Configuration.GetValue<bool>("Elastic:Enabled"))
+    {
+        configuration.WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(
+            new Uri(context.Configuration["Elastic:Uri"]))
+        {
+            AutoRegisterTemplate = true,
+            IndexFormat = context.Configuration["Elastic:Index"]
+        });
+    }
+});
+
+
 
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();

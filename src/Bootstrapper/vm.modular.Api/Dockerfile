@@ -22,9 +22,6 @@ ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copy NuGet.config first
-COPY ["NuGet.config", "./"]
-
 # Copy Bootstrapper (main API)
 COPY ["src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj", "src/Bootstrapper/vm.modular.Api/"]
 

@@ -1,75 +1,114 @@
-﻿services:
+﻿version: "3.9"
+
+services:
   modularmonolithdb:
     image: postgres:16
     container_name: modularmonolithdb
-    env_file:
-      - .env
+    env_file: [ .env ]
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    restart: always
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    restart: always
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d ModularMonolithDb -h localhost -p 5432" ]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 30s
-    networks:
-      - modularmonolith-network
+    networks: [ modularmonolith-network ]
 
   rabbitmq:
     image: rabbitmq:4.2.2-management-alpine
-    container_name: ${AppConfiguration__RabbitMQ__ExchangeName}
-    hostname: ${AppConfiguration__RabbitMQ__Host}
-    restart: always
+    container_name: rabbitmq
+    hostname: rabbitmq
+    env_file: [ .env ]
     environment:
       RABBITMQ_DEFAULT_USER: ${AppConfiguration__RabbitMQ__Username}
       RABBITMQ_DEFAULT_PASS: ${AppConfiguration__RabbitMQ__Password}
-      RABBITMQ_ERLANG_COOKIE: rabbitmq_super_secret_cookie_2025
-
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    restart: always
     healthcheck:
-      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 30s
-    networks:
-      - modularmonolith-network
+    networks: [ modularmonolith-network ]
+
+  elasticsearch:
+    image: elasticsearch:8.12.2
+    container_name: elasticsearch
+    env_file: [ .env ]
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "true"
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    restart: unless-stopped
+    networks: [ modularmonolith-network ]
+
+  kibana:
+    image: kibana:8.12.2
+    container_name: kibana
+    env_file: [ .env ]
+    environment:
+      SERVER_NAME: kibana
+      SERVER_HOST: 0.0.0.0
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      ELASTICSEARCH_USERNAME: kibana_system
+      ELASTICSEARCH_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+      NODE_OPTIONS: "--max-old-space-size=512"
+      #Required encryption keys (32+ chars)
+      XPACK_SECURITY_ENCRYPTIONKEY: "n3Kp8sG1QvT9jF4XwZ6rB2yL0uA5kP7h"
+      XPACK_ENCRYPTED_SAVED_OBJECTS_ENCRYPTIONKEY: "G4r8Yw7J2lZ9pT5kH6bM1xQ0vC3sR9nE"
+      XPACK_REPORTING_ENCRYPTIONKEY: "P0kN5vH8bT7wQ2jL9cM6rF1yS3zU4aX1"
+
+    ports:
+      - "5601:5601"
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+    networks: [ modularmonolith-network ]
 
   vm.modular.api:
     image: vm.modular.api
     build:
       context: .
       dockerfile: ./src/Bootstrapper/vm.modular.Api/Dockerfile
-    env_file:
-      - .env
+    env_file: [ .env ]
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      NODE_ENV: production            # frontend only
       ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
-    depends_on:
-      modularmonolithdb:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+      Elastic__Uri: http://elasticsearch:9200
+      Elastic__Username: elastic
+      Elastic__Password: ${ELASTIC_PASSWORD}
+      Elastic__Index: ${ELASTIC_INDEX}
     ports:
       - "8080:8080"
-    networks:
-      - modularmonolith-network
     restart: unless-stopped
+    depends_on:
+      - modularmonolithdb
+      - rabbitmq
+      - elasticsearch
+    networks: [ modularmonolith-network ]
 
 volumes:
   postgres_data:
   rabbitmq_data:
+  elasticsearch_data:
 
 networks:
   modularmonolith-network:
