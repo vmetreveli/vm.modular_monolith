@@ -22,54 +22,42 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Build argument for GitHub Packages authentication
 ARG GITHUB_TOKEN
 
-# Copy Bootstrapper (main API)
-COPY ["src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj", "src/Bootstrapper/vm.modular.Api/"]
+# Copy solution-level NuGet config FIRST
+COPY src/NuGet.config ./NuGet.config
 
-# Copy Basket module projects
-COPY ["src/Modules/Basket/Basket.Application/Basket.Application.csproj", "src/Modules/Basket/Basket.Application/"]
-COPY ["src/Modules/Basket/Basket.Domain/Basket.Domain.csproj", "src/Modules/Basket/Basket.Domain/"]
-COPY ["src/Modules/Basket/Basket.Infrastructure/Basket.Infrastructure.csproj", "src/Modules/Basket/Basket.Infrastructure/"]
-COPY ["src/Modules/Basket/Basket.Module/Basket.Module.csproj", "src/Modules/Basket/Basket.Module/"]
+# Copy project files (for caching restore layer)
+COPY src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj src/Bootstrapper/vm.modular.Api/
 
-# Copy Catalog module projects
-COPY ["src/Modules/Catalog/Catalog.Application/Catalog.Application.csproj", "src/Modules/Catalog/Catalog.Application/"]
-COPY ["src/Modules/Catalog/Catalog.Domain/Catalog.Domain.csproj", "src/Modules/Catalog/Catalog.Domain/"]
-COPY ["src/Modules/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj", "src/Modules/Catalog/Catalog.Infrastructure/"]
-COPY ["src/Modules/Catalog/Catalog.Module/Catalog.Module.csproj", "src/Modules/Catalog/Catalog.Module/"]
+COPY src/Modules/Basket/Basket.Application/*.csproj src/Modules/Basket/Basket.Application/
+COPY src/Modules/Basket/Basket.Domain/*.csproj src/Modules/Basket/Basket.Domain/
+COPY src/Modules/Basket/Basket.Infrastructure/*.csproj src/Modules/Basket/Basket.Infrastructure/
+COPY src/Modules/Basket/Basket.Module/*.csproj src/Modules/Basket/Basket.Module/
 
-# Copy Ordering module projects
-COPY ["src/Modules/Ordering/Ordering.Application/Ordering.Application.csproj", "src/Modules/Ordering/Ordering.Application/"]
-COPY ["src/Modules/Ordering/Ordering.Domain/Ordering.Domain.csproj", "src/Modules/Ordering/Ordering.Domain/"]
-COPY ["src/Modules/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "src/Modules/Ordering/Ordering.Infrastructure/"]
-COPY ["src/Modules/Ordering/Ordering.Module/Ordering.Module.csproj", "src/Modules/Ordering/Ordering.Module/"]
-COPY src/NuGet.config ./
+COPY src/Modules/Catalog/Catalog.Application/*.csproj src/Modules/Catalog/Catalog.Application/
+COPY src/Modules/Catalog/Catalog.Domain/*.csproj src/Modules/Catalog/Catalog.Domain/
+COPY src/Modules/Catalog/Catalog.Infrastructure/*.csproj src/Modules/Catalog/Catalog.Infrastructure/
+COPY src/Modules/Catalog/Catalog.Module/*.csproj src/Modules/Catalog/Catalog.Module/
 
+COPY src/Modules/Ordering/Ordering.Application/*.csproj src/Modules/Ordering/Ordering.Application/
+COPY src/Modules/Ordering/Ordering.Domain/*.csproj src/Modules/Ordering/Ordering.Domain/
+COPY src/Modules/Ordering/Ordering.Infrastructure/*.csproj src/Modules/Ordering/Ordering.Infrastructure/
+COPY src/Modules/Ordering/Ordering.Module/*.csproj src/Modules/Ordering/Ordering.Module/
 
+# Safely inject token only if provided
+RUN if [ -n "$GITHUB_TOKEN" ]; then \
+        sed -i "s|%GITHUB_TOKEN%|$GITHUB_TOKEN|g" NuGet.config ; \
+    fi
 
-
-# ============================================================
-# Inject GitHub token into NuGet.config
-# Replace %GITHUB_TOKEN% placeholder in NuGet.config
-# ============================================================
-RUN sed -i "s|%GITHUB_TOKEN%|${GITHUB_TOKEN}|g" NuGet.config
-
-# ============================================================
-# Restore dependencies
-# ============================================================
+# Restore
 RUN dotnet restore "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
     --configfile NuGet.config
 
-# ============================================================
 # Copy full source
-# ============================================================
 COPY . .
 
-# ============================================================
 # Build
-# ============================================================
 RUN dotnet build "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
     -c Release \
     -o /app/build \
@@ -83,7 +71,7 @@ FROM build AS publish
 RUN dotnet publish "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
     -c Release \
     -o /app/publish \
-     /p:UseAppHost=false
+    /p:UseAppHost=false
 
 # ============================================================
 # Final runtime
@@ -93,6 +81,7 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-HEALTHCHECK CMD curl --fail http://localhost:80/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+  CMD curl -f http://localhost:80/health || exit 1
 
 ENTRYPOINT ["dotnet", "vm.modular.Api.dll"]

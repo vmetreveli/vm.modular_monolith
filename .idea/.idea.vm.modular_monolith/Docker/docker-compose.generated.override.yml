@@ -8,7 +8,7 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net9.0/vm.modular.Api.dll"
+    - "/app/bin/Debug/net10.0/vm.modular.Api.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
     image: "vm.modular.api:dev"
@@ -16,5 +16,5 @@ services:
     volumes:
     - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith/src/Bootstrapper/vm.modular.Api:/app:rw"
     - "/Users/vakhushtimetreveli/RiderProjects/vm.modular_monolith:/src:rw"
-    - "/Users/vakhushtimetreveli/.nuget/packages:/root/.nuget/packages"
+    - "/Users/vakhushtimetreveli/.nuget/packages:/home/app/.nuget/packages"
     working_dir: "/app"
