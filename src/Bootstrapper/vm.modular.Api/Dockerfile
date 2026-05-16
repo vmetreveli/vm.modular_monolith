@@ -24,9 +24,6 @@ WORKDIR /src
 
 ARG GITHUB_TOKEN
 
-# Copy solution-level NuGet config FIRST
-COPY src/NuGet.config ./NuGet.config
-
 # Copy project files (for caching restore layer)
 COPY src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj src/Bootstrapper/vm.modular.Api/
 
