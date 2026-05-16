@@ -24,8 +24,6 @@ WORKDIR /src
 
 # Build argument for GitHub Packages authentication
 ARG GITHUB_TOKEN
-# Copy NuGet.config first
-COPY ["NuGet.config", "./"]
 
 # Copy Bootstrapper (main API)
 COPY ["src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj", "src/Bootstrapper/vm.modular.Api/"]
@@ -47,6 +45,7 @@ COPY ["src/Modules/Ordering/Ordering.Application/Ordering.Application.csproj", "
 COPY ["src/Modules/Ordering/Ordering.Domain/Ordering.Domain.csproj", "src/Modules/Ordering/Ordering.Domain/"]
 COPY ["src/Modules/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "src/Modules/Ordering/Ordering.Infrastructure/"]
 COPY ["src/Modules/Ordering/Ordering.Module/Ordering.Module.csproj", "src/Modules/Ordering/Ordering.Module/"]
+COPY src/NuGet.config ./
 
 
 
