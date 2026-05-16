@@ -1,6 +1,12 @@
-﻿# Base image for runtime
+﻿# syntax=docker/dockerfile:1
+
+# ============================================================
+# Base runtime
+# ============================================================
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
+
+ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
 
 RUN apt-get update \
@@ -10,24 +16,14 @@ RUN apt-get update \
 RUN useradd -m appuser
 USER appuser
 
-# SDK image for build
+# ============================================================
+# Build stage
+# ============================================================
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
-
-# Disable unwanted logging and re-use behavior
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1 \
-    DOTNET_NOLOGO=1 \
-    MSBUILDDISABLENODEREUSE=1 \
-    DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
-
-# Install Azure Artifact Credential Provider
-RUN wget -qO- https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh | bash
-
-ARG GITHUB_PAT
-ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://nuget.pkg.github.com/YOUR_GITHUB_USERNAME/index.json\", \"username\":\"docker\", \"password\":\"${GITHUB_PAT}\"}]}"
-
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
+# Build argument for GitHub Packages authentication
+ARG GITHUB_TOKEN
 # Copy NuGet.config first
 COPY ["NuGet.config", "./"]
 
@@ -52,21 +48,52 @@ COPY ["src/Modules/Ordering/Ordering.Domain/Ordering.Domain.csproj", "src/Module
 COPY ["src/Modules/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "src/Modules/Ordering/Ordering.Infrastructure/"]
 COPY ["src/Modules/Ordering/Ordering.Module/Ordering.Module.csproj", "src/Modules/Ordering/Ordering.Module/"]
 
-# Restore packages (this will now work with GitHub Packages)
-RUN dotnet restore "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj"
 
-# Copy everything else
+
+
+# ============================================================
+# Inject GitHub token into NuGet.config
+# Replace %GITHUB_TOKEN% placeholder in NuGet.config
+# ============================================================
+RUN sed -i "s|%GITHUB_TOKEN%|${GITHUB_TOKEN}|g" NuGet.config
+
+# ============================================================
+# Restore dependencies
+# ============================================================
+RUN dotnet restore "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
+    --configfile NuGet.config
+
+# ============================================================
+# Copy full source
+# ============================================================
 COPY . .
 
+# ============================================================
 # Build
-RUN dotnet build "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+# ============================================================
+RUN dotnet build "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
+    -c Release \
+    -o /app/build \
+    --no-restore
 
+# ============================================================
 # Publish
+# ============================================================
 FROM build AS publish
-RUN dotnet publish "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Final runtime image
+RUN dotnet publish "src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj" \
+    -c Release \
+    -o /app/publish \
+     /p:UseAppHost=false
+
+# ============================================================
+# Final runtime
+# ============================================================
 FROM base AS final
 WORKDIR /app
+
 COPY --from=publish /app/publish .
+
+HEALTHCHECK CMD curl --fail http://localhost:80/health || exit 1
+
 ENTRYPOINT ["dotnet", "vm.modular.Api.dll"]
