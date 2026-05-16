@@ -37,6 +37,7 @@ builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalog
 
 builder.Services.AddFramework(
     builder.Configuration,
+    true,
     typeof(Basket.Application.DependencyInjection).Assembly,
     typeof(Ordering.Application.DependencyInjection).Assembly,
     typeof(Catalog.Application.DependencyInjection).Assembly);
