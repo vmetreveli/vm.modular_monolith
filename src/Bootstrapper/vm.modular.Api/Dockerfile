@@ -3,6 +3,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
 EXPOSE 80
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m appuser
+USER appuser
+
 # SDK image for build
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
