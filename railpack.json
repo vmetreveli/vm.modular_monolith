@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "providers": {
+    "dotnet": {
+      "version": "10.0"
+    }
+  },
+  "steps": {
+    "build": {
+      "commands": [
+        "dotnet --info",
+        "dotnet publish src/Bootstrapper/vm.modular.Api/vm.modular.Api.csproj -c Release -o out"
+      ]
+    }
+  },
+  "deploy": {
+    "startCommand": "dotnet out/vm.modular.Api.dll"
+  }
+}
