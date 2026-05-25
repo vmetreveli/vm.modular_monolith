@@ -50,18 +50,25 @@
     build:
       context: .
       dockerfile: ./src/Bootstrapper/vm.modular.Api/Dockerfile
-    env_file:
-      - .env
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
     depends_on:
       modularmonolithdb:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+    networks:
+      - modularmonolith-network
+    restart: unless-stopped
+
+  eventcatalog:
+    image: eventcatalog
+    container_name: eventcatalog
+    build:
+      context: ./eventcatalog
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3000:3000"
     networks:
       - modularmonolith-network
     restart: unless-stopped

@@ -14,6 +14,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Application", "src\Modules\Basket\Basket.Application\Basket.Application.csproj", "{EEF03970-3470-4454-BF09-A48D6428DAEE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{06CF182E-631B-4A98-9AD6-34802757CDFC}"
+	ProjectSection(SolutionItems) = preProject
+		src\Bootstrapper\NuGet.config = src\Bootstrapper\NuGet.config
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{EE47B679-4236-4A85-B04A-43AA70565299}"
 EndProject
@@ -46,6 +49,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Module", "src\Modules\Basket\Basket.Module\Basket.Module.csproj", "{55C341FD-CD68-470E-8230-5E6D571A731C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Module", "src\Modules\Ordering\Ordering.Module\Ordering.Module.csproj", "{AF67B9A4-6D2E-4E69-BCC4-9486F3818C9E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBBD16C}") = "docker-compose", "docker-compose.dcproj", "{154585D3-4E14-4D2C-B0A6-FF7B7D1A22C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

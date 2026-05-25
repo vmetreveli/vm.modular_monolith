@@ -1,0 +1,35 @@
+{
+  "$id": "ProductPriceChangedIntegrationEvent",
+  "type": "object",
+  "properties": {
+    "ProductId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the product"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "Category": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Product categories"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "ImageFile": {
+      "type": "string",
+      "description": "Product image file path"
+    },
+    "Price": {
+      "type": "number",
+      "format": "decimal",
+      "description": "Updated product price"
+    }
+  },
+  "required": ["ProductId", "Name", "Price"]
+}
+

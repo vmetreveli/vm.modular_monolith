@@ -1,0 +1,18 @@
+{
+  "$id": "OrderCreatedEvent",
+  "type": "object",
+  "properties": {
+    "Order": {
+      "type": "object",
+      "description": "The newly created order aggregate",
+      "properties": {
+        "Id": { "type": "string", "format": "uuid" },
+        "CustomerId": { "type": "string", "format": "uuid" },
+        "OrderName": { "type": "string" },
+        "TotalPrice": { "type": "number", "format": "decimal" },
+        "Status": { "type": "string", "enum": ["Pending", "Processing", "Completed", "Cancelled"] }
+      }
+    }
+  }
+}
+

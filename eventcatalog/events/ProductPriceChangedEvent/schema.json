@@ -1,0 +1,19 @@
+{
+  "$id": "ProductPriceChangedEvent",
+  "type": "object",
+  "properties": {
+    "Product": {
+      "type": "object",
+      "description": "The product with updated price",
+      "properties": {
+        "Id": { "type": "string", "format": "uuid" },
+        "Name": { "type": "string" },
+        "Category": { "type": "array", "items": { "type": "string" } },
+        "Description": { "type": "string" },
+        "ImageFile": { "type": "string" },
+        "Price": { "type": "number", "format": "decimal", "description": "The new/updated price" }
+      }
+    }
+  }
+}
+

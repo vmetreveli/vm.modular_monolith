@@ -1,14 +1,16 @@
 using System.Threading.Tasks;
 using Basket.Application.Features.Commands.UpdateItemPriceInBasket;
 using Basket.Domain.Events;
+using MassTransit;
 using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Meadow_Framework.Core.Abstractions.Events;
-using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace Basket.Application.Features.Events;
 
-public class ProductPriceChangedIntegrationEventHandler(IDispatcher dispatcher, ILogger<ProductPriceChangedIntegrationEventHandler> logger)
+public class ProductPriceChangedIntegrationEventHandler(
+    IDispatcher dispatcher,
+    ILogger<ProductPriceChangedIntegrationEventHandler> logger)
     : IEventConsumer<ProductPriceChangedIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<ProductPriceChangedIntegrationEvent> context)

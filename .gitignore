@@ -402,3 +402,8 @@ NuGet.config.local
 secrets/
 *.secrets
 .env.local
+
+# EventCatalog
+eventcatalog/.eventcatalog-core/
+eventcatalog/.astro/
+eventcatalog/dist/

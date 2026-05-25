@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>..\..</DockerfileContext>
-        <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -47,7 +47,7 @@
     </ItemGroup>
 
     <ItemGroup>
-         <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
+        <ProjectReference Include="..\..\Modules\Catalog\Catalog.Module\Catalog.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Basket\Basket.Module\Basket.Module.csproj" />
         <ProjectReference Include="..\..\Modules\Ordering\Ordering.Module\Ordering.Module.csproj" />
     </ItemGroup>

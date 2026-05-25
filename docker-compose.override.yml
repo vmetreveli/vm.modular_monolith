@@ -1,0 +1,17 @@
+services:
+  vm.modular.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Server=modularmonolithdb;Port=5432;Database=ModularMonolithDb;User Id=postgres;Password=postgres;
+      - AppConfiguration__RabbitMQ__Host=rabbitmq
+      - AppConfiguration__RabbitMQ__Port=5672
+      - AppConfiguration__RabbitMQ__VirtualHost=/
+      - AppConfiguration__RabbitMQ__Username=admin
+      - AppConfiguration__RabbitMQ__Password=admin123
+      - AppConfiguration__ExternalServices__CatalogApi__BaseAddress=http://vm.modular.api:8080/api/v1/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/appuser/.microsoft/usersecrets:ro
+
