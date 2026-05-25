@@ -1,0 +1,75 @@
+{
+  "$id": "BasketCheckoutIntegrationEvent",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "Customer name"
+    },
+    "UserName": {
+      "type": "string",
+      "description": "Customer username"
+    },
+    "CustomerId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Customer unique identifier"
+    },
+    "TotalPrice": {
+      "type": "number",
+      "format": "decimal",
+      "description": "Total basket price at checkout"
+    },
+    "FirstName": {
+      "type": "string",
+      "description": "Shipping/billing first name"
+    },
+    "LastName": {
+      "type": "string",
+      "description": "Shipping/billing last name"
+    },
+    "EmailAddress": {
+      "type": "string",
+      "format": "email",
+      "description": "Customer email"
+    },
+    "AddressLine": {
+      "type": "string",
+      "description": "Street address"
+    },
+    "Country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "State": {
+      "type": "string",
+      "description": "State/province"
+    },
+    "ZipCode": {
+      "type": "string",
+      "description": "Postal/ZIP code"
+    },
+    "CardName": {
+      "type": "string",
+      "description": "Name on payment card"
+    },
+    "CardNumber": {
+      "type": "string",
+      "description": "Payment card number"
+    },
+    "Expiration": {
+      "type": "string",
+      "description": "Card expiration date"
+    },
+    "Cvv": {
+      "type": "string",
+      "description": "Card CVV code"
+    },
+    "PaymentMethod": {
+      "type": "integer",
+      "description": "Payment method identifier"
+    }
+  },
+  "required": ["UserName", "CustomerId", "TotalPrice"]
+}
+

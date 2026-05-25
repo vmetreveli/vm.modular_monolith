@@ -1,0 +1,8 @@
+node_modules
+.eventcatalog-core
+dist
+.astro
+.git
+README.md
+.nvmrc
+

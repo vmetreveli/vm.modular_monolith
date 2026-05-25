@@ -32,7 +32,7 @@ var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
 var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
 var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
-builder.Services.AddCarterWithAssemblies(orderingAssembly,basketAssembly,catalogAssembly);
+builder.Services.AddCarterWithAssemblies(orderingAssembly, basketAssembly, catalogAssembly);
 
 
 builder.Services.AddFramework(
@@ -104,7 +104,7 @@ var app = builder.Build();
             options.SwaggerEndpoint(url, name);
         }
     });
-    app.ApplyMigration();
+    //app.ApplyMigration();
 }
 
 // app.UseAuthentication();
