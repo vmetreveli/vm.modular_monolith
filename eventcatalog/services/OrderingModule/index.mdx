@@ -1,0 +1,47 @@
+---
+id: OrderingModule
+name: Ordering Module
+version: 1.0.0
+summary: |
+  Handles order processing — receives checkout events, creates orders, and manages order lifecycle.
+owners:
+  - vm-team
+receives:
+  - id: BasketCheckoutIntegrationEvent
+    version: 1.0.0
+sends:
+  - id: OrderCreatedEvent
+    version: 1.0.0
+---
+
+## Ordering Module
+
+The Ordering Module is responsible for creating and managing customer orders.
+
+### Endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/v1/ordering/orders` | Create a new order |
+| GET | `/api/v1/ordering/orders/{id}` | Get order by ID |
+| GET | `/api/v1/ordering/orders` | Get all orders |
+| DELETE | `/api/v1/ordering/orders/{id}` | Delete an order |
+
+### Integration Events
+
+**Consumes:**
+- `BasketCheckoutIntegrationEvent` — Consumed via MassTransit. The `BasketCheckoutIntegrationEventHandler` maps the event data to a `CreateOrderCommand` and dispatches it.
+
+### Domain Events
+
+- `OrderCreatedEvent` — Raised when a new order entity is created (currently handler is commented out / placeholder).
+
+### Architecture
+
+```
+Ordering.Module (API endpoints)
+  └── Ordering.Application (Commands, Queries, Event Handlers)
+       └── Ordering.Domain (Entities, Domain Events, Value Objects)
+       └── Ordering.Infrastructure (EF Core, Repositories, Migrations)
+```
+

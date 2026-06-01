@@ -1,0 +1,74 @@
+---
+id: BasketCheckoutIntegrationEvent
+name: BasketCheckoutIntegrationEvent
+version: 1.0.0
+summary: Integration event published when a customer checks out their basket. Consumed by the Ordering Module to create a new order.
+owners:
+  - vm-team
+producers:
+  - BasketModule
+consumers:
+  - OrderingModule
+badges:
+  - content: Integration Event
+    backgroundColor: blue
+    textColor: white
+  - content: RabbitMQ
+    backgroundColor: orange
+    textColor: white
+  - content: Transactional Outbox
+    backgroundColor: green
+    textColor: white
+schemaPath: schema.json
+---
+
+## Overview
+
+The `BasketCheckoutIntegrationEvent` is the **core integration event** that connects the Basket and Ordering modules. It carries all the information needed to create an order: customer details, shipping address, billing address, and payment information.
+
+This event uses the **transactional outbox pattern** — it is first persisted to the outbox table within the same database transaction that deletes the basket, then a Quartz background job publishes it to RabbitMQ.
+
+### Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Basket as Basket Module
+    participant Outbox as Outbox (DB)
+    participant Quartz as Quartz Job
+    participant RMQ as RabbitMQ
+    participant Order as Ordering Module
+
+    Client->>Basket: POST /api/v1/basket/checkout
+    Basket->>Basket: Load basket, compute total
+    Basket->>Outbox: Save BasketCheckoutIntegrationEvent
+    Basket->>Basket: Delete basket (same transaction)
+    Basket->>Client: 200 OK
+    Quartz->>Outbox: Poll for pending messages
+    Quartz->>RMQ: Publish event
+    RMQ->>Order: Deliver to consumer
+    Order->>Order: Create order via CreateOrderCommand
+```
+
+### Producer
+
+**BasketModule** — The `CheckoutBasketCommandHandler`:
+1. Loads the shopping cart
+2. Maps checkout data to `BasketCheckoutIntegrationEvent`
+3. Saves it to the outbox within a transaction
+4. Deletes the basket
+
+### Consumer
+
+**OrderingModule** — The `BasketCheckoutIntegrationEventHandler` (MassTransit `IConsumer`):
+1. Logs the incoming event
+2. Maps to `CreateOrderCommand` with address, payment, and order item details
+3. Dispatches the command to create the order
+
+### Source Files
+
+- `Basket.Application/Features/Commands/CheckoutBasket/CheckoutBasketCommandHandler.cs` — Producer
+- `Basket.Domain/Events/BasketCheckoutIntegrationEvent.cs` — Event definition (Basket side)
+- `Ordering.Domain/Events/BasketCheckoutIntegrationEvent.cs` — Event definition (Ordering side)
+- `Ordering.Application/Features/Events/BasketCheckoutIntegrationEventHandler.cs` — Consumer
+

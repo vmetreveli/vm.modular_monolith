@@ -1,0 +1,75 @@
+---
+id: ProductPriceChangedIntegrationEvent
+name: ProductPriceChangedIntegrationEvent
+version: 1.0.0
+summary: Integration event published when a product's price changes. Consumed by the Basket Module to update active basket item prices.
+owners:
+  - vm-team
+producers:
+  - CatalogModule
+consumers:
+  - BasketModule
+badges:
+  - content: Integration Event
+    backgroundColor: blue
+    textColor: white
+  - content: RabbitMQ
+    backgroundColor: orange
+    textColor: white
+  - content: MassTransit
+    backgroundColor: darkblue
+    textColor: white
+schemaPath: schema.json
+---
+
+## Overview
+
+The `ProductPriceChangedIntegrationEvent` is an **integration event** that crosses module boundaries via RabbitMQ (MassTransit).
+
+### Flow
+
+```mermaid
+sequenceDiagram
+    participant Catalog as Catalog Module
+    participant RMQ as RabbitMQ
+    participant Basket as Basket Module
+
+    Catalog->>Catalog: Product.Update() detects price change
+    Catalog->>Catalog: Raises ProductPriceChangedEvent (domain)
+    Catalog->>Catalog: ProductPriceChangedEventHandler converts to integration event
+    Catalog->>RMQ: Publish ProductPriceChangedIntegrationEvent
+    RMQ->>Basket: Deliver to consumer
+    Basket->>Basket: UpdateItemPriceInBasketCommand
+    Basket->>Basket: Update matching basket items
+```
+
+### Producer
+
+**CatalogModule** — The `ProductPriceChangedEventHandler` domain event handler publishes this integration event when a `ProductPriceChangedEvent` is raised:
+
+```csharp
+var integrationEvent = new ProductPriceChangedIntegrationEvent
+{
+    ProductId = @event.Product.Id,
+    Name = @event.Product.Name,
+    Category = @event.Product.Category,
+    Description = @event.Product.Description,
+    ImageFile = @event.Product.ImageFile,
+    Price = @event.Product.Price
+};
+
+await eventDispatcher.PublishIntegrationEventAsync(integrationEvent, cancellationToken);
+```
+
+### Consumer
+
+**BasketModule** — The `ProductPriceChangedIntegrationEventHandler` dispatches an `UpdateItemPriceInBasketCommand` to update all baskets containing the affected product.
+
+### Source Files
+
+- `Catalog.Domain/Events/ProductPriceChangedEvent.cs` — Domain event
+- `Catalog.Application/Features/Events/ProductPriceChangedEventHandler.cs` — Produces the integration event
+- `Catalog.Domain/Events/ProductPriceChangedIntegrationEvent.cs` — Event definition (Catalog side)
+- `Basket.Domain/Events/ProductPriceChangedIntegrationEvent.cs` — Event definition (Basket side)
+- `Basket.Application/Features/Events/ProductPriceChangedIntegrationEventHandler.cs` — Consumer
+

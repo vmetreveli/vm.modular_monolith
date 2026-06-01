@@ -1,0 +1,44 @@
+---
+id: ProductPriceChangedEvent
+name: ProductPriceChangedEvent
+version: 1.0.0
+summary: Domain event raised when a product's price is updated. Triggers the ProductPriceChangedIntegrationEvent for cross-module communication.
+owners:
+  - vm-team
+producers:
+  - CatalogModule
+badges:
+  - content: Domain Event
+    backgroundColor: purple
+    textColor: white
+  - content: Synchronous
+    backgroundColor: gray
+    textColor: white
+schemaPath: schema.json
+---
+
+## Overview
+
+The `ProductPriceChangedEvent` is a **domain event** raised within the Catalog Module when a product's price is changed via `Product.Update()`.
+
+### Trigger
+
+```csharp
+// In Product.Update()
+if (Price != price)
+{
+    Price = price;
+    RaiseDomainEvent(new ProductPriceChangedEvent { Product = this });
+}
+```
+
+### Handler
+
+The `ProductPriceChangedEventHandler` handles this event and converts it to a `ProductPriceChangedIntegrationEvent`, which is then published via the event dispatcher to notify other modules (specifically the Basket Module).
+
+### Source Files
+
+- `Catalog.Domain/Entities/Product.cs` — Raises the event on price change
+- `Catalog.Domain/Events/ProductPriceChangedEvent.cs` — Event definition
+- `Catalog.Application/Features/Events/ProductPriceChangedEventHandler.cs` — Handles and publishes integration event
+

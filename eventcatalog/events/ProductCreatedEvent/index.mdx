@@ -1,0 +1,42 @@
+---
+id: ProductCreatedEvent
+name: ProductCreatedEvent
+version: 1.0.0
+summary: Domain event raised when a new product is created in the catalog.
+owners:
+  - vm-team
+producers:
+  - CatalogModule
+badges:
+  - content: Domain Event
+    backgroundColor: purple
+    textColor: white
+  - content: Synchronous
+    backgroundColor: gray
+    textColor: white
+schemaPath: schema.json
+---
+
+## Overview
+
+The `ProductCreatedEvent` is a **domain event** raised within the Catalog Module when a new product is created via the `Product.Create()` factory method.
+
+This event is handled in-process by the `ProductCreatedEventHandler`, which currently logs the event. It can be extended to trigger additional side effects (e.g., indexing, notifications).
+
+### Trigger
+
+```csharp
+// In Product.Create()
+product.RaiseDomainEvent(new ProductCreatedEvent { Product = product });
+```
+
+### Handler
+
+- **ProductCreatedEventHandler** — Logs the event occurrence.
+
+### Source Files
+
+- `Catalog.Domain/Entities/Product.cs` — Raises the event
+- `Catalog.Domain/Events/ProductCreatedEvent.cs` — Event definition
+- `Catalog.Application/Features/Events/ProductCreatedEventHandler.cs` — Handler
+

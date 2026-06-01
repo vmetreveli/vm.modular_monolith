@@ -1,0 +1,42 @@
+---
+id: OrderCreatedEvent
+name: OrderCreatedEvent
+version: 1.0.0
+summary: Domain event raised when a new order is created in the Ordering module.
+owners:
+  - vm-team
+producers:
+  - OrderingModule
+badges:
+  - content: Domain Event
+    backgroundColor: purple
+    textColor: white
+  - content: Synchronous
+    backgroundColor: gray
+    textColor: white
+schemaPath: schema.json
+---
+
+## Overview
+
+The `OrderCreatedEvent` is a **domain event** raised within the Ordering Module when a new `Order` aggregate is created.
+
+> **Note:** The handler for this event (`OrderCreatedEventHandler`) is currently commented out / placeholder. It can be extended to trigger notifications, analytics, or further integration events.
+
+### Schema
+
+```csharp
+public record OrderCreatedEvent(Order Order) : IDomainEvent;
+```
+
+### Potential Use Cases
+
+- Send order confirmation email
+- Notify an analytics/reporting module
+- Trigger inventory reservation in a future Inventory module
+
+### Source Files
+
+- `Ordering.Domain/Events/OrderCreatedEvent.cs` — Event definition
+- `Ordering.Application/Features/Events/OrderCreatedEventHandler.cs` — Handler (currently commented out)
+

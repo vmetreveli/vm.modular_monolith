@@ -1,0 +1,57 @@
+---
+id: BasketModule
+name: Basket Module
+version: 1.0.0
+summary: |
+  Manages shopping carts — adding/removing items, price synchronization, and the checkout flow that triggers order creation.
+owners:
+  - vm-team
+receives:
+  - id: ProductPriceChangedIntegrationEvent
+    version: 1.0.0
+sends:
+  - id: BasketCheckoutIntegrationEvent
+    version: 1.0.0
+---
+
+## Basket Module
+
+The Basket Module manages customer shopping carts and orchestrates the checkout process.
+
+### Endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/v1/basket` | Create a new basket |
+| GET | `/api/v1/basket/{userName}` | Get basket by user name |
+| POST | `/api/v1/basket/items` | Add item to basket |
+| DELETE | `/api/v1/basket/items` | Remove item from basket |
+| POST | `/api/v1/basket/checkout` | Checkout basket |
+| DELETE | `/api/v1/basket/{userName}` | Delete basket |
+
+### Integration Events
+
+**Consumes:**
+- `ProductPriceChangedIntegrationEvent` — Updates item prices in active baskets when catalog prices change.
+
+**Produces:**
+- `BasketCheckoutIntegrationEvent` — Published when a customer checks out. Delivered via the transactional outbox pattern to ensure reliability.
+
+### Architecture
+
+```
+Basket.Module (API endpoints)
+  └── Basket.Application (Commands, Queries, Event Handlers)
+       └── Basket.Domain (Entities, Domain Events)
+       └── Basket.Infrastructure (EF Core, Repositories, Outbox)
+```
+
+### Checkout Flow
+
+1. Customer calls the checkout endpoint
+2. `CheckoutBasketCommandHandler` retrieves the basket
+3. A `BasketCheckoutIntegrationEvent` is created with basket + payment details
+4. The event is saved to the **outbox** in the same transaction as the basket deletion
+5. A Quartz job picks up the outbox message and publishes it via MassTransit/RabbitMQ
+6. The Ordering Module consumes the event and creates an order
+

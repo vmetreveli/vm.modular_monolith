@@ -13,5 +13,5 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/home/appuser/.microsoft/usersecrets:ro
+      - ${USER_SECRETS_PATH:-${HOME}/.microsoft/usersecrets}:/home/appuser/.microsoft/usersecrets:ro
 

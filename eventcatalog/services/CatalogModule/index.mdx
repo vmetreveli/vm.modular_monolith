@@ -1,0 +1,49 @@
+---
+id: CatalogModule
+name: Catalog Module
+version: 1.0.0
+summary: |
+  Manages the product catalog — CRUD operations on products including pricing, categorization, and product images.
+owners:
+  - vm-team
+sends:
+  - id: ProductPriceChangedIntegrationEvent
+    version: 1.0.0
+  - id: ProductCreatedEvent
+    version: 1.0.0
+  - id: ProductPriceChangedEvent
+    version: 1.0.0
+---
+
+## Catalog Module
+
+The Catalog Module is responsible for managing the product catalog. It is the source of truth for product data.
+
+### Endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/v1/catalog/products` | Create a new product |
+| PUT | `/api/v1/catalog/products` | Update an existing product |
+| GET | `/api/v1/catalog/products/{id}` | Get product by ID |
+| GET | `/api/v1/catalog/products/category/{category}` | Get products by category |
+| DELETE | `/api/v1/catalog/products/{id}` | Delete a product |
+
+### Domain Events Published
+
+- **ProductCreatedEvent** — Raised when a new product is created via `Product.Create()`
+- **ProductPriceChangedEvent** — Raised when a product's price is updated via `Product.Update()`, triggers the `ProductPriceChangedIntegrationEvent`
+
+### Architecture
+
+```
+Catalog.Module (API endpoints)
+  └── Catalog.Application (Commands, Queries, Event Handlers)
+       └── Catalog.Domain (Entities, Domain Events)
+       └── Catalog.Infrastructure (EF Core, Repositories, Migrations)
+```
+
+### Key Behavior
+
+When a product price changes, the domain raises a `ProductPriceChangedEvent`. The `ProductPriceChangedEventHandler` catches this and publishes a `ProductPriceChangedIntegrationEvent` via the event dispatcher, ensuring downstream modules (e.g., Basket) are notified.
+

@@ -1,0 +1,18 @@
+{
+  "name": "eventcatalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx @eventcatalog/core dev",
+    "build": "npx @eventcatalog/core build",
+    "preview": "npx @eventcatalog/core preview",
+    "generate": "npx @eventcatalog/core generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@eventcatalog/core": "^2.65.4"
+  }
+}
