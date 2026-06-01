@@ -13,7 +13,7 @@ RUN npm ci
 
 # Copy all EventCatalog content
 COPY . .
-
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 # Build the static site
 RUN npx @eventcatalog/core build
 
