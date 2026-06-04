@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace vm.modular.Api.Swagger;
@@ -25,20 +26,21 @@ public class SwaggerDefaultValues : IOperationFilter
 
         if (operation.Parameters == null) return;
 
-        foreach (var parameter in operation.Parameters)
+        foreach (var openApiParameter in operation.Parameters)
         {
+            var parameter = (OpenApiParameter)openApiParameter;
             var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
 
             parameter.Description ??= description.ModelMetadata?.Description;
 
-            if (parameter.Schema.Default == null &&
+            if (parameter.Schema is OpenApiSchema concreteSchema &&
+                concreteSchema.Default == null &&
                 description.DefaultValue != null &&
                 description.DefaultValue is not DBNull &&
                 description.ModelMetadata is ModelMetadata modelMetadata)
             {
-                // REF: https://github.com/Microsoft/aspnet-api-versioning/issues/429#issuecomment-605402330
                 var json = JsonSerializer.Serialize(description.DefaultValue, modelMetadata.ModelType);
-                parameter.Schema.Default = OpenApiAnyFactory.CreateFromJson(json);
+                concreteSchema.Default = JsonNode.Parse(json);
             }
 
             parameter.Required |= description.IsRequired;
