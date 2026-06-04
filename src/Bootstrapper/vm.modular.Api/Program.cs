@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using Basket.Module;
 using Carter;
 using Catalog.Module;
@@ -86,7 +88,7 @@ var app = builder.Build();
 //         .AllowAnyMethod();
 // });
 
-//if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.MapPrometheusScrapingEndpoint();
     app.UseDeveloperExceptionPage();
@@ -94,13 +96,13 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        var descriptions = app.DescribeApiVersions();
+        IReadOnlyList<ApiVersionDescription> descriptions = app.DescribeApiVersions();
 
         // Build a swagger endpoint for each discovered API version
-        foreach (var description in descriptions)
+        foreach (ApiVersionDescription description in descriptions)
         {
-            var url = $"/swagger/{description.GroupName}/swagger.json";
-            var name = description.GroupName.ToUpperInvariant();
+            string url = $"/swagger/{description.GroupName}/swagger.json";
+            string name = description.GroupName.ToUpperInvariant();
             options.SwaggerEndpoint(url, name);
         }
     });
