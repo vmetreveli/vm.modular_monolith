@@ -1,4 +1,5 @@
-﻿using Meadow_Framework.Core.Abstractions.Repository;
+﻿using System.Reflection;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
 using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -28,15 +29,15 @@ public static class DependencyInjection
                 var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        configuration.GetConnectionString("DefaultConnection"))
-                    // options =>
-                    // {
-                    //     options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
-                    //     options.MigrationsHistoryTable($"__{nameof(NotificationDbContext)}");
-                    //
-                    //     options.EnableRetryOnFailure(5);
-                    //     options.MinBatchSize(1);
-                    // })
+                        configuration.GetConnectionString("DefaultConnection"),
+                    options =>
+                    {
+                        options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
+                        options.MigrationsHistoryTable($"__{nameof(OrderingDbContext)}");
+
+                        options.EnableRetryOnFailure(5);
+                        options.MinBatchSize(1);
+                    })
                     .UseSnakeCaseNamingConvention()
                     .AddInterceptors(outboxMessagesInterceptor!)
                     .AddInterceptors(auditableInterceptor!)

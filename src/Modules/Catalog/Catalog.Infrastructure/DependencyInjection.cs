@@ -1,4 +1,5 @@
-﻿using Catalog.Domain.Repository;
+﻿using System.Reflection;
+using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
 using Meadow_Framework.Core.Abstractions.Repository;
@@ -27,15 +28,15 @@ public static class DependencyInjection
                 var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        configuration.GetConnectionString("DefaultConnection"))
-                    // options =>
-                    // {
-                    //     options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
-                    //     options.MigrationsHistoryTable($"__{nameof(NotificationDbContext)}");
-                    //
-                    //     options.EnableRetryOnFailure(5);
-                    //     options.MinBatchSize(1);
-                    // })
+                        configuration.GetConnectionString("DefaultConnection"),
+                    options =>
+                    {
+                        options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
+                        options.MigrationsHistoryTable($"__{nameof(CatalogDbContext)}");
+
+                        options.EnableRetryOnFailure(5);
+                        options.MinBatchSize(1);
+                    })
                     .UseSnakeCaseNamingConvention()
                     .AddInterceptors(outboxMessagesInterceptor!)
                     .AddInterceptors(auditableInterceptor!)

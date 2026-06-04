@@ -104,7 +104,7 @@ var app = builder.Build();
             options.SwaggerEndpoint(url, name);
         }
     });
-    //app.ApplyMigration();
+    app.ApplyMigration();
 }
 
 // app.UseAuthentication();
