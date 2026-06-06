@@ -3,10 +3,14 @@ using Catalog.Domain.Entities;
 using Catalog.Domain.Repository;
 using Meadow_Framework.Core.Abstractions.Commands;
 using Meadow_Framework.Core.Abstractions.Repository;
+using Microsoft.Extensions.Logging;
 
 namespace Catalog.Application.Features.Commands.CreateProduct;
 
-public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : ICommandHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductCommandHandler(
+    IProductRepository productRepository,
+    IUnitOfWork unitOfWork,
+    ILogger<CreateProductCommandHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, 
         CancellationToken cancellationToken = default)
@@ -20,6 +24,8 @@ public class CreateProductCommandHandler(IProductRepository productRepository, I
         await productRepository.AddAsync(product, cancellationToken);
       
         await unitOfWork.CompleteAsync(cancellationToken);
+
+        logger.LogInformation("Product created with Id: {ProductId}", product.Id);
 
         return new CreateProductResult(product.Id);
     }
