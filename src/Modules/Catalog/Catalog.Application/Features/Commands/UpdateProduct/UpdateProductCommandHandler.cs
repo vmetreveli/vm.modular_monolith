@@ -1,12 +1,16 @@
-﻿using Catalog.Application.Contracts;
+using Catalog.Application.Contracts;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Exception;
+using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Meadow_Framework.Core.Abstractions.Commands;
+using Meadow_Framework.Core.Abstractions.Repository;
 
 namespace Catalog.Application.Features.Commands.UpdateProduct;
 
-internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
+internal class UpdateProductCommandHandler(
+    IProductRepository productRepository,
+    IUnitOfWork unitOfWork)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken = default)
@@ -15,8 +19,7 @@ internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
         //save to database
         //return result
 
-        var product = await dbContext.Products
-          .FindAsync([command.Product.Id], cancellationToken: cancellationToken);
+        var product = await productRepository.GetByIdAsync(command.Product.Id, cancellationToken: cancellationToken);
 
         if (product is null)
         {
@@ -25,8 +28,7 @@ internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
 
         UpdateProductWithNewValues(product, command.Product);
 
-      //  dbContext.Products.Update(product);
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await unitOfWork.CompleteAsync(cancellationToken);
 
         return new UpdateProductResult(true);
     }
