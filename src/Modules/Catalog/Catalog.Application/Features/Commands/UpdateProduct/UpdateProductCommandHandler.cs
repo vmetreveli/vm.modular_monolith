@@ -25,7 +25,7 @@ internal class UpdateProductCommandHandler(CatalogDbContext dbContext)
 
         UpdateProductWithNewValues(product, command.Product);
 
-        dbContext.Products.Update(product);
+      //  dbContext.Products.Update(product);
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return new UpdateProductResult(true);
