@@ -2,9 +2,7 @@
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
-using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
-using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +46,7 @@ public static class DependencyInjection
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<CatalogDbContext>>();
+        services.AddScoped<ICatalogUnitOfWork, CatalogUnitOfWork>();
 
         return services;
     }

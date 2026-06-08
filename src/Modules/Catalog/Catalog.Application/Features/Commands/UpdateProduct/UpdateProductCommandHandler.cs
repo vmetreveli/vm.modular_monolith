@@ -2,15 +2,13 @@ using Catalog.Application.Contracts;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Exception;
 using Catalog.Domain.Repository;
-using Catalog.Infrastructure.Context;
 using Meadow_Framework.Core.Abstractions.Commands;
-using Meadow_Framework.Core.Abstractions.Repository;
 
 namespace Catalog.Application.Features.Commands.UpdateProduct;
 
 internal class UpdateProductCommandHandler(
     IProductRepository productRepository,
-    IUnitOfWork unitOfWork)
+    ICatalogUnitOfWork unitOfWork)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken = default)

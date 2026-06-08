@@ -2,14 +2,13 @@
 using Catalog.Domain.Entities;
 using Catalog.Domain.Repository;
 using Meadow_Framework.Core.Abstractions.Commands;
-using Meadow_Framework.Core.Abstractions.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace Catalog.Application.Features.Commands.CreateProduct;
 
 public class CreateProductCommandHandler(
     IProductRepository productRepository,
-    IUnitOfWork unitOfWork,
+    ICatalogUnitOfWork unitOfWork,
     ILogger<CreateProductCommandHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, 
