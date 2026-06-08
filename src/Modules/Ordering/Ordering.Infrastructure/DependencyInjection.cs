@@ -1,12 +1,8 @@
 ﻿using System.Reflection;
-using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
-using Meadow_Framework.Core.Infrastructure.Repository;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ordering.Domain.Entities;
 using Ordering.Domain.Repository;
 using Ordering.Infrastructure.Context;
 using Ordering.Infrastructure.Repositories;
@@ -46,7 +42,7 @@ public static class DependencyInjection
                     .EnableDetailedErrors();
             });
         services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<OrderingDbContext>>();
+        services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
 
         return services;
     }

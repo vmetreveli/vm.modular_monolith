@@ -49,7 +49,7 @@ public static class DependencyInjection
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<BasketDbContext>>();
+        services.AddScoped<IBasketUnitOfWork, BasketUnitOfWork>();
        // services.AddScoped<IProductReadService, ProductReadService>();
        AddCatalogApiClient(services,configuration);
         return services;
