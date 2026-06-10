@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using Basket.Domain.Entities;
 using Meadow_Framework.Core.Abstractions;
-using Meadow_Framework.Core.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System;
+using Meadow_Framework.Core.Infrastructure.Context;
 
 namespace Basket.Infrastructure.Context;
 
@@ -12,6 +13,7 @@ public class BasketDbContext(DbContextOptions<BaseDbContext> options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("basket");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
@@ -26,13 +28,15 @@ public class BasketDbContext(DbContextOptions<BaseDbContext> options)
 
 public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BasketDbContext>
 {
-    public BasketDbContext CreateDbContext(string[] args)
-    {
-        var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
-        optionsBuilder
-            .UseNpgsql("BasketConnection")
-            .UseSnakeCaseNamingConvention();
+        public BasketDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
+            var conn = Environment.GetEnvironmentVariable("BasketConnection");
 
-        return new BasketDbContext(optionsBuilder.Options);
-    }
+            optionsBuilder
+                .UseNpgsql(conn)
+                .UseSnakeCaseNamingConvention();
+
+            return new BasketDbContext(optionsBuilder.Options);
+        }
 }

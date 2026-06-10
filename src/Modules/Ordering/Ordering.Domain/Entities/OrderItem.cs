@@ -1,7 +1,7 @@
 ﻿using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Ordering.Domain.Entities;
-public class OrderItem : EntityBase<Guid>
+public class OrderItem : EntityBase<Guid>, IAuditableEntity, IDeletableEntity
 {
     public OrderItem():base(Guid.NewGuid())
     {
@@ -19,4 +19,8 @@ public class OrderItem : EntityBase<Guid>
     public Guid ProductId { get; private set; } = default!;
     public int Quantity { get; internal set; } = default!;
     public decimal Price { get; private set; } = default!;
+    public DateTime CreatedOn { get; }
+    public DateTime ModifiedOn { get; }
+    public bool IsDeleted { get; }
+    public DateTime? DeletedOn { get; }
 }

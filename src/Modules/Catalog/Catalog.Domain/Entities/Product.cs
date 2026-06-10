@@ -1,9 +1,8 @@
 ﻿using Catalog.Domain.Events;
 using Meadow_Framework.Core.Abstractions.Primitives;
-using Meadow_Framework.Core.Infrastructure.Security;
 
 namespace Catalog.Domain.Entities;
-public class Product : AggregateRoot<Guid>,IAuditableEntity, IDeletableEntity
+public class Product : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
 {
     public Product(Guid id, string name, List<string> category, string description, string imageFile, decimal price) : base(id)
     {
@@ -13,7 +12,7 @@ public class Product : AggregateRoot<Guid>,IAuditableEntity, IDeletableEntity
         ImageFile = imageFile;
         Price = price;
     }
-    [SensitiveData]
+
     public string Name { get; private set; } = default!;
     public List<string> Category { get; private set; } = new();
     public string Description { get; private set; } = default!;

@@ -6,10 +6,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
 {
     public Order(Guid id, DateTime createdOn, DateTime modifiedOn, bool isDeleted, DateTime? deletedOn, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment) : base(id)
     {
-        CreatedOn = createdOn;
-        ModifiedOn = modifiedOn;
-        IsDeleted = isDeleted;
-        DeletedOn = deletedOn;
+        Id = id;
         CustomerId = customerId;
         OrderName = orderName;
         ShippingAddress = shippingAddress;

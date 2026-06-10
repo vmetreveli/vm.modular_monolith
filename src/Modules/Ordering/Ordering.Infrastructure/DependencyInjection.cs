@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,19 +20,12 @@ public static class DependencyInjection
         services
             .AddDbContext<OrderingDbContext>((sp, options) =>
             {
-                var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-                var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
-                var connectionString = configuration.GetConnectionString("OrderingConnection")
-                                       ?? configuration.GetConnectionString("DefaultConnection");
-
-                if (string.IsNullOrWhiteSpace(connectionString))
-                {
-                    throw new InvalidOperationException("Connection string 'OrderingConnection' is not configured.");
-                }
+                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
+                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        connectionString,
+                        configuration.GetConnectionString("DefaultConnection"),
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);

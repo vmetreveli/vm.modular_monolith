@@ -1,12 +1,9 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Repositories;
 using Basket.Infrastructure.Services.Catalog;
-using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
-using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,19 +22,12 @@ public static class DependencyInjection
         services
             .AddDbContext<BasketDbContext>((sp, options) =>
             {
-                var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-                var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
-                var connectionString = configuration.GetConnectionString("BasketConnection")
-                                       ?? configuration.GetConnectionString("DefaultConnection");
-
-                if (string.IsNullOrWhiteSpace(connectionString))
-                {
-                    throw new InvalidOperationException("Connection string 'BasketConnection' is not configured.");
-                }
+                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
+                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        connectionString,
+                        configuration.GetConnectionString("DefaultConnection"),
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);

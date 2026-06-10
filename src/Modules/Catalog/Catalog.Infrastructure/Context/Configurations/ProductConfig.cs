@@ -25,6 +25,6 @@ public class ProductConfig: IEntityTypeConfiguration<Product>
         builder.Property(c => c.DeletedOn);
         builder.Property(c => c.IsDeleted).IsRequired();
 
-        builder.HasQueryFilter(c => !c.IsDeleted);
+        builder.HasQueryFilter(user => !user.IsDeleted);
     }
 }

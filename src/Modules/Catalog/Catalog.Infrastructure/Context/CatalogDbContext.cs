@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 using Catalog.Domain.Entities;
 using Meadow_Framework.Core.Abstractions;
-using Meadow_Framework.Core.Abstractions.Outbox;
-using Meadow_Framework.Core.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Meadow_Framework.Core.Infrastructure.Context;
 
 namespace Catalog.Infrastructure.Context;
 
@@ -13,6 +12,7 @@ public class CatalogDbContext(DbContextOptions<BaseDbContext> options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("catalog");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
@@ -23,15 +23,17 @@ public class CatalogDbContext(DbContextOptions<BaseDbContext> options)
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<CatalogDbContext>
+public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BaseDbContext>
 {
-    public CatalogDbContext CreateDbContext(string[] args)
-    {
-        var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
-        optionsBuilder
-            .UseNpgsql("CatalogConnection")
-            .UseSnakeCaseNamingConvention();
+        public BaseDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
+            var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
-        return new CatalogDbContext(optionsBuilder.Options);
-    }
+            optionsBuilder
+                .UseNpgsql(conn)
+                .UseSnakeCaseNamingConvention();
+
+            return new BaseDbContext(optionsBuilder.Options);
+        }
 }

@@ -98,5 +98,12 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
 
                    paymentBuilder.Property(p => p.PaymentMethod);
                });
+
+        builder.Property(c => c.CreatedOn).IsRequired();
+        builder.Property(c => c.ModifiedOn);
+        builder.Property(c => c.DeletedOn);
+        builder.Property(c => c.IsDeleted).IsRequired();
+
+        builder.HasQueryFilter(user => !user.IsDeleted);
     }
 }
