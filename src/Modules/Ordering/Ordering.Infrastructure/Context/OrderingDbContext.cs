@@ -30,7 +30,7 @@ public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<Order
     {
         var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
         optionsBuilder
-            .UseNpgsql("DefaultConnection")
+            .UseNpgsql("OrderingConnection")
             .UseSnakeCaseNamingConvention();
 
         return new OrderingDbContext(optionsBuilder.Options);
