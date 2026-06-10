@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
@@ -15,26 +14,19 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<InsertOutboxMessagesInterceptor>();
-        services.AddScoped<UpdateAuditableEntitiesInterceptor>();
-        services.AddScoped<UpdateDeletableEntitiesInterceptor>();
+        // services.AddScoped<InsertOutboxMessagesInterceptor>();
+        // services.AddScoped<UpdateAuditableEntitiesInterceptor>();
+        // services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
             .AddDbContext<CatalogDbContext>((sp, options) =>
             {
-                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
-                var connectionString = configuration.GetConnectionString("CatalogConnection")
-                                       ?? configuration.GetConnectionString("DefaultConnection");
-
-                if (string.IsNullOrWhiteSpace(connectionString))
-                {
-                    throw new InvalidOperationException("Connection string 'CatalogConnection' is not configured.");
-                }
+                // var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+                // var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
+                // var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        connectionString,
+                        configuration.GetConnectionString("DefaultConnection"),
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
@@ -44,10 +36,11 @@ public static class DependencyInjection
                         options.MinBatchSize(1);
                     })
                     .UseSnakeCaseNamingConvention()
-                    .AddInterceptors(outboxMessagesInterceptor!)
-                    .AddInterceptors(auditableInterceptor!)
-                    .AddInterceptors(deletableEntitiesInterceptor!)
+                    // .AddInterceptors(outboxMessagesInterceptor!)
+                    // .AddInterceptors(auditableInterceptor!)
+                    // .AddInterceptors(deletableEntitiesInterceptor!)
                     .EnableSensitiveDataLogging()
+                    .LogTo(Console.WriteLine)
                     .EnableDetailedErrors();
             });
 
