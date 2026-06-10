@@ -5,4 +5,5 @@ namespace Catalog.Domain.Repository;
 
 public interface IProductRepository : IRepositoryBase<Product, Guid>
 {
+  public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

@@ -17,16 +17,15 @@ internal class UpdateProductCommandHandler(
         //save to database
         //return result
 
-        var product = await productRepository.GetByIdAsync(command.Product.Id, cancellationToken: cancellationToken);
+        Product? product = await productRepository.GetByIdAsync(command.Product.Id, cancellationToken: cancellationToken);
 
         if (product is null)
         {
             throw new ProductNotFoundException(command.Product.Id);
         }
-
         UpdateProductWithNewValues(product, command.Product);
 
-        await unitOfWork.CompleteAsync(cancellationToken);
+        await productRepository.SaveChangesAsync(cancellationToken);
 
         return new UpdateProductResult(true);
     }

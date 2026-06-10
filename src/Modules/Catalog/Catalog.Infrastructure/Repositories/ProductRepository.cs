@@ -12,9 +12,13 @@ public class ProductRepository(CatalogDbContext dbContext) : RepositoryBase<Cata
     private readonly DbContext _dbContext = dbContext;
 
     
-    public async Task<int> SaveChangesAsync(string? userName = null, CancellationToken cancellationToken = default)
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
+    public override async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        return await _dbContext.Set<Product>().FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+    }
 }

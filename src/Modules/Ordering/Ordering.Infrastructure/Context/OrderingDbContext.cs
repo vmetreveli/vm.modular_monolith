@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
 using Meadow_Framework.Core.Abstractions;
+using Meadow_Framework.Core.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Context;
 
-public class OrderingDbContext(DbContextOptions<OrderingDbContext> options)
-    : DbContext(options) , IDbContext
+public class OrderingDbContext(DbContextOptions<BaseDbContext> options)
+    : BaseDbContext(options) , IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("ordering");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
@@ -28,7 +28,7 @@ public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<Order
 {
     public OrderingDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<OrderingDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
         optionsBuilder
             .UseNpgsql("DefaultConnection")
             .UseSnakeCaseNamingConvention();

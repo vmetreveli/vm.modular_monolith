@@ -17,7 +17,6 @@ namespace Basket.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("basket")
                 .HasAnnotation("ProductVersion", "10.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -54,7 +53,7 @@ namespace Basket.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_shopping_carts");
 
-                    b.ToTable("shopping_carts", "basket");
+                    b.ToTable("shopping_carts", (string)null);
                 });
 
             modelBuilder.Entity("Basket.Domain.Entities.ShoppingCartItem", b =>
@@ -112,7 +111,51 @@ namespace Basket.Infrastructure.Migrations
                     b.HasIndex("ShoppingCartId")
                         .HasDatabaseName("ix_shopping_cart_items_shopping_cart_id");
 
-                    b.ToTable("shopping_cart_items", "basket");
+                    b.ToTable("shopping_cart_items", (string)null);
+                });
+
+            modelBuilder.Entity("Meadow_Framework.Core.Abstractions.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("content");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("data");
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("event_date");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("event_id");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("modified_date");
+
+                    b.Property<int>("State")
+                        .HasColumnType("integer")
+                        .HasColumnName("state");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id")
+                        .HasName("pk_outbox_messages");
+
+                    b.ToTable("outbox_messages", (string)null);
                 });
 
             modelBuilder.Entity("Basket.Domain.Entities.ShoppingCartItem", b =>

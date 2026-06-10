@@ -11,12 +11,8 @@ namespace Ordering.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "ordering");
-
             migrationBuilder.CreateTable(
                 name: "orders",
-                schema: "ordering",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -48,8 +44,25 @@ namespace Ordering.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "outbox_messages",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<string>(type: "text", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false),
+                    event_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    event_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    state = table.Column<int>(type: "integer", nullable: false),
+                    modified_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    content = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_outbox_messages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "order_items",
-                schema: "ordering",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -64,7 +77,6 @@ namespace Ordering.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_order_items_orders_order_id",
                         column: x => x.order_id,
-                        principalSchema: "ordering",
                         principalTable: "orders",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -72,13 +84,11 @@ namespace Ordering.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
-                schema: "ordering",
                 table: "order_items",
                 column: "order_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_order_name",
-                schema: "ordering",
                 table: "orders",
                 column: "order_name",
                 unique: true);
@@ -88,12 +98,13 @@ namespace Ordering.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "order_items",
-                schema: "ordering");
+                name: "order_items");
 
             migrationBuilder.DropTable(
-                name: "orders",
-                schema: "ordering");
+                name: "outbox_messages");
+
+            migrationBuilder.DropTable(
+                name: "orders");
         }
     }
 }

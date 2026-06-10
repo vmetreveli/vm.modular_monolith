@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
@@ -21,12 +22,19 @@ public static class DependencyInjection
         services
             .AddDbContext<CatalogDbContext>((sp, options) =>
             {
-                var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-                var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
+                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
+                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
+                var connectionString = configuration.GetConnectionString("CatalogConnection")
+                                       ?? configuration.GetConnectionString("DefaultConnection");
+
+                if (string.IsNullOrWhiteSpace(connectionString))
+                {
+                    throw new InvalidOperationException("Connection string 'CatalogConnection' is not configured.");
+                }
 
                 options.UseNpgsql(
-                        configuration.GetConnectionString("DefaultConnection"),
+                        connectionString,
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);

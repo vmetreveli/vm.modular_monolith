@@ -6,17 +6,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Basket.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "basket");
+            migrationBuilder.CreateTable(
+                name: "outbox_messages",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<string>(type: "text", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false),
+                    event_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    event_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    state = table.Column<int>(type: "integer", nullable: false),
+                    modified_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    content = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_outbox_messages", x => x.id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "shopping_carts",
-                schema: "basket",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -33,7 +47,6 @@ namespace Basket.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "shopping_cart_items",
-                schema: "basket",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -54,7 +67,6 @@ namespace Basket.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_shopping_cart_items_shopping_carts_shopping_cart_id",
                         column: x => x.shopping_cart_id,
-                        principalSchema: "basket",
                         principalTable: "shopping_carts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -62,7 +74,6 @@ namespace Basket.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_shopping_cart_items_shopping_cart_id",
-                schema: "basket",
                 table: "shopping_cart_items",
                 column: "shopping_cart_id");
         }
@@ -71,12 +82,13 @@ namespace Basket.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "shopping_cart_items",
-                schema: "basket");
+                name: "outbox_messages");
 
             migrationBuilder.DropTable(
-                name: "shopping_carts",
-                schema: "basket");
+                name: "shopping_cart_items");
+
+            migrationBuilder.DropTable(
+                name: "shopping_carts");
         }
     }
 }

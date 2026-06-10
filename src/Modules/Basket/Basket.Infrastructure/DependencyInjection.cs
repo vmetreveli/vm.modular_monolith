@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Repositories;
@@ -27,9 +28,16 @@ public static class DependencyInjection
                 var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
                 var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
                 var deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
+                var connectionString = configuration.GetConnectionString("BasketConnection")
+                                       ?? configuration.GetConnectionString("DefaultConnection");
+
+                if (string.IsNullOrWhiteSpace(connectionString))
+                {
+                    throw new InvalidOperationException("Connection string 'BasketConnection' is not configured.");
+                }
 
                 options.UseNpgsql(
-                        configuration.GetConnectionString("DefaultConnection"),
+                        connectionString,
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);

@@ -1,17 +1,18 @@
 ﻿using System.Reflection;
 using Catalog.Domain.Entities;
 using Meadow_Framework.Core.Abstractions;
+using Meadow_Framework.Core.Abstractions.Outbox;
+using Meadow_Framework.Core.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Catalog.Infrastructure.Context;
 
-public class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
-    : DbContext(options), IDbContext
+public class CatalogDbContext(DbContextOptions<BaseDbContext> options)
+    : BaseDbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("catalog");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
@@ -26,7 +27,7 @@ public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<Catal
 {
     public CatalogDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<CatalogDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
         optionsBuilder
             .UseNpgsql("DefaultConnection")
             .UseSnakeCaseNamingConvention();

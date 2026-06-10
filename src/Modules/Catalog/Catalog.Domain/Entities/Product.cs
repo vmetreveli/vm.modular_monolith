@@ -2,7 +2,7 @@
 using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Catalog.Domain.Entities;
-public class Product : AggregateRoot<Guid>
+public class Product : AggregateRoot<Guid>,IAuditableEntity, IDeletableEntity
 {
     public Product(Guid id, string name, List<string> category, string description, string imageFile, decimal price) : base(id)
     {
@@ -55,4 +55,9 @@ public class Product : AggregateRoot<Guid>
             RaiseDomainEvent(new ProductPriceChangedEvent{Product = this});
         }
     }
+
+    public DateTime CreatedOn { get; }
+    public DateTime ModifiedOn { get; }
+    public bool IsDeleted { get; }
+    public DateTime? DeletedOn { get; }
 }

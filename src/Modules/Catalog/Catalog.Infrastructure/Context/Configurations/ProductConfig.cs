@@ -19,5 +19,12 @@ public class ProductConfig: IEntityTypeConfiguration<Product>
         builder.Property(p => p.ImageFile).HasMaxLength(100);
 
         builder.Property(p => p.Price).IsRequired();
+
+        builder.Property(c => c.CreatedOn).IsRequired();
+        builder.Property(c => c.ModifiedOn);
+        builder.Property(c => c.DeletedOn);
+        builder.Property(c => c.IsDeleted).IsRequired();
+
+        builder.HasQueryFilter(c => !c.IsDeleted);
     }
 }
