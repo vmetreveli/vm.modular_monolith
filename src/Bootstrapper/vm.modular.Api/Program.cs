@@ -6,7 +6,6 @@ using Asp.Versioning.ApiExplorer;
 using Basket.Module;
 using Carter;
 using Catalog.Module;
-using Framework.Infrastructure;
 using Meadow_Framework.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;

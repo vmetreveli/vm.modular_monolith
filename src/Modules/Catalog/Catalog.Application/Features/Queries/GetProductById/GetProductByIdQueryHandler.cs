@@ -13,7 +13,7 @@ public class GetProductByIdQueryHandler(IProductRepository productRepository) : 
         // get products by id using dbContext
         // return result
 
-        var product = await productRepository.GetByIdAsync(query.Id, cancellationToken);
+        var product = await productRepository.GetByIdAsync(query.Id, false, cancellationToken);
 
         if (product is null)
         {

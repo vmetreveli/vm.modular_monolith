@@ -14,7 +14,7 @@ public class GetProductByCategoryQueryHandler(IProductRepository productReposito
     {
         // get products by category using dbContext
         // return result
-        await productRepository.GetAllAsync(cancellationToken);
+        await productRepository.GetAllAsync(false, cancellationToken);
         var products = await dbContext.Products
                 .AsNoTracking()
                 .Where(p => p.Category.Contains(query.Category))

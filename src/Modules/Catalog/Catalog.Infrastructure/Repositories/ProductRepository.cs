@@ -17,8 +17,4 @@ public class ProductRepository(CatalogDbContext dbContext) : RepositoryBase<Cata
         return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public override async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken))
-    {
-        return await _dbContext.Set<Product>().FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-    }
 }
