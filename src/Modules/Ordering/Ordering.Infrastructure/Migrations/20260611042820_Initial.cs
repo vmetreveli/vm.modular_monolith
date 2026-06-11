@@ -52,6 +52,25 @@ namespace Ordering.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "outbox_messages",
+                schema: "ordering",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<string>(type: "text", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false),
+                    event_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    event_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    state = table.Column<int>(type: "integer", nullable: false),
+                    modified_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    content = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_outbox_messages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "order_items",
                 schema: "ordering",
                 columns: table => new
@@ -97,6 +116,10 @@ namespace Ordering.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "order_items",
+                schema: "ordering");
+
+            migrationBuilder.DropTable(
+                name: "outbox_messages",
                 schema: "ordering");
 
             migrationBuilder.DropTable(
