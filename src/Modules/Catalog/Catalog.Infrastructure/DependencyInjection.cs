@@ -25,7 +25,7 @@ public static class DependencyInjection
                 UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
                 options.UseNpgsql(
-                        configuration.GetConnectionString("CatalogConnection"),
+                        configuration.GetConnectionString("DefaultConnection"),
                     options =>
                     {
                         options.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);

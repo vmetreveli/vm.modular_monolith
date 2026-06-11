@@ -3,7 +3,6 @@ using Basket.Domain.Entities;
 using Meadow_Framework.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
 using Meadow_Framework.Core.Infrastructure.Context;
 
 namespace Basket.Infrastructure.Context;
@@ -31,7 +30,7 @@ public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<Baske
         public BasketDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
-            var conn = Environment.GetEnvironmentVariable("BasketConnection");
+            var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
             optionsBuilder
                 .UseNpgsql(conn)

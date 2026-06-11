@@ -3,12 +3,13 @@ using Meadow_Framework.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
+using Meadow_Framework.Core.Infrastructure.Context;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Context;
 
-public class OrderingDbContext(DbContextOptions<OrderingDbContext> options)
-    : DbContext(options) , IDbContext
+public class OrderingDbContext(DbContextOptions<BaseDbContext> options)
+    : BaseDbContext(options) , IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,17 +26,17 @@ public class OrderingDbContext(DbContextOptions<OrderingDbContext> options)
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<OrderingDbContext>
+public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BaseDbContext>
 {
-        public OrderingDbContext CreateDbContext(string[] args)
+        public BaseDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<OrderingDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
             var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
             optionsBuilder
                 .UseNpgsql(conn)
                 .UseSnakeCaseNamingConvention();
 
-            return new OrderingDbContext(optionsBuilder.Options);
+            return new BaseDbContext(optionsBuilder.Options);
         }
 }
