@@ -4,9 +4,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__DefaultConnection=Server=modularmonolithdb;Port=5432;Database=ModularMonolithDb;User Id=postgres;Password=postgres;
-      - ConnectionStrings__CatalogConnection=Server=modularmonolithdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;
-      - ConnectionStrings__BasketConnection=Server=modularmonolithdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;
-      - ConnectionStrings__OrderingConnection=Server=modularmonolithdb;Port=5432;Database=OrderingDb;User Id=postgres;Password=postgres;
       - AppConfiguration__RabbitMQ__Host=rabbitmq
       - AppConfiguration__RabbitMQ__Port=5672
       - AppConfiguration__RabbitMQ__VirtualHost=/
