@@ -17,7 +17,7 @@ internal class UpdateProductCommandHandler(
         //save to database
         //return result
 
-        Product? product = await productRepository.GetByIdAsync(command.Product.Id, cancellationToken: cancellationToken);
+        Product? product = await productRepository.GetByIdAsync(command.Product.Id,false, cancellationToken: cancellationToken);
 
         if (product is null)
         {

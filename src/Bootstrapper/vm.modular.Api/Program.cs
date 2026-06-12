@@ -87,7 +87,7 @@ var app = builder.Build();
 //         .AllowAnyMethod();
 // });
 
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.MapPrometheusScrapingEndpoint();
     app.UseDeveloperExceptionPage();
