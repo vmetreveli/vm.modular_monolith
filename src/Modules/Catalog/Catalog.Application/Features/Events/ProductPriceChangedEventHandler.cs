@@ -1,4 +1,5 @@
 ﻿using Catalog.Domain.Events;
+using Meadow_Framework.Core.Abstractions.Dispatchers;
 using Meadow_Framework.Core.Abstractions.Events;
 using Meadow_Framework.Core.Abstractions.Kernel;
 using Microsoft.Extensions.Logging;
@@ -9,8 +10,8 @@ public class ProductPriceChangedEventHandler(IEventDispatcher eventDispatcher, I
 
     public async Task HandleAsync(ProductPriceChangedEvent @event, CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("Domain Event handled: {DomainEvent}", @event.GetType().Name);        
-        
+        logger.LogInformation("Domain Event handled: {DomainEvent}", @event.GetType().Name);
+
         // Publish product price changed integration event for update basket prices
         var integrationEvent = new ProductPriceChangedIntegrationEvent
         {

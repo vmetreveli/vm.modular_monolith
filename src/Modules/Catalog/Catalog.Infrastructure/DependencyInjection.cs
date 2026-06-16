@@ -2,7 +2,9 @@
 using Catalog.Domain.Repository;
 using Catalog.Infrastructure.Context;
 using Catalog.Infrastructure.Repositories;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
+using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,14 +15,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<InsertOutboxMessagesInterceptor>();
+        services.AddScoped<DomainEventEntitiesInterceptor>();
         services.AddScoped<UpdateAuditableEntitiesInterceptor>();
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
             .AddDbContext<CatalogDbContext>((sp, options) =>
             {
-                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+              //  InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
+
+                DomainEventEntitiesInterceptor? domainEventEntitiesInterceptor = sp.GetService<DomainEventEntitiesInterceptor>();
                 UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
                 UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
 
@@ -35,7 +39,7 @@ public static class DependencyInjection
                         options.MinBatchSize(1);
                     })
                     .UseSnakeCaseNamingConvention()
-                    .AddInterceptors(outboxMessagesInterceptor!)
+                    .AddInterceptors(domainEventEntitiesInterceptor!)
                     .AddInterceptors(auditableInterceptor!)
                     .AddInterceptors(deletableEntitiesInterceptor!)
                     .EnableSensitiveDataLogging()

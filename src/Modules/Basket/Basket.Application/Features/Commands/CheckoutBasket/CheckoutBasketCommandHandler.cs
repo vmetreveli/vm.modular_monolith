@@ -16,7 +16,7 @@ using Mapster;
 
 namespace Basket.Application.Features.Commands.CheckoutBasket;
 
-internal class CheckoutBasketCommandHandler(IBasketUnitOfWork unitOfWork, IOutboxRepository outboxRepository,IShoppingCartRepository shoppingCartRepository)
+internal class CheckoutBasketCommandHandler(IBasketUnitOfWork unitOfWork, IShoppingCartRepository shoppingCartRepository)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken = default)
@@ -42,11 +42,11 @@ internal class CheckoutBasketCommandHandler(IBasketUnitOfWork unitOfWork, IOutbo
             var eventMessage = command.BasketCheckout.Adapt<BasketCheckoutIntegrationEvent>();
             eventMessage.TotalPrice = basket.TotalPrice;
 
-            // Write a message to the outbox
-            var outboxMessage = new OutboxMessage(JsonSerializer.Serialize(eventMessage),Guid.NewGuid(), DateTime.UtcNow);
-         
-
-            outboxRepository.CreateOutboxMessage(outboxMessage);
+            // // Write a message to the outbox
+            // var outboxMessage = new OutboxMessage(JsonSerializer.Serialize(eventMessage),Guid.NewGuid(), DateTime.UtcNow);
+            //
+            //
+            // outboxRepository.CreateOutboxMessage(outboxMessage);
 
             // Delete the basket
             shoppingCartRepository.Remove(basket);

@@ -3,7 +3,9 @@ using Basket.Domain.Repository;
 using Basket.Infrastructure.Context;
 using Basket.Infrastructure.Repositories;
 using Basket.Infrastructure.Services.Catalog;
+using Meadow_Framework.Core.Abstractions.Repository;
 using Meadow_Framework.Core.Infrastructure.Interceptors;
+using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +45,6 @@ public static class DependencyInjection
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors();
             });
-
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
         services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();

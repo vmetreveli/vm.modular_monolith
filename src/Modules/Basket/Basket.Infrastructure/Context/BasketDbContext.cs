@@ -7,8 +7,7 @@ using Meadow_Framework.Core.Infrastructure.Context;
 
 namespace Basket.Infrastructure.Context;
 
-public class BasketDbContext(DbContextOptions<BaseDbContext> options)
-    : BaseDbContext(options), IDbContext
+public class BasketDbContext(DbContextOptions<BasketDbContext> options) : BaseDbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,17 +24,18 @@ public class BasketDbContext(DbContextOptions<BaseDbContext> options)
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BasketDbContext>
+public class BasketDbContextFactory : IDesignTimeDbContextFactory<BasketDbContext>
 {
-        public BasketDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
-            var conn = Environment.GetEnvironmentVariable("DefaultConnection");
+    public BasketDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<BasketDbContext>();
 
-            optionsBuilder
-                .UseNpgsql(conn)
-                .UseSnakeCaseNamingConvention();
+        var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
-            return new BasketDbContext(optionsBuilder.Options);
-        }
+        optionsBuilder
+            .UseNpgsql(conn)
+            .UseSnakeCaseNamingConvention();
+
+        return new BasketDbContext(optionsBuilder.Options);
+    }
 }

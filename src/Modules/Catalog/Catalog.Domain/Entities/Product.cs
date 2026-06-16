@@ -24,7 +24,7 @@ public class Product : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
 
-        var product = new Product(
+        Product product = new(
             id,
             name,
             category,

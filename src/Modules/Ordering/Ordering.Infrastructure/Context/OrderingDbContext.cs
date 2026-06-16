@@ -8,8 +8,7 @@ using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Context;
 
-public class OrderingDbContext(DbContextOptions<BaseDbContext> options)
-    : BaseDbContext(options) , IDbContext
+public class OrderingDbContext(DbContextOptions<OrderingDbContext> options) : BaseDbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,17 +25,17 @@ public class OrderingDbContext(DbContextOptions<BaseDbContext> options)
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BaseDbContext>
+public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<OrderingDbContext>
 {
-        public BaseDbContext CreateDbContext(string[] args)
+        public OrderingDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<OrderingDbContext>();
             var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
             optionsBuilder
                 .UseNpgsql(conn)
                 .UseSnakeCaseNamingConvention();
 
-            return new BaseDbContext(optionsBuilder.Options);
+            return new OrderingDbContext(optionsBuilder.Options);
         }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
@@ -29,9 +30,9 @@ builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
-var catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
-var basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
-var orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
+Assembly catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
+Assembly basketAssembly = typeof(Basket.Module.DependencyInjection).Assembly;
+Assembly orderingAssembly = typeof(Ordering.Module.DependencyInjection).Assembly;
 
 builder.Services.AddCarterWithAssemblies(orderingAssembly, basketAssembly, catalogAssembly);
 
@@ -105,7 +106,10 @@ var app = builder.Build();
             options.SwaggerEndpoint(url, name);
         }
     });
-    app.ApplyMigration();
+    app.ApplyMigration(
+    [typeof(Catalog.Infrastructure.DependencyInjection).Assembly,
+        typeof(Basket.Infrastructure.DependencyInjection).Assembly,
+        typeof(Ordering.Infrastructure.DependencyInjection).Assembly]);
 }
 
 // app.UseAuthentication();

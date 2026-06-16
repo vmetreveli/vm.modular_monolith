@@ -7,8 +7,7 @@ using Meadow_Framework.Core.Infrastructure.Context;
 
 namespace Catalog.Infrastructure.Context;
 
-public class CatalogDbContext(DbContextOptions<BaseDbContext> options)
-    : BaseDbContext(options), IDbContext
+public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : BaseDbContext(options), IDbContext
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,17 +22,17 @@ public class CatalogDbContext(DbContextOptions<BaseDbContext> options)
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<BaseDbContext>
+public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<CatalogDbContext>
 {
-        public BaseDbContext CreateDbContext(string[] args)
+        public CatalogDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<CatalogDbContext>();
             var conn = Environment.GetEnvironmentVariable("DefaultConnection");
 
             optionsBuilder
                 .UseNpgsql(conn)
                 .UseSnakeCaseNamingConvention();
 
-            return new BaseDbContext(optionsBuilder.Options);
+            return new CatalogDbContext(optionsBuilder.Options);
         }
 }
