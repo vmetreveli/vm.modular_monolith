@@ -43,7 +43,7 @@ COPY src/Modules/Ordering/Ordering.Infrastructure/*.csproj src/Modules/Ordering/
 COPY src/Modules/Ordering/Ordering.Module/*.csproj src/Modules/Ordering/Ordering.Module/
 
 # Copy NuGet config
-COPY src/Bootstrapper/NuGet.config .
+COPY NuGet.config .
 
 # Safely inject token only if provided
 RUN if [ -n "$GITHUB_TOKEN" ]; then \

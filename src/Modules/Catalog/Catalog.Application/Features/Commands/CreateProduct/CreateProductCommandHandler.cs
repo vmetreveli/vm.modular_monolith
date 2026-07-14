@@ -18,7 +18,7 @@ public class CreateProductCommandHandler(
         //save to database
         //return result
         
-        var product = CreateNewProduct(command.Product);
+        Product product = CreateNewProduct(command.Product);
 
         await productRepository.AddAsync(product, cancellationToken);
       

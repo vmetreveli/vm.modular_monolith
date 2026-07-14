@@ -33,7 +33,7 @@ public class Product : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
             price
         );
 
-        product.RaiseDomainEvent(new ProductCreatedEvent{Product = product});
+       product.RaiseDomainEvent(new ProductCreatedEvent{Product = product});
 
         return product;
     }

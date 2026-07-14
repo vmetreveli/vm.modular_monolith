@@ -401,9 +401,20 @@ FodyWeavers.xsd
 NuGet.config.local
 secrets/
 *.secrets
+.env
 .env.local
+
+# macOS
+.DS_Store
+
+# Local docker bind-mount leftovers
+postgres_data/
 
 # EventCatalog
 eventcatalog/.eventcatalog-core/
 eventcatalog/.astro/
 eventcatalog/dist/
+
+# JetBrains data source definitions (may reference private hosts)
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml

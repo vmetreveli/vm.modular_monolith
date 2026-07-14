@@ -28,6 +28,7 @@ builder.Services.AddBasketModule(builder.Configuration);
 
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHealthChecks();
 
 //common services: carter, mediatr, fluentvalidation, masstransit
 Assembly catalogAssembly = typeof(Catalog.Module.DependencyInjection).Assembly;
@@ -77,7 +78,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Logging.AddSerilog();
 var app = builder.Build();
-//app.MapHealthChecks("_health");
+app.MapHealthChecks("/health");
 
 // Apply the CORS policy globally
 
