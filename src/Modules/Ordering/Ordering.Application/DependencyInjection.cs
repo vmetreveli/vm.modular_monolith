@@ -13,7 +13,6 @@ public static class DependencyInjection
       //  services.AddFramework(configuration, typeof(DependencyInjection).Assembly);
         // services.AddAsynchronousAdapter(configuration);
         // services.AddApplicationServices(configuration);
-        // services.AddDomainEventsHandlers(typeof(DependencyInjection).Assembly);
 
         return services;
     }
