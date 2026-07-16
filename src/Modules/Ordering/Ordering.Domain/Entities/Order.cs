@@ -1,4 +1,5 @@
 ﻿using Meadow_Framework.Core.Abstractions.Primitives;
+using Ordering.Domain.Events;
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Domain.Entities;
@@ -47,7 +48,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, IDeletableEntity
             Payment = payment
         };
 
-      //  order.AddDomainEvent(new OrderCreatedEvent(order));
+        order.RaiseDomainEvent(new OrderCreatedEvent(order));
 
         return order;
     }

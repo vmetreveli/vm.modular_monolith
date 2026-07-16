@@ -1,4 +1,5 @@
-﻿using Meadow_Framework.Core.Abstractions.Primitives;
+﻿using Basket.Domain.Events;
+using Meadow_Framework.Core.Abstractions.Primitives;
 
 namespace Basket.Domain.Entities;
 
@@ -53,12 +54,26 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity, IDeletableEnt
             var newItem = new ShoppingCartItem(Id, productId, quantity, color, price, productName);
             _items.Add(newItem);
         }
+
+        RaiseDomainEvent(new ShoppingCartItemAddedEvent
+        {
+            ShoppingCartId = Id,
+            ProductId = productId,
+            Quantity = quantity,
+            Color = color,
+            Price = price,
+            ProductName = productName
+        });
     }
 
     public void RemoveItem(Guid productId)
     {
         var existingItem = Items.FirstOrDefault(x => x.ProductId == productId);
 
-        if (existingItem != null) _items.Remove(existingItem);
+        if (existingItem != null)
+        {
+            _items.Remove(existingItem);
+            RaiseDomainEvent(new ShoppingCartItemRemovedEvent { ShoppingCartId = Id, ProductId = productId });
+        }
     }
 }
