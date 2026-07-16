@@ -418,3 +418,18 @@ eventcatalog/dist/
 # JetBrains data source definitions (may reference private hosts)
 .idea/**/dataSources.xml
 .idea/**/dataSources.local.xml
+
+# Ruflo (claude-flow) generated scaffolding — tool state, not project code
+.agents/
+.claude-flow/
+.swarm/
+ruvector.db
+skills-lock.json
+.claude/.proven-config-version
+.claude/proven-config.json
+.claude/settings.json
+.claude/agents/
+.claude/commands/
+.claude/helpers/
+.claude/skills/*
+!.claude/skills/gitnexus/
