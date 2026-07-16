@@ -8,6 +8,7 @@ using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Catalog.Infrastructure;
 
@@ -22,12 +23,6 @@ public static class DependencyInjection
         services
             .AddDbContext<CatalogDbContext>((sp, options) =>
             {
-              //  InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-
-                DomainEventEntitiesInterceptor? domainEventEntitiesInterceptor = sp.GetService<DomainEventEntitiesInterceptor>();
-                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
-
                 options.UseNpgsql(
                         configuration.GetConnectionString("DefaultConnection"),
                     options =>
@@ -39,11 +34,16 @@ public static class DependencyInjection
                         options.MinBatchSize(1);
                     })
                     .UseSnakeCaseNamingConvention()
-                    .AddInterceptors(domainEventEntitiesInterceptor!)
-                    .AddInterceptors(auditableInterceptor!)
-                    .AddInterceptors(deletableEntitiesInterceptor!)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors();
+                    .AddInterceptors(
+                        sp.GetRequiredService<DomainEventEntitiesInterceptor>(),
+                        sp.GetRequiredService<UpdateAuditableEntitiesInterceptor>(),
+                        sp.GetRequiredService<UpdateDeletableEntitiesInterceptor>());
+
+                if (sp.GetRequiredService<IHostEnvironment>().IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging()
+                        .EnableDetailedErrors();
+                }
             });
 
         //services.AddScoped<IEventRepository, EventRepository>();

@@ -22,7 +22,7 @@ public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : Base
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<CatalogDbContext>
+public class CatalogDbContextFactory : IDesignTimeDbContextFactory<CatalogDbContext>
 {
         public CatalogDbContext CreateDbContext(string[] args)
         {

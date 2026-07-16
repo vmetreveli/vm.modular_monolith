@@ -1,13 +1,17 @@
 ﻿using Meadow_Framework.Core.Abstractions.Dispatchers;
 using MassTransit;
+using Meadow_Framework.Core.Abstractions.Events;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts;
 using Ordering.Application.Features.Commands.CreateOrder;
-using Ordering.Domain.Events;
+using vm.modular.IntegrationEvents;
 
 namespace Ordering.Application.Features.Events;
+
+// IEventConsumer (not raw IConsumer): the framework only discovers and registers
+// consumers implementing IEventConsumer<T>, a raw IConsumer<T> never gets an endpoint.
 public class BasketCheckoutIntegrationEventHandler(IDispatcher dispatcher, ILogger<BasketCheckoutIntegrationEventHandler> logger)
-    : IConsumer<BasketCheckoutIntegrationEvent>
+    : IEventConsumer<BasketCheckoutIntegrationEvent>
 {
     public async  Task Consume(ConsumeContext<BasketCheckoutIntegrationEvent> context)
     {

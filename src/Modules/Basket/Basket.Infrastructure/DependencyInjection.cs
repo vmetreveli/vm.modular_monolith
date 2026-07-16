@@ -9,6 +9,7 @@ using Meadow_Framework.Core.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Refit;
 
 namespace Basket.Infrastructure;
@@ -17,17 +18,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<InsertOutboxMessagesInterceptor>();
+        services.AddScoped<DomainEventEntitiesInterceptor>();
         services.AddScoped<UpdateAuditableEntitiesInterceptor>();
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
             .AddDbContext<BasketDbContext>((sp, options) =>
             {
-                InsertOutboxMessagesInterceptor? outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
-                UpdateAuditableEntitiesInterceptor? auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
-                UpdateDeletableEntitiesInterceptor? deletableEntitiesInterceptor = sp.GetService<UpdateDeletableEntitiesInterceptor>();
-
                 options.UseNpgsql(
                         configuration.GetConnectionString("DefaultConnection"),
                     options =>
@@ -39,11 +36,16 @@ public static class DependencyInjection
                         options.MinBatchSize(1);
                     })
                     .UseSnakeCaseNamingConvention()
-                    .AddInterceptors(outboxMessagesInterceptor!)
-                    .AddInterceptors(auditableInterceptor!)
-                    .AddInterceptors(deletableEntitiesInterceptor!)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors();
+                    .AddInterceptors(
+                        sp.GetRequiredService<DomainEventEntitiesInterceptor>(),
+                        sp.GetRequiredService<UpdateAuditableEntitiesInterceptor>(),
+                        sp.GetRequiredService<UpdateDeletableEntitiesInterceptor>());
+
+                if (sp.GetRequiredService<IHostEnvironment>().IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging()
+                        .EnableDetailedErrors();
+                }
             });
         //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();

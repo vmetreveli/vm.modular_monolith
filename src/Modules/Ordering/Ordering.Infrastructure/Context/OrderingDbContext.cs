@@ -25,7 +25,7 @@ public class OrderingDbContext(DbContextOptions<OrderingDbContext> options) : Ba
     #endregion
 }
 
-public class ModularMonolithDbContextFactory : IDesignTimeDbContextFactory<OrderingDbContext>
+public class OrderingDbContextFactory : IDesignTimeDbContextFactory<OrderingDbContext>
 {
         public OrderingDbContext CreateDbContext(string[] args)
         {

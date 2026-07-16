@@ -2,6 +2,7 @@
 using Meadow_Framework.Core.Abstractions.Events;
 using Meadow_Framework.Core.Abstractions.Kernel;
 using Microsoft.Extensions.Logging;
+using vm.modular.IntegrationEvents;
 
 namespace Catalog.Application.Features.Events;
 public class ProductPriceChangedEventHandler(IEventDispatcher eventDispatcher, ILogger<ProductPriceChangedEventHandler> logger) : IDomainEventHandler<ProductPriceChangedEvent>

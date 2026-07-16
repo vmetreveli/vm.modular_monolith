@@ -47,12 +47,6 @@ builder.Services.AddFramework(
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.EnableAnnotations();
-    options.OperationFilter<SwaggerDefaultValues>();
-});
-
 
 builder.Services.AddApiVersioning(options =>
     {
@@ -89,29 +83,31 @@ app.MapHealthChecks("/health");
 //         .AllowAnyMethod();
 // });
 
-//if (app.Environment.IsDevelopment())
+app.MapPrometheusScrapingEndpoint();
+
+if (app.Environment.IsDevelopment())
 {
-    app.MapPrometheusScrapingEndpoint();
     app.UseDeveloperExceptionPage();
-
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        IReadOnlyList<ApiVersionDescription> descriptions = app.DescribeApiVersions();
-
-        // Build a swagger endpoint for each discovered API version
-        foreach (ApiVersionDescription description in descriptions)
-        {
-            string url = $"/swagger/{description.GroupName}/swagger.json";
-            string name = description.GroupName.ToUpperInvariant();
-            options.SwaggerEndpoint(url, name);
-        }
-    });
-    app.ApplyMigration(
-    [typeof(Catalog.Infrastructure.DependencyInjection).Assembly,
-        typeof(Basket.Infrastructure.DependencyInjection).Assembly,
-        typeof(Ordering.Infrastructure.DependencyInjection).Assembly]);
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    IReadOnlyList<ApiVersionDescription> descriptions = app.DescribeApiVersions();
+
+    // Build a swagger endpoint for each discovered API version
+    foreach (ApiVersionDescription description in descriptions)
+    {
+        string url = $"/swagger/{description.GroupName}/swagger.json";
+        string name = description.GroupName.ToUpperInvariant();
+        options.SwaggerEndpoint(url, name);
+    }
+});
+
+app.ApplyMigration(
+    [typeof(Catalog.Infrastructure.DependencyInjection).Assembly,
+    typeof(Basket.Infrastructure.DependencyInjection).Assembly,
+    typeof(Ordering.Infrastructure.DependencyInjection).Assembly]);
 
 // app.UseAuthentication();
 // app.UseAuthorization();

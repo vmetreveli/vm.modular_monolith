@@ -2,7 +2,9 @@ using Meadow_Framework.Core.Abstractions.Events;
 using Meadow_Framework.Core.Abstractions.Primitives;
 using Meadow_Framework.Core.Infrastructure.Security;
 
-namespace Basket.Domain.Events;
+// Shared contract namespace: MassTransit routes messages by namespace-qualified type name,
+// so the publisher (Catalog) and consumer (Basket) copies must declare the same namespace.
+namespace vm.modular.IntegrationEvents;
 
 public class ProductPriceChangedIntegrationEvent : IntegrationBaseEvent
 {
